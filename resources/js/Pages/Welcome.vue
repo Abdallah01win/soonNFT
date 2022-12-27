@@ -1,6 +1,14 @@
 <script setup>
 import { Head, Link } from '@inertiajs/inertia-vue3';
 </script>
+<script>
+import Footer from '@/Components/Footer.vue';
+    export default{
+        components: {
+            Footer,
+        }
+    }
+</script>
 
 <template>
     <Head title="Home" />
@@ -224,83 +232,73 @@ import { Head, Link } from '@inertiajs/inertia-vue3';
         </div>
     </div> -->
 
-    <main class="main font-poppins">
-        <nav class="nav container">
-            <ul class="nav-links">
-                <li class="logo">SOONNFT</li>
-                <li>Etheriom</li>
-                <li>Sonlana</li>
+    <main class="main">
+        <nav class="flex justify-between items-center py-6 mx-auto max-w-[1180px]">
+            <ul class="flex items-center gap-x-8">
+                <li class="font-inter text-2xl font-extrabold">SOONNFT</li>
+                <li>Ethereum</li>
+                <li>Solana</li>
                 <li>Upcoming</li>
                 <li>Blog</li>
             </ul>
-            <div class="extra-Links">
-                <button>Sign-In</button>
+            <div class="flex items-center gap-x-4 text-base">
+                <button class="rounded-full py-2 px-6 uppercase border border-white bg-none">Sign-In</button>
+                <button class="rounded-full py-2 px-6 uppercase border border-white bg-none">Register</button>
             </div>
         </nav>
-        <section class="hero container">
-            <div class="hero-text">
-                <h1 class="inter">The NFT World in your hands</h1>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro quae velit modi voluptatem, iure explicabo! Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
-                <div class="btn-container">
-                    <button>Get Started</button>
-                    <button>Exlore NFTs</button>
+        <section class="flex items-center h-[100vh] max-h-[600px] mx-auto max-w-[1180px]">
+            <div class="flex flex-col items-center /translate-y-[-50%]">
+                <h1 class="font-inter font-black text-6xl mb-3 uppercase">The NFT World in your hands</h1>
+                <p class="text-center max-w-[70%] mx-auto">Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro quae velit modi voluptatem, iure explicabo! Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
+                <div class="flex items-center gap-x-6 mt-8">
+                    <button class="text-lg rounded-full py-2 px-6 uppercase border border-white bg-none">Get Started</button>
+                    <button class="text-lg rounded-full py-2 px-6 border border-white bg-none">EXPLORE NFTs</button>
                 </div>
             </div>
-            <div></div>
         </section>
 
     </main>
-    <!-- <section class="container">
-        <h3 class="sec-title">Popular NFTs</h3>
-        <div class="nft-grid">
-            <div class="nft-card">
-                <img src="./assets/alien-g46925652f_1280.jpg" alt="">
-                <div class="nft-card-det">
-                    <div>NFT Name</div>
-                    <div>0.10 ETH</div>
+    <section class="mx-auto my-20 max-w-[1180px]">
+        <h3 class="text-4xl font-bold mt-7 mb-6">Popular NFTs</h3>
+        <div class="grid grid-cols-4 gap-10">
+            <div class="relative overflow-hidden rounded-t-2xl cursor-pointer">
+                <img src="../../../storage/app/public/assets/alien-gc688c9726_1280.jpg" alt="" class="min-w-[100%] max-h-[400px]">
+                <div class="nft-card-det flex justify-between items-center py-4 px-5 w-full absolute left-0 bottom-0">
+                    <div class="hover:underline underline-offset-4 cursor-pointer">NFT Name</div>
+                    <div class="font-bold">0.10 ETH</div>
                 </div>
             </div>
-            <div class="nft-card">
-                <img src="./assets/venus-g6e5b034b4_1280.jpg" alt="">
-                <div class="nft-card-det">
-                    <div>NFT Name</div>
-                    <div>0.10 ETH</div>
+            <div class="relative overflow-hidden rounded-t-2xl">
+                <img src="../../../storage/app/public/assets/colorful-g0fd569376_1280.jpg" alt="" class="min-w-[100%] max-h-[400px]">
+                <div class="nft-card-det flex justify-between items-center py-4 px-5 w-full absolute left-0 bottom-0">
+                    <div class="hover:underline underline-offset-4 cursor-pointer">NFT Name</div>
+                    <div class="font-bold">0.10 ETH</div>
                 </div>
             </div>
-            <div class="nft-card">
-                <img src="./assets/fantasy-ga554b74ad_1280.jpg" alt="">
-                <div class="nft-card-det">
-                    <div>NFT Name</div>
-                    <div>0.10 ETH</div>
+            <div class="relative overflow-hidden rounded-t-2xl">
+                <img src="../../../storage/app/public/assets/heart-g7eea2c9a6_1280.jpg" alt="" class="min-w-[100%] max-h-[400px]">
+                <div class="nft-card-det flex justify-between items-center py-4 px-5 w-full absolute left-0 bottom-0">
+                    <div class="hover:underline underline-offset-4 cursor-pointer">NFT Name</div>
+                    <div class="font-bold">0.10 ETH</div>
                 </div>
             </div>
-            <div class="nft-card">
-                <img src="./assets/dream-g324c12493_1280.jpg" alt="">
-                <div class="nft-card-det">
-                    <div>NFT Name</div>
-                    <div>0.10 ETH</div>
+            <div class="relative overflow-hidden rounded-t-2xl">
+                <img src="../../../storage/app/public/assets/venus-g61bb11ec1_1280.jpg" alt="" class="min-w-[100%] max-h-[400px]">
+                <div class="nft-card-det flex justify-between items-center py-4 px-5 w-full absolute left-0 bottom-0">
+                    <div class="hover:underline underline-offset-4 cursor-pointer">NFT Name</div>
+                    <div class="font-bold">0.10 ETH</div>
                 </div>
             </div>
+            
         </div>
-    </section> -->
+    </section>
+
+    <Footer />
 </template>
 
 
 <style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  color: white;
-  font-family: "Poppins", sans-serif;
-}
-body {
-  background: #000000;
-}
-ul,
-ol {
-  list-style: none;
-}
+
 .main {
   background-color: #000000;
   background-image: radial-gradient(
@@ -335,116 +333,26 @@ ol {
     );
 }
 
-.container {
-  max-width: 1180px;
-  margin: 0 auto;
-}
 
-.hero {
-  display: grid;
-  grid-template-columns: 1fr;
-  margin-top: 96px;
-  height: 100vh;
-  max-height: 480px;
-}
-.hero-text {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.hero h1 {
-  font-family: "Inter", sans-serif;
-  font-weight: 900;
-  font-size: 4rem;
-  margin-bottom: 8px;
-  text-transform: uppercase;
-}
-.hero p {
-  font-size: 18px;
-  text-align: center;
-  max-width: 70%;
-  margin: 0 auto;
-}
 
-.nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-top: 24px;
-  padding-bottom: 24px;
-}
-.nav-links {
-  display: flex;
-  align-items: center;
-  column-gap: 2rem;
-}
 
-button {
-  background: none;
-  border: solid 1px white;
-  border-radius: 1000px;
-  padding: 8px 24px;
-  text-transform: uppercase;
-  font-size: inherit;
-}
-.btn-container {
-  display: flex;
-  align-items: center;
-  column-gap: 1.5rem;
-  margin-top: 32px;
-}
-.btn-container button {
-  font-size: 16px;
-}
-.nav .logo {
-  font-family: "Inter", sans-serif;
-  font-size: 24px;
-  font-weight: 800;
-}
 
-.sec-title{
-    font-family: "Inter", sans-serif;
-    font-size: 28px;
-    font-weight: 700;
-    margin-bottom: 28px;
-}
 
-.nft-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 3rem;
-}
-.nft-card {
-  position: relative;
-  border-radius: 15px 15px 0% 0%;
-  overflow: hidden;
-}
+
+
 
 .nft-card-det {
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(50px);
   -webkit-backdrop-filter: blur(50px);
-  position: absolute;
-  left: 0;
-  bottom: 0;
 }
 
-.nft-card img {
-  min-width: 100%;
-  max-height: 400px;
-}
+
 /*.nft-card:hover img {
   transform: scale(1.1);
   transition: all 300ms ease-out;
   overflow: hidden;
 }*/
 
-.nft-card-det {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 18px 22px;
-  width: 100%;
-}
 
 </style>
