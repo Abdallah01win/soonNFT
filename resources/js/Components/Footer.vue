@@ -1,5 +1,5 @@
 <template>
-    <footer class="mx-auto my-12 max-w-[1180px]">
+    <footer class="mx-auto mb-16 mt-32 max-w-[1180px]">
         <div class="text-5xl uppercase font-black mb-4">Soonnft</div>
         <div class="grid grid-cols-[2.5fr,0.7fr,1.8fr] gap-x-6">
             <div>

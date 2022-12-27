@@ -258,8 +258,12 @@ import Footer from '@/Components/Footer.vue';
         </section>
 
     </main>
+    <!-- Gallery Section -->
     <section class="mx-auto my-20 max-w-[1180px]">
-        <h3 class="text-4xl font-bold mt-7 mb-6">Popular NFTs</h3>
+        <div class="flex flex-col mb-6">
+            <div class="text-white opacity-50 text-lg">Gallery</div>
+            <h3 class="text-4xl font-bold ">Popular NFTs</h3>
+        </div>
         <div class="grid grid-cols-4 gap-10">
             <div class="relative overflow-hidden rounded-t-2xl cursor-pointer">
                 <img src="../../../storage/app/public/assets/alien-gc688c9726_1280.jpg" alt="" class="min-w-[100%] max-h-[400px]">
@@ -292,6 +296,16 @@ import Footer from '@/Components/Footer.vue';
             
         </div>
     </section>
+    <!-- End Gallery Section -->
+
+    <!-- Blog Section -->
+    <section class="mx-auto my-20 max-w-[1180px]">
+        <div class="flex flex-col mb-6">
+            <div class="text-white opacity-50 text-lg">Blog</div>
+            <h3 class="text-4xl font-bold ">Recent posts</h3>
+        </div>
+    </section>
+    <!-- End Blog Section -->
 
     <Footer />
 </template>
