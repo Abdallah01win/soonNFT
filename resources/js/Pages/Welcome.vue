@@ -1,21 +1,41 @@
 <script setup>
+import { onMounted } from 'vue'
 import { Head, Link } from '@inertiajs/inertia-vue3';
 </script>
 <script>
+import { Network, Alchemy } from 'alchemy-sdk';
 import Footer from '@/Components/Footer.vue';
-    export default{
-        /*data(){
-            return {
-                loggedin: Boolean,
-            }
-        },*/
-        components: {
-            Footer,
+import Navigation from '@/Components/Navigation.vue'
+export default {
+    data() {
+        return {
+            Nfts: Array,
         }
-    }
+    },
+    components: {
+        Footer,
+        Navigation,
+    },
+    methods: {
+        async getNfts() {
+            const settings = {
+                apiKey: "_pf4L_mT0GGNERcH7gUMRNsoLmYE60Rm",
+                network: Network.ETH_MAINNET,
+            };
+            const alchemy = new Alchemy(settings);
+            const nfts = await alchemy.nft.getNftsForOwner("0xshah.eth");
+            console.log(nfts)
+            this.Nfts = nfts.ownedNfts
+        }
+    },
+    mounted: function () {
+        //this.getNfts();
+    },
+}
 </script>
 
 <template>
+
     <Head title="Home" />
 
     <!-- <div
@@ -238,28 +258,16 @@ import Footer from '@/Components/Footer.vue';
     </div> -->
 
     <main class="main">
-        <nav class="flex justify-between items-center py-6 mx-auto max-w-[1180px]">
-            <ul class="flex items-center gap-x-8">
-                <li class="font-inter text-2xl font-extrabold">SOONNFT</li>
-                <li>Ethereum</li>
-                <li>Solana</li>
-                <li>Upcoming</li>
-                <li>Blog</li>
-            </ul>
-            <div v-if="!$page.props.auth.user" class="flex items-center gap-x-4 text-base">
-                <Link :href="route('login')" class="rounded-full py-2 px-6 uppercase border border-white bg-none">Log in</Link>
-                <Link :href="route('register')" class="rounded-full py-2 px-6 uppercase border border-white bg-none">Register</Link>
-            </div>
-            <div v-else>
-               {{$page.props.auth.user.name}}
-            </div>
-        </nav>
+        <Navigation />
         <section class="flex items-center h-[100vh] max-h-[610px] mx-auto max-w-[1180px]">
             <div class="flex flex-col items-center /translate-y-[-50%]">
                 <h1 class="font-inter font-black text-6xl mb-3 uppercase">The NFT World in your hands</h1>
-                <p class="text-center max-w-[70%] mx-auto">Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro quae velit modi voluptatem, iure explicabo! Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
+                <p class="text-center max-w-[70%] mx-auto">Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Porro quae velit modi voluptatem, iure explicabo! Lorem ipsum dolor sit, amet consectetur
+                    adipisicing elit.</p>
                 <div class="flex items-center gap-x-6 mt-8">
-                    <button class="text-lg rounded-full py-2 px-6 uppercase border border-white bg-none">Get Started</button>
+                    <button class="text-lg rounded-full py-2 px-6 uppercase border border-white bg-none">Get
+                        Started</button>
                     <button class="text-lg rounded-full py-2 px-6 border border-white bg-none">EXPLORE NFTs</button>
                 </div>
             </div>
@@ -274,35 +282,46 @@ import Footer from '@/Components/Footer.vue';
         </div>
         <div class="grid grid-cols-4 gap-10">
             <div class="relative overflow-hidden rounded-t-2xl cursor-pointer">
-                <img src="../../../storage/app/public/assets/alien-gc688c9726_1280.jpg" alt="" class="min-w-[100%] max-h-[400px]">
+                <img src="../../../storage/app/public/assets/alien-gc688c9726_1280.jpg" alt=""
+                    class="min-w-[100%] max-h-[400px]">
                 <div class="nft-card-det flex justify-between items-center py-4 px-5 w-full absolute left-0 bottom-0">
                     <div class="hover:underline underline-offset-4 cursor-pointer">NFT Name</div>
                     <div class="font-bold">0.10 ETH</div>
                 </div>
             </div>
             <div class="relative overflow-hidden rounded-t-2xl">
-                <img src="../../../storage/app/public/assets/colorful-g0fd569376_1280.jpg" alt="" class="min-w-[100%] max-h-[400px]">
+                <img src="../../../storage/app/public/assets/colorful-g0fd569376_1280.jpg" alt=""
+                    class="min-w-[100%] max-h-[400px]">
                 <div class="nft-card-det flex justify-between items-center py-4 px-5 w-full absolute left-0 bottom-0">
                     <div class="hover:underline underline-offset-4 cursor-pointer">NFT Name</div>
                     <div class="font-bold">0.10 ETH</div>
                 </div>
             </div>
             <div class="relative overflow-hidden rounded-t-2xl">
-                <img src="../../../storage/app/public/assets/heart-g7eea2c9a6_1280.jpg" alt="" class="min-w-[100%] max-h-[400px]">
+                <img src="../../../storage/app/public/assets/heart-g7eea2c9a6_1280.jpg" alt=""
+                    class="min-w-[100%] max-h-[400px]">
                 <div class="nft-card-det flex justify-between items-center py-4 px-5 w-full absolute left-0 bottom-0">
                     <div class="hover:underline underline-offset-4 cursor-pointer">NFT Name</div>
                     <div class="font-bold">0.10 ETH</div>
                 </div>
             </div>
             <div class="relative overflow-hidden rounded-t-2xl">
-                <img src="../../../storage/app/public/assets/venus-g61bb11ec1_1280.jpg" alt="" class="min-w-[100%] max-h-[400px]">
+                <img src="../../../storage/app/public/assets/venus-g61bb11ec1_1280.jpg" alt=""
+                    class="min-w-[100%] max-h-[400px]">
                 <div class="nft-card-det flex justify-between items-center py-4 px-5 w-full absolute left-0 bottom-0">
                     <div class="hover:underline underline-offset-4 cursor-pointer">NFT Name</div>
                     <div class="font-bold">0.10 ETH</div>
                 </div>
             </div>
-            
+
         </div>
+
+        <!-- <div v-for="nft in Nfts" :key="nft.tokenId" class="grid grid-cols-4">
+            <div v-if="nft.metadataError == undefined">
+                <img :src="nft.rawMetadata.image" alt="">
+                <div>{{ nft.title }}</div>
+            </div>
+        </div> -->
     </section>
     <!-- End Gallery Section -->
 
@@ -320,61 +339,31 @@ import Footer from '@/Components/Footer.vue';
 
 
 <style>
-
 .main {
-  background-color: #000000;
-  background-image: radial-gradient(
-      at 76% 60%,
-      hsla(267, 94%, 59%, 1) 0,
-      hsla(267, 94%, 59%, 0) 50%
-    ),
-    radial-gradient(
-      at 42% 45%,
-      hsla(239, 91%, 66%, 1) 0,
-      hsla(239, 91%, 66%, 0) 50%
-    ),
-    radial-gradient(
-      at 64% 38%,
-      hsla(267, 85%, 50%, 1) 0,
-      hsla(267, 85%, 50%, 0) 50%
-    ),
-    radial-gradient(
-      at 2% 32%,
-      hsla(313, 85%, 61%, 1) 0,
-      hsla(313, 85%, 61%, 0) 50%
-    ),
-    radial-gradient(
-      at 26% 55%,
-      hsla(267, 85%, 50%, 1) 0,
-      hsla(267, 85%, 50%, 0) 50%
-    ),
-    radial-gradient(
-      at 42% 59%,
-      hsla(221, 90%, 52%, 1) 0,
-      hsla(221, 90%, 52%, 0) 50%
-    );
+    background-color: #000000;
+    background-image: radial-gradient(at 76% 60%,
+            hsla(267, 94%, 59%, 1) 0,
+            hsla(267, 94%, 59%, 0) 50%),
+        radial-gradient(at 42% 45%,
+            hsla(239, 91%, 66%, 1) 0,
+            hsla(239, 91%, 66%, 0) 50%),
+        radial-gradient(at 64% 38%,
+            hsla(267, 85%, 50%, 1) 0,
+            hsla(267, 85%, 50%, 0) 50%),
+        radial-gradient(at 2% 32%,
+            hsla(313, 85%, 61%, 1) 0,
+            hsla(313, 85%, 61%, 0) 50%),
+        radial-gradient(at 26% 55%,
+            hsla(267, 85%, 50%, 1) 0,
+            hsla(267, 85%, 50%, 0) 50%),
+        radial-gradient(at 42% 59%,
+            hsla(221, 90%, 52%, 1) 0,
+            hsla(221, 90%, 52%, 0) 50%);
 }
-
-
-
-
-
-
-
-
 
 .nft-card-det {
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(50px);
-  -webkit-backdrop-filter: blur(50px);
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(50px);
+    -webkit-backdrop-filter: blur(50px);
 }
-
-
-/*.nft-card:hover img {
-  transform: scale(1.1);
-  transition: all 300ms ease-out;
-  overflow: hidden;
-}*/
-
-
 </style>
