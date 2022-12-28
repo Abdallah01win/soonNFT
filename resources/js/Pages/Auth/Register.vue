@@ -1,4 +1,5 @@
 <script setup>
+import Checkbox from '@/Components/Checkbox.vue';
 import GuestLayout from '@/Layouts/GuestLayout.vue';
 import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
@@ -23,81 +24,83 @@ const submit = () => {
 
 <template>
     <GuestLayout>
+
         <Head title="Register" />
+
+        <div class="mb-6">
+            <Link :href="route('/')" class="block cursor-pointer font-inter text-4xl font-extrabold uppercase mb-4">
+            Soonnft</Link>
+            <div class="text-lg font-semibold">Welcome!</div>
+            <p class="text-white/50">Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
+        </div>
 
         <form @submit.prevent="submit">
             <div>
-                <InputLabel for="name" value="Name" />
+                <!-- <InputLabel for="name" value="Name" /> -->
 
-                <TextInput
-                    id="name"
-                    type="text"
-                    class="mt-1 block w-full"
-                    v-model="form.name"
-                    required
-                    autofocus
-                    autocomplete="name"
-                />
+                <TextInput id="name" type="text" class="mt-5 block w-full" v-model="form.name" required autofocus
+                    autocomplete="name" placeholder="Name" />
 
                 <InputError class="mt-2" :message="form.errors.name" />
             </div>
 
             <div class="mt-4">
-                <InputLabel for="email" value="Email" />
+                <!-- <InputLabel for="email" value="Email" /> -->
 
-                <TextInput
-                    id="email"
-                    type="email"
-                    class="mt-1 block w-full"
-                    v-model="form.email"
-                    required
-                    autocomplete="username"
-                />
+                <TextInput id="email" type="email" class="mt-5 block w-full" v-model="form.email" required
+                    autocomplete="username" placeholder="Email" />
 
                 <InputError class="mt-2" :message="form.errors.email" />
             </div>
 
             <div class="mt-4">
-                <InputLabel for="password" value="Password" />
+                <!-- <InputLabel for="password" value="Password" /> -->
 
-                <TextInput
-                    id="password"
-                    type="password"
-                    class="mt-1 block w-full"
-                    v-model="form.password"
-                    required
-                    autocomplete="new-password"
-                />
+                <TextInput id="password" type="password" class="mt-5 block w-full" v-model="form.password" required
+                    autocomplete="new-password" placeholder="Password" />
 
                 <InputError class="mt-2" :message="form.errors.password" />
             </div>
 
             <div class="mt-4">
-                <InputLabel for="password_confirmation" value="Confirm Password" />
+                <!-- <InputLabel for="password_confirmation" value="Confirm Password" /> -->
 
-                <TextInput
-                    id="password_confirmation"
-                    type="password"
-                    class="mt-1 block w-full"
-                    v-model="form.password_confirmation"
-                    required
-                    autocomplete="new-password"
-                />
+                <TextInput id="password_confirmation" type="password" class="mt-5 block w-full"
+                    v-model="form.password_confirmation" required autocomplete="new-password"
+                    placeholder="Confirm password" />
 
                 <InputError class="mt-2" :message="form.errors.password_confirmation" />
             </div>
+            <div class="flex items-center mt-5 justify-between">
+                <div class="block">
+                    <label class="flex items-center">
+                        <Checkbox name="terms" checked required v-model:checked="form.terms" />
+                        <span class="ml-2 text-sm text-white/50">I agree to
+                            <span class="hover:text-white">
+                                <a href="#">Terms & conditions</a>
+                            </span>
+                        </span>
+                    </label>
+                </div>
+                <div class="block">
+                    <label class="flex items-center">
+                        <Checkbox name="newsLetter" checked v-model:checked="form.newsLetter" />
+                        <span class="ml-2 text-sm text-white/50">Signup to newsLetter</span>
+                    </label>
+                </div>
+            </div>
 
-            <div class="flex items-center justify-end mt-4">
-                <Link
-                    :href="route('login')"
-                    class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                >
-                    Already registered?
+
+
+            <PrimaryButton class="w-full justify-center mt-5" :class="{ 'opacity-25': form.processing }"
+                :disabled="form.processing">
+                Register
+            </PrimaryButton>
+            <div class="flex items-center justify-center mt-4">
+                <Link :href="route('login')"
+                    class="underline text-sm text-white/50 hover:hover:text-white rounded-md focus:outline-none underline-offset-4">
+                Already registered?
                 </Link>
-
-                <PrimaryButton class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                    Register
-                </PrimaryButton>
             </div>
         </form>
     </GuestLayout>

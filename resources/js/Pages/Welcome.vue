@@ -242,8 +242,10 @@ import Footer from '@/Components/Footer.vue';
                 <li>Blog</li>
             </ul>
             <div class="flex items-center gap-x-4 text-base">
-                <button class="rounded-full py-2 px-6 uppercase border border-white bg-none">Sign-In</button>
-                <button class="rounded-full py-2 px-6 uppercase border border-white bg-none">Register</button>
+                <!-- <button class="rounded-full py-2 px-6 uppercase border border-white bg-none">Sign-In</button> -->
+                <Link :href="route('login')" class="rounded-full py-2 px-6 uppercase border border-white bg-none">Log in</Link>
+                <Link :href="route('register')" class="rounded-full py-2 px-6 uppercase border border-white bg-none">Register</Link>
+                <!-- <button class="rounded-full py-2 px-6 uppercase border border-white bg-none">Register</button> -->
             </div>
         </nav>
         <section class="flex items-center h-[100vh] max-h-[600px] mx-auto max-w-[1180px]">

@@ -1,5 +1,5 @@
 <template>
-    <footer class="mx-auto mb-16 mt-32 max-w-[1180px]">
+    <footer class="mx-auto mt-32 pt-10 max-w-[1180px] border-t border-white/50">
         <div class="text-5xl uppercase font-black mb-4">Soonnft</div>
         <div class="grid grid-cols-[2.5fr,0.7fr,1.8fr] gap-x-6">
             <div>
@@ -37,7 +37,7 @@
                 <p class="mb-3 font-light">Lorem ipsum dolor sit. Lorem ipsum dolor.</p>
                 <form action="" class="flex relative mb-6">
                     <input type="email" name="email" id="footerEmail"
-                        class="w-full bg-transparent border border-white rounded-full placeholder:text-white placeholder:opacity-50 placeholder:pl-[2%]"
+                        class="w-full bg-transparent border border-white rounded-full placeholder:text-white  placeholder:pl-[2%]"
                         placeholder="Email Adress">
                     <button type="submit" class="absolute right-[5%] top-[50%] translate-y-[-50%] z-10">Sign Up</button>
                 </form>
@@ -48,6 +48,17 @@
                     <ion-icon name="logo-twitter"></ion-icon>
                     <ion-icon name="logo-discord"></ion-icon>
                 </div>
+            </div>
+        </div>
+        <div class="border-t border-white/50 text-white/50 py-6 mt-10 flex items-center justify-between">
+            <div>&copy; - 2022 SoonNFT, Inc</div>
+            <div class="flex gap-3">
+                <span class="cursor-pointer hover:text-white">
+                    <a href="#">Privacy Policy</a>
+                </span>
+                <span class="cursor-pointer hover:text-white">
+                    <a href="#">Terms of Service</a>
+                </span>
             </div>
         </div>
     </footer>
