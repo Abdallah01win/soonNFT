@@ -4,6 +4,11 @@ import { Head, Link } from '@inertiajs/inertia-vue3';
 <script>
 import Footer from '@/Components/Footer.vue';
     export default{
+        /*data(){
+            return {
+                loggedin: Boolean,
+            }
+        },*/
         components: {
             Footer,
         }
@@ -241,14 +246,15 @@ import Footer from '@/Components/Footer.vue';
                 <li>Upcoming</li>
                 <li>Blog</li>
             </ul>
-            <div class="flex items-center gap-x-4 text-base">
-                <!-- <button class="rounded-full py-2 px-6 uppercase border border-white bg-none">Sign-In</button> -->
+            <div v-if="!$page.props.auth.user" class="flex items-center gap-x-4 text-base">
                 <Link :href="route('login')" class="rounded-full py-2 px-6 uppercase border border-white bg-none">Log in</Link>
                 <Link :href="route('register')" class="rounded-full py-2 px-6 uppercase border border-white bg-none">Register</Link>
-                <!-- <button class="rounded-full py-2 px-6 uppercase border border-white bg-none">Register</button> -->
+            </div>
+            <div v-else>
+               {{$page.props.auth.user.name}}
             </div>
         </nav>
-        <section class="flex items-center h-[100vh] max-h-[600px] mx-auto max-w-[1180px]">
+        <section class="flex items-center h-[100vh] max-h-[610px] mx-auto max-w-[1180px]">
             <div class="flex flex-col items-center /translate-y-[-50%]">
                 <h1 class="font-inter font-black text-6xl mb-3 uppercase">The NFT World in your hands</h1>
                 <p class="text-center max-w-[70%] mx-auto">Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro quae velit modi voluptatem, iure explicabo! Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>

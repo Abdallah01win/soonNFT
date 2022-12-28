@@ -50,7 +50,7 @@
                 </div>
             </div>
         </div>
-        <div class="border-t border-white/50 text-white/50 py-6 mt-10 flex items-center justify-between">
+        <div class="border-t border-white/50 text-white/50 py-3 mt-10 flex items-center justify-between">
             <div>&copy; - 2022 SoonNFT, Inc</div>
             <div class="flex gap-3">
                 <span class="cursor-pointer hover:text-white">
