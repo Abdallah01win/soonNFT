@@ -1,5 +1,17 @@
+<script setup>
+import InputError from '@/Components/InputError.vue';
+import TextInput from '@/Components/TextInput.vue';
+import { useForm } from '@inertiajs/inertia-vue3';
+import PrimaryButton from '@/Components/PrimaryButton.vue';
+
+
+const form = useForm({
+    email: '',
+});
+
+</script>
 <template>
-    <footer class="mx-auto mt-32 pt-10 max-w-[1180px] border-t border-white/50">
+    <footer class="mx-auto mt-28 pt-10 max-w-[1180px] border-t border-white/50">
         <div class="text-5xl uppercase font-black mb-4">Soonnft</div>
         <div class="grid grid-cols-[2.5fr,0.7fr,1.8fr] gap-x-6">
             <div>
@@ -35,12 +47,36 @@
             <div>
                 <h4 class="font-semibold mb-2 text-lg ">Community</h4>
                 <p class="mb-3 font-light">Lorem ipsum dolor sit. Lorem ipsum dolor.</p>
-                <form action="" class="flex relative mb-6">
+                <!-- <form action="" class="flex relative mb-6">
                     <input type="email" name="email" id="footerEmail"
                         class="w-full bg-transparent border border-white rounded-full placeholder:text-white  placeholder:pl-[2%]"
                         placeholder="Email Adress">
                     <button type="submit" class="absolute right-[5%] top-[50%] translate-y-[-50%] z-10">Sign Up</button>
+                </form> -->
+
+                <form action="post" class="flex items-center gap-x-2 mb-6">
+                    <div class="grow">
+                        <TextInput
+                            id="email"
+                            type="email"
+                            class="mt-1 block w-full"
+                            v-model="form.email"
+                            required
+                            autofocus
+                            autocomplete="username"
+                            placeholder="Email"
+                        />
+                        <InputError class="mt-2" :message="form.errors.email" />
+                    </div>
+                    <PrimaryButton
+                        class="w-fit justify-center px-5"
+                        :class="{ 'opacity-25': form.processing }"
+                        :disabled="form.processing"
+                    >
+                        Subscribe
+                    </PrimaryButton>
                 </form>
+
                 <div class="flex gap-4 items-center text-2xl">
                     <ion-icon name="logo-instagram"></ion-icon>
                     <ion-icon name="logo-youtube"></ion-icon>

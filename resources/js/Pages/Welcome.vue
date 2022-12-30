@@ -1,20 +1,29 @@
 <script setup>
-import { onMounted } from 'vue'
-import { Head, Link } from '@inertiajs/inertia-vue3';
+import { onMounted } from "vue";
+import TextInput from "@/Components/TextInput.vue";
+import InputError from "@/Components/InputError.vue";
+import PrimaryButton from "@/Components/PrimaryButton.vue";
+import { Head, Link, useForm } from "@inertiajs/inertia-vue3";
+
+const form = useForm({
+    email: "",
+});
 </script>
 <script>
-import { Network, Alchemy } from 'alchemy-sdk';
-import Footer from '@/Components/Footer.vue';
-import Navigation from '@/Components/Navigation.vue'
+import { Network, Alchemy } from "alchemy-sdk";
+import Footer from "@/Components/Footer.vue";
+import Navigation from "@/Components/Navigation.vue";
 export default {
     data() {
         return {
             Nfts: Array,
-        }
+        };
     },
     components: {
         Footer,
         Navigation,
+        PrimaryButton,
+        PrimaryButton,
     },
     methods: {
         async getNfts() {
@@ -24,18 +33,17 @@ export default {
             };
             const alchemy = new Alchemy(settings);
             const nfts = await alchemy.nft.getNftsForOwner("0xshah.eth");
-            console.log(nfts)
-            this.Nfts = nfts.ownedNfts
-        }
+            console.log(nfts);
+            this.Nfts = nfts.ownedNfts;
+        },
     },
     mounted: function () {
         //this.getNfts();
     },
-}
+};
 </script>
 
 <template>
-
     <Head title="Home" />
 
     <!-- <div
@@ -259,61 +267,108 @@ export default {
 
     <main class="main">
         <Navigation />
-        <section class="flex items-center h-[100vh] max-h-[610px] mx-auto max-w-[1180px]">
+        <section
+            class="flex items-center h-[100vh] max-h-[610px] mx-auto max-w-[1180px]"
+        >
             <div class="flex flex-col items-center /translate-y-[-50%]">
-                <h1 class="font-inter font-black text-6xl mb-3 uppercase">The NFT World in your hands</h1>
-                <p class="text-center max-w-[70%] mx-auto">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Porro quae velit modi voluptatem, iure explicabo! Lorem ipsum dolor sit, amet consectetur
-                    adipisicing elit.</p>
+                <h1 class="font-inter font-black text-6xl mb-3 uppercase">
+                    The NFT World in your hands
+                </h1>
+                <p class="text-center max-w-[70%] mx-auto">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Porro quae velit modi voluptatem, iure explicabo! Lorem
+                    ipsum dolor sit, amet consectetur adipisicing elit.
+                </p>
                 <div class="flex items-center gap-x-6 mt-8">
-                    <button class="text-lg rounded-full py-2 px-6 uppercase border border-white bg-none">Get
-                        Started</button>
-                    <button class="text-lg rounded-full py-2 px-6 border border-white bg-none">EXPLORE NFTs</button>
+                    <button
+                        class="text-lg rounded-full py-2 px-6 uppercase border border-white bg-none"
+                    >
+                        Get Started
+                    </button>
+                    <button
+                        class="text-lg rounded-full py-2 px-6 border border-white bg-none"
+                    >
+                        EXPLORE NFTs
+                    </button>
                 </div>
             </div>
         </section>
-
     </main>
     <!-- Gallery Section -->
     <section class="mx-auto my-20 max-w-[1180px]">
         <div class="flex flex-col mb-6">
             <div class="text-white opacity-50 text-lg">Gallery</div>
-            <h3 class="text-4xl font-bold ">Popular NFTs</h3>
+            <h3 class="text-4xl font-bold">Popular NFTs</h3>
         </div>
         <div class="grid grid-cols-4 gap-10">
             <div class="relative overflow-hidden rounded-t-2xl cursor-pointer">
-                <img src="../../../storage/app/public/assets/alien-gc688c9726_1280.jpg" alt=""
-                    class="min-w-[100%] max-h-[400px]">
-                <div class="nft-card-det flex justify-between items-center py-4 px-5 w-full absolute left-0 bottom-0">
-                    <div class="hover:underline underline-offset-4 cursor-pointer">NFT Name</div>
+                <img
+                    src="../../../storage/app/public/assets/alien-gc688c9726_1280.jpg"
+                    alt=""
+                    class="min-w-[100%] max-h-[400px]"
+                />
+                <div
+                    class="nft-card-det flex justify-between items-center py-4 px-5 w-full absolute left-0 bottom-0"
+                >
+                    <div
+                        class="hover:underline underline-offset-4 cursor-pointer"
+                    >
+                        NFT Name
+                    </div>
                     <div class="font-bold">0.10 ETH</div>
                 </div>
             </div>
             <div class="relative overflow-hidden rounded-t-2xl">
-                <img src="../../../storage/app/public/assets/colorful-g0fd569376_1280.jpg" alt=""
-                    class="min-w-[100%] max-h-[400px]">
-                <div class="nft-card-det flex justify-between items-center py-4 px-5 w-full absolute left-0 bottom-0">
-                    <div class="hover:underline underline-offset-4 cursor-pointer">NFT Name</div>
+                <img
+                    src="../../../storage/app/public/assets/colorful-g0fd569376_1280.jpg"
+                    alt=""
+                    class="min-w-[100%] max-h-[400px]"
+                />
+                <div
+                    class="nft-card-det flex justify-between items-center py-4 px-5 w-full absolute left-0 bottom-0"
+                >
+                    <div
+                        class="hover:underline underline-offset-4 cursor-pointer"
+                    >
+                        NFT Name
+                    </div>
                     <div class="font-bold">0.10 ETH</div>
                 </div>
             </div>
             <div class="relative overflow-hidden rounded-t-2xl">
-                <img src="../../../storage/app/public/assets/heart-g7eea2c9a6_1280.jpg" alt=""
-                    class="min-w-[100%] max-h-[400px]">
-                <div class="nft-card-det flex justify-between items-center py-4 px-5 w-full absolute left-0 bottom-0">
-                    <div class="hover:underline underline-offset-4 cursor-pointer">NFT Name</div>
+                <img
+                    src="../../../storage/app/public/assets/heart-g7eea2c9a6_1280.jpg"
+                    alt=""
+                    class="min-w-[100%] max-h-[400px]"
+                />
+                <div
+                    class="nft-card-det flex justify-between items-center py-4 px-5 w-full absolute left-0 bottom-0"
+                >
+                    <div
+                        class="hover:underline underline-offset-4 cursor-pointer"
+                    >
+                        NFT Name
+                    </div>
                     <div class="font-bold">0.10 ETH</div>
                 </div>
             </div>
             <div class="relative overflow-hidden rounded-t-2xl">
-                <img src="../../../storage/app/public/assets/venus-g61bb11ec1_1280.jpg" alt=""
-                    class="min-w-[100%] max-h-[400px]">
-                <div class="nft-card-det flex justify-between items-center py-4 px-5 w-full absolute left-0 bottom-0">
-                    <div class="hover:underline underline-offset-4 cursor-pointer">NFT Name</div>
+                <img
+                    src="../../../storage/app/public/assets/venus-g61bb11ec1_1280.jpg"
+                    alt=""
+                    class="min-w-[100%] max-h-[400px]"
+                />
+                <div
+                    class="nft-card-det flex justify-between items-center py-4 px-5 w-full absolute left-0 bottom-0"
+                >
+                    <div
+                        class="hover:underline underline-offset-4 cursor-pointer"
+                    >
+                        NFT Name
+                    </div>
                     <div class="font-bold">0.10 ETH</div>
                 </div>
             </div>
-
         </div>
 
         <!-- <div v-for="nft in Nfts" :key="nft.tokenId" class="grid grid-cols-4">
@@ -326,43 +381,153 @@ export default {
     <!-- End Gallery Section -->
 
     <!-- Blog Section -->
-    <section class="mx-auto my-20 max-w-[1180px]">
+    <!-- <section class="mx-auto my-20 max-w-[1180px]">
         <div class="flex flex-col mb-6">
             <div class="text-white opacity-50 text-lg">Blog</div>
-            <h3 class="text-4xl font-bold ">Recent posts</h3>
+            <h3 class="text-4xl font-bold">Recent posts</h3>
+        </div>
+    </section> -->
+    <!-- End Blog Section -->
+
+    <!-- News Letter -->
+
+    <section
+        class="mx-auto my-20 max-w-[1180px] rounded-xl bg-gray-600 newsletter-sec"
+    >
+        <div class="grid grid-cols-2 py-16 px-10">
+            <div class="text">
+                <div class="flex flex-col">
+                    <div
+                        class="py-1 px-3 text-xs rounded-full news-letter-sub /bg-slate-400 w-fit mb-2"
+                    >
+                        Subscribe to our news-letter
+                    </div>
+                    <h3 class="text-5xl font-inter font-black mb-3">
+                        Join The Future Now
+                    </h3>
+                </div>
+                <p class="/max-w-[80%] mb-4">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Veniam magnam officia sequi debitis necessitatibus
+                    asperiores.
+                </p>
+                <form action="post" class="flex items-center gap-x-3 mt-6">
+                    <div class="grow">
+                        <TextInput
+                            id="email"
+                            type="email"
+                            class="mt-1 block w-full"
+                            v-model="form.email"
+                            required
+                            autofocus
+                            autocomplete="username"
+                            placeholder="Email Adress"
+                        />
+                        <InputError class="mt-2" :message="form.errors.email" />
+                    </div>
+                    <PrimaryButton
+                        class="w-fit justify-center px-6"
+                        :class="{ 'opacity-25': form.processing }"
+                        :disabled="form.processing"
+                    >
+                        Subscribe
+                    </PrimaryButton>
+                </form>
+            </div>
+            <div class="text"></div>
         </div>
     </section>
-    <!-- End Blog Section -->
 
     <Footer />
 </template>
 
-
 <style>
 .main {
     background-color: #000000;
-    background-image: radial-gradient(at 76% 60%,
+    background-image: radial-gradient(
+            at 76% 60%,
             hsla(267, 94%, 59%, 1) 0,
-            hsla(267, 94%, 59%, 0) 50%),
-        radial-gradient(at 42% 45%,
+            hsla(267, 94%, 59%, 0) 50%
+        ),
+        radial-gradient(
+            at 42% 45%,
             hsla(239, 91%, 66%, 1) 0,
-            hsla(239, 91%, 66%, 0) 50%),
-        radial-gradient(at 64% 38%,
+            hsla(239, 91%, 66%, 0) 50%
+        ),
+        radial-gradient(
+            at 64% 38%,
             hsla(267, 85%, 50%, 1) 0,
-            hsla(267, 85%, 50%, 0) 50%),
-        radial-gradient(at 2% 32%,
+            hsla(267, 85%, 50%, 0) 50%
+        ),
+        radial-gradient(
+            at 2% 32%,
             hsla(313, 85%, 61%, 1) 0,
-            hsla(313, 85%, 61%, 0) 50%),
-        radial-gradient(at 26% 55%,
+            hsla(313, 85%, 61%, 0) 50%
+        ),
+        radial-gradient(
+            at 26% 55%,
             hsla(267, 85%, 50%, 1) 0,
-            hsla(267, 85%, 50%, 0) 50%),
-        radial-gradient(at 42% 59%,
+            hsla(267, 85%, 50%, 0) 50%
+        ),
+        radial-gradient(
+            at 42% 59%,
             hsla(221, 90%, 52%, 1) 0,
-            hsla(221, 90%, 52%, 0) 50%);
+            hsla(221, 90%, 52%, 0) 50%
+        );
+}
+
+.newsletter-sec {
+    background-color: #000000;
+    background-image: radial-gradient(
+            at 76% 60%,
+            hsla(267, 94%, 59%, 1) 0,
+            hsla(267, 94%, 59%, 0) 50%
+        ),
+        radial-gradient(
+            at 42% 45%,
+            hsla(239, 91%, 66%, 1) 0,
+            hsla(239, 91%, 66%, 0) 50%
+        ),
+        radial-gradient(
+            at 64% 38%,
+            hsla(267, 85%, 50%, 1) 0,
+            hsla(267, 85%, 50%, 0) 50%
+        ),
+        radial-gradient(
+            at 10% 32%,
+            hsla(313, 85%, 61%, 1) 0,
+            hsla(313, 85%, 61%, 0) 50%
+        ),
+        radial-gradient(
+            at 30% 85%,
+            hsla(267, 85%, 50%, 1) 0,
+            hsla(267, 85%, 50%, 0) 50%
+        ),
+        radial-gradient(
+            at 42% 89%,
+            hsla(221, 90%, 52%, 1) 0,
+            hsla(221, 90%, 52%, 0) 50%
+        ),
+        radial-gradient(
+            at 100% 70%,
+            hsla(313, 85%, 61%, 1) 0,
+            hsla(313, 85%, 61%, 0) 50%
+        ),
+        radial-gradient(
+            at 100% 10%,
+            hsla(267, 85%, 50%, 1) 0,
+            hsla(267, 85%, 50%, 0) 50%
+        );
 }
 
 .nft-card-det {
     background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(50px);
+    -webkit-backdrop-filter: blur(50px);
+}
+
+.news-letter-sub{
+    background: rgba(255, 255, 255, 0.3);
     backdrop-filter: blur(50px);
     -webkit-backdrop-filter: blur(50px);
 }
