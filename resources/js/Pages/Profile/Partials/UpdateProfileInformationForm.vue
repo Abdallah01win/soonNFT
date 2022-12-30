@@ -19,9 +19,9 @@ const form = useForm({
 </script>
 
 <template>
-    <section>
+    <section class="">
         <header>
-            <h2 class="text-lg font-medium text-gray-900">Profile Information</h2>
+            <h2 class="text-lg font-medium">Profile Information</h2>
 
             <p class="mt-1 text-sm text-gray-600">
                 Update your account's profile information and email address.
@@ -54,6 +54,7 @@ const form = useForm({
                     class="mt-1 block w-full"
                     v-model="form.email"
                     required
+                    disabled
                     autocomplete="email"
                 />
 

@@ -1,7 +1,7 @@
 <script setup>
 import InputError from '@/Components/InputError.vue';
 import TextInput from '@/Components/TextInput.vue';
-import { useForm } from '@inertiajs/inertia-vue3';
+import { useForm, Link } from '@inertiajs/inertia-vue3';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 
 
@@ -12,7 +12,9 @@ const form = useForm({
 </script>
 <template>
     <footer class="mx-auto mt-28 pt-10 max-w-[1180px] border-t border-white/50">
-        <div class="text-5xl uppercase font-black mb-4">Soonnft</div>
+        <div class="text-5xl uppercase font-black mb-4">
+            <Link :href="route('/')">Soonnft</Link>
+            </div>
         <div class="grid grid-cols-[2.5fr,0.7fr,1.8fr] gap-x-6">
             <div>
                 <p class="mb-4 font-light">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fugiat,
@@ -40,7 +42,9 @@ const form = useForm({
                     <li>Blog</li>
                     <li>Etherum</li>
                     <li>Solana</li>
-                    <li>Contact</li>
+                    <li>
+                        <Link :href="route('contact')">Contact</Link>
+                    </li>
                     <li>Help</li>
                 </ul>
             </div>

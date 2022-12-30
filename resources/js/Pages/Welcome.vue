@@ -400,7 +400,7 @@ export default {
                     <div
                         class="py-1 px-3 text-xs rounded-full news-letter-sub /bg-slate-400 w-fit mb-2"
                     >
-                        Subscribe to our news-letter
+                        News-letter
                     </div>
                     <h3 class="text-5xl font-inter font-black mb-3">
                         Join The Future Now
@@ -445,7 +445,7 @@ export default {
 .main {
     background-color: #000000;
     background-image: radial-gradient(
-            at 76% 60%,
+            at 76% 58%,
             hsla(267, 94%, 59%, 1) 0,
             hsla(267, 94%, 59%, 0) 50%
         ),
