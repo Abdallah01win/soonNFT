@@ -278,7 +278,7 @@ export default {
 
     <main class="main">
         <Navigation />
-        <section class="flex items-center h-[100vh] max-h-[610px] mx-auto max-w-[1180px]">
+        <section class="flex items-center h-[100vh] max-h-[620px] mx-auto max-w-[1180px]">
             <div class="flex flex-col items-center /translate-y-[-50%]">
                 <h1 class="font-inter font-black text-6xl mb-3 uppercase">
                     The NFT World in your hands
@@ -360,7 +360,7 @@ export default {
     <!-- End Blog Section -->
 
     <!-- Table Section -->
-    <section class="mx-auto my-20 max-w-[1180px] bg-gray-900/80 px-10 py-12 rounded-xl">
+    <section class="mx-auto my-20 max-w-[1180px] bg-myDark-200 px-10 py-12 rounded-xl">
         <div class="flex flex-col mb-6">
             <div class="text-white opacity-50 text-lg">Gallery</div>
             <h3 class="text-4xl font-bold">Popular NFTs</h3>

@@ -48,7 +48,7 @@ export default {
                     <h3 class="text-4xl font-bold">Dashboard</h3>
                 </div>
                 <div class="grid grid-cols-[2fr,0.9fr] gap-x-4">
-                    <form action="post" class="bg-gray-900/50 px-8 py-10 rounded-xl">
+                    <form action="post" class="bg-myDark-200 px-8 py-10 rounded-xl">
                         <div class="text-2xl font-semibold mb-4">Add New NFT</div>
 
                         <div>
@@ -95,8 +95,8 @@ export default {
                                 <InputError class="mt-2" :message="form.errors.blockchain" />
                             </div>
                             <div class="w-full">
-                                <TextInput id="Date" type="date" class="mt-1 block w-full" v-model="form.dropDate"
-                                    required autocomplete="Date" placeholder="Drop Date" />
+                                <TextInput id="Date" type="text" class="mt-1 block w-full" v-model="form.dropDate"
+                                    required autocomplete="Date" placeholder="Drop Date" onfocus="(this.type='date')" onblur="(this.type='text')"/>
                                 <InputError class="mt-2" :message="form.errors.dropDate" />
                             </div>
                         </div>
@@ -115,7 +115,7 @@ export default {
                     </form>
 
                     <!-- stats -->
-                    <div class="bg-gray-900/50 px-8 py-10 rounded-xl">
+                    <div class="bg-myDark-200 px-8 py-10 rounded-xl">
                         <div class="text-2xl font-semibold mb-4">Statestics</div>
                         <div class="flex flex-col gap-y-4">
                             <div class="flex items-center justify-between">
@@ -138,3 +138,9 @@ export default {
         </template>
     </AuthenticatedLayout>
 </template>
+
+<style>
+    ::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+}
+</style>

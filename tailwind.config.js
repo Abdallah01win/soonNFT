@@ -15,6 +15,13 @@ module.exports = {
                 sans: ['Poppins', ...defaultTheme.fontFamily.sans],
                 inter: ['Inter', ...defaultTheme.fontFamily.sans],
             },
+            colors: {
+                'myDark': {
+                    100: "#181818ff",
+                    200: "#0f0f0fff",
+                    300: "#0a0a0aff",
+                }
+            },
         },
     },
 
