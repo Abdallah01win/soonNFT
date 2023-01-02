@@ -32,7 +32,7 @@ export default {
     <Head title="Contact" />
     <!-- <Navigation /> -->
 
-    <main class="main">
+    <main class="main mb-32">
         <Navigation />
         <section
             class="flex items-center h-[100vh] max-h-[610px] mx-auto max-w-[1180px]"
@@ -47,7 +47,7 @@ export default {
                     >
                         Let's Get in Touch</Link
                     >
-                    <p class="text-white/50">
+                    <p>
                         Lorem ipsum dolor sit, amet consectetur adipisicing
                         elit.
                     </p>

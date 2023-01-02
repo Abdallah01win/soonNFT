@@ -26,24 +26,35 @@ export default {
         PrimaryButton,
     },
     methods: {
-        async getNfts() {
-            const settings = {
-                apiKey: "_pf4L_mT0GGNERcH7gUMRNsoLmYE60Rm",
-                network: Network.ETH_MAINNET,
-            };
-            const alchemy = new Alchemy(settings);
-            const nfts = await alchemy.nft.getNftsForOwner("0xshah.eth");
-            console.log(nfts);
-            this.Nfts = nfts.ownedNfts;
+        checkImage(url) {
+            new Promise((resolve) => {
+                const img = new Image();
+                img.src = url;
+                img.onload = () => resolve(true);
+                img.onerror = () => resolve(false);
+            })
         },
-    },
-    mounted: function () {
-        //this.getNfts();
-    },
-};
+                async getNfts() {
+                const settings = {
+                    apiKey: "_pf4L_mT0GGNERcH7gUMRNsoLmYE60Rm",
+                    network: Network.ETH_MAINNET,
+                };
+                const alchemy = new Alchemy(settings);
+                const nfts = await alchemy.nft.getNftsForOwner("0xshah.eth");
+                //const newArray = nfts.ownedNfts.filter(nft => this.checkImage(nft.rawMetadata.image) === true)
+                const newArray = nfts.ownedNfts.filter(nft => nft.rawMetadata.image !== undefined )
+                console.log(newArray)
+                this.Nfts = newArray;
+            }
+        },
+        mounted: function () {
+            //this.getNfts();
+        },
+    };
 </script>
 
 <template>
+
     <Head title="Home" />
 
     <!-- <div
@@ -267,9 +278,7 @@ export default {
 
     <main class="main">
         <Navigation />
-        <section
-            class="flex items-center h-[100vh] max-h-[610px] mx-auto max-w-[1180px]"
-        >
+        <section class="flex items-center h-[100vh] max-h-[610px] mx-auto max-w-[1180px]">
             <div class="flex flex-col items-center /translate-y-[-50%]">
                 <h1 class="font-inter font-black text-6xl mb-3 uppercase">
                     The NFT World in your hands
@@ -280,14 +289,10 @@ export default {
                     ipsum dolor sit, amet consectetur adipisicing elit.
                 </p>
                 <div class="flex items-center gap-x-6 mt-8">
-                    <button
-                        class="text-lg rounded-full py-2 px-6 uppercase border border-white bg-none"
-                    >
+                    <button class="text-lg rounded-full py-2 px-6 uppercase border border-white bg-none">
                         Get Started
                     </button>
-                    <button
-                        class="text-lg rounded-full py-2 px-6 border border-white bg-none"
-                    >
+                    <button class="text-lg rounded-full py-2 px-6 border border-white bg-none">
                         EXPLORE NFTs
                     </button>
                 </div>
@@ -302,81 +307,46 @@ export default {
         </div>
         <div class="grid grid-cols-4 gap-10">
             <div class="relative overflow-hidden rounded-t-2xl cursor-pointer">
-                <img
-                    src="../../../storage/app/public/assets/alien-gc688c9726_1280.jpg"
-                    alt=""
-                    class="min-w-[100%] max-h-[400px]"
-                />
-                <div
-                    class="nft-card-det flex justify-between items-center py-4 px-5 w-full absolute left-0 bottom-0"
-                >
-                    <div
-                        class="hover:underline underline-offset-4 cursor-pointer"
-                    >
+                <img src="../../../storage/app/public/assets/alien-gc688c9726_1280.jpg" alt=""
+                    class="min-w-[100%] max-h-[400px]" />
+                <div class="nft-card-det flex justify-between items-center py-4 px-5 w-full absolute left-0 bottom-0">
+                    <div class="hover:underline underline-offset-4 cursor-pointer">
                         NFT Name
                     </div>
                     <div class="font-bold">0.10 ETH</div>
                 </div>
             </div>
             <div class="relative overflow-hidden rounded-t-2xl">
-                <img
-                    src="../../../storage/app/public/assets/colorful-g0fd569376_1280.jpg"
-                    alt=""
-                    class="min-w-[100%] max-h-[400px]"
-                />
-                <div
-                    class="nft-card-det flex justify-between items-center py-4 px-5 w-full absolute left-0 bottom-0"
-                >
-                    <div
-                        class="hover:underline underline-offset-4 cursor-pointer"
-                    >
+                <img src="../../../storage/app/public/assets/colorful-g0fd569376_1280.jpg" alt=""
+                    class="min-w-[100%] max-h-[400px]" />
+                <div class="nft-card-det flex justify-between items-center py-4 px-5 w-full absolute left-0 bottom-0">
+                    <div class="hover:underline underline-offset-4 cursor-pointer">
                         NFT Name
                     </div>
                     <div class="font-bold">0.10 ETH</div>
                 </div>
             </div>
             <div class="relative overflow-hidden rounded-t-2xl">
-                <img
-                    src="../../../storage/app/public/assets/heart-g7eea2c9a6_1280.jpg"
-                    alt=""
-                    class="min-w-[100%] max-h-[400px]"
-                />
-                <div
-                    class="nft-card-det flex justify-between items-center py-4 px-5 w-full absolute left-0 bottom-0"
-                >
-                    <div
-                        class="hover:underline underline-offset-4 cursor-pointer"
-                    >
+                <img src="../../../storage/app/public/assets/heart-g7eea2c9a6_1280.jpg" alt=""
+                    class="min-w-[100%] max-h-[400px]" />
+                <div class="nft-card-det flex justify-between items-center py-4 px-5 w-full absolute left-0 bottom-0">
+                    <div class="hover:underline underline-offset-4 cursor-pointer">
                         NFT Name
                     </div>
                     <div class="font-bold">0.10 ETH</div>
                 </div>
             </div>
             <div class="relative overflow-hidden rounded-t-2xl">
-                <img
-                    src="../../../storage/app/public/assets/venus-g61bb11ec1_1280.jpg"
-                    alt=""
-                    class="min-w-[100%] max-h-[400px]"
-                />
-                <div
-                    class="nft-card-det flex justify-between items-center py-4 px-5 w-full absolute left-0 bottom-0"
-                >
-                    <div
-                        class="hover:underline underline-offset-4 cursor-pointer"
-                    >
+                <img src="../../../storage/app/public/assets/venus-g61bb11ec1_1280.jpg" alt=""
+                    class="min-w-[100%] max-h-[400px]" />
+                <div class="nft-card-det flex justify-between items-center py-4 px-5 w-full absolute left-0 bottom-0">
+                    <div class="hover:underline underline-offset-4 cursor-pointer">
                         NFT Name
                     </div>
                     <div class="font-bold">0.10 ETH</div>
                 </div>
             </div>
         </div>
-
-        <!-- <div v-for="nft in Nfts" :key="nft.tokenId" class="grid grid-cols-4">
-            <div v-if="nft.metadataError == undefined">
-                <img :src="nft.rawMetadata.image" alt="">
-                <div>{{ nft.title }}</div>
-            </div>
-        </div> -->
     </section>
     <!-- End Gallery Section -->
 
@@ -389,17 +359,77 @@ export default {
     </section> -->
     <!-- End Blog Section -->
 
+    <!-- Table Section -->
+    <section class="mx-auto my-20 max-w-[1180px] bg-gray-900/80 px-10 py-12 rounded-xl">
+        <div class="flex flex-col mb-6">
+            <div class="text-white opacity-50 text-lg">Gallery</div>
+            <h3 class="text-4xl font-bold">Popular NFTs</h3>
+        </div>
+        <table class="w-full">
+            <thead class="border-b border-white font-semibold">
+                <tr class="">
+                    <td class="py-3 text-xl pl-3">#</td>
+                    <td class="py-3 text-xl">Name</td>
+                    <td class="py-3 text-xl">Social</td>
+                    <td class="py-3 text-xl">Blockchain</td>
+                    <td class="py-3 text-xl">Quantity</td>
+                    <td class="py-3 text-xl">Price</td>
+                    <td class="py-3 text-xl">Floor</td>
+                </tr>
+            </thead>
+
+            <tbody class="text-white/50">
+                <tr v-for="nft in Nfts" :key="nft.tokenId" class="border-b border-white/50">
+                    <td class="py-3 pl-3">{{ 1 }}</td>
+                    <td class="py-3 ">
+                        <a href="#" class="w-fit flex gap-x-3 items-center hover:text-white">
+                            <span class=" rounded-full /overflow-hidden">
+                                <img alt="testimonial"
+                                    :src="nft.rawMetadata.image"
+                                    class="w-14 h-14 rounded-full flex-shrink-0 object-cover object-center" />
+                            </span>
+                            <span>{{ nft.title }}</span>
+                        </a>
+
+                    </td>
+                    <td class="py-3">
+                        <div class="flex items-center gap-x-3 text-2xl">
+                            <span>
+                                <a href="#" class="hover:text-white">
+                                    <ion-icon name="globe-outline"></ion-icon>
+                                </a>
+                            </span>
+                            <span>
+                                <a href="#" class="hover:text-white">
+                                    <ion-icon name="logo-twitter"></ion-icon>
+                                </a>
+                            </span>
+                            <span>
+                                <a href="#" class="hover:text-white">
+                                    <ion-icon name="logo-discord"></ion-icon>
+                                </a>
+                            </span>
+                        </div>
+                    </td>
+                    <td class="py-3">Ethereum</td>
+                    <td class="py-3">1000</td>
+                    <td class="py-3">0.10Eth</td>
+                    <td class="py-3">$12k</td>
+                </tr>
+
+
+            </tbody>
+        </table>
+
+    </section>
+    <!-- End Table Section -->
     <!-- News Letter -->
 
-    <section
-        class="mx-auto my-20 max-w-[1180px] rounded-xl bg-gray-600 newsletter-sec"
-    >
-        <div class="grid grid-cols-2 py-16 px-10">
+    <section class="mx-auto my-20 max-w-[1180px] rounded-xl bg-gray-600 newsletter-sec">
+        <div class="grid grid-cols-2 py-16 px-10 gap-x-4">
             <div class="text">
                 <div class="flex flex-col">
-                    <div
-                        class="py-1 px-3 text-xs rounded-full news-letter-sub /bg-slate-400 w-fit mb-2"
-                    >
+                    <div class="py-1 px-3 text-xs rounded-full news-letter-sub /bg-slate-400 w-fit mb-2">
                         News-letter
                     </div>
                     <h3 class="text-5xl font-inter font-black mb-3">
@@ -413,28 +443,21 @@ export default {
                 </p>
                 <form action="post" class="flex items-center gap-x-3 mt-6">
                     <div class="grow">
-                        <TextInput
-                            id="email"
-                            type="email"
-                            class="mt-1 block w-full"
-                            v-model="form.email"
-                            required
-                            autofocus
-                            autocomplete="username"
-                            placeholder="Email Adress"
-                        />
+                        <TextInput id="email" type="email" class="mt-1 block w-full" v-model="form.email" required
+                            autofocus autocomplete="username" placeholder="Email Adress" />
                         <InputError class="mt-2" :message="form.errors.email" />
                     </div>
-                    <PrimaryButton
-                        class="w-fit justify-center px-6"
-                        :class="{ 'opacity-25': form.processing }"
-                        :disabled="form.processing"
-                    >
+                    <PrimaryButton class="w-fit justify-center px-6" :class="{ 'opacity-25': form.processing }"
+                        :disabled="form.processing">
                         Subscribe
                     </PrimaryButton>
                 </form>
             </div>
-            <div class="text"></div>
+            <div class="rounded-2xl overflow-hidden">
+                <!-- <div style="background:url('../../../storage/app/public/assets/eth.jpg')" class="h-[300px]">
+                </div> -->
+                <!-- <img src="../../../storage/app/public/assets/eth.jpg" alt="" class=" w-full"> -->
+            </div>
         </div>
     </section>
 
@@ -444,80 +467,52 @@ export default {
 <style>
 .main {
     background-color: #000000;
-    background-image: radial-gradient(
-            at 76% 58%,
+    background-image: radial-gradient(at 76% 58%,
             hsla(267, 94%, 59%, 1) 0,
-            hsla(267, 94%, 59%, 0) 50%
-        ),
-        radial-gradient(
-            at 42% 45%,
+            hsla(267, 94%, 59%, 0) 50%),
+        radial-gradient(at 42% 45%,
             hsla(239, 91%, 66%, 1) 0,
-            hsla(239, 91%, 66%, 0) 50%
-        ),
-        radial-gradient(
-            at 64% 38%,
+            hsla(239, 91%, 66%, 0) 50%),
+        radial-gradient(at 64% 38%,
             hsla(267, 85%, 50%, 1) 0,
-            hsla(267, 85%, 50%, 0) 50%
-        ),
-        radial-gradient(
-            at 2% 32%,
+            hsla(267, 85%, 50%, 0) 50%),
+        radial-gradient(at 2% 32%,
             hsla(313, 85%, 61%, 1) 0,
-            hsla(313, 85%, 61%, 0) 50%
-        ),
-        radial-gradient(
-            at 26% 55%,
+            hsla(313, 85%, 61%, 0) 50%),
+        radial-gradient(at 26% 55%,
             hsla(267, 85%, 50%, 1) 0,
-            hsla(267, 85%, 50%, 0) 50%
-        ),
-        radial-gradient(
-            at 42% 59%,
+            hsla(267, 85%, 50%, 0) 50%),
+        radial-gradient(at 42% 59%,
             hsla(221, 90%, 52%, 1) 0,
-            hsla(221, 90%, 52%, 0) 50%
-        );
+            hsla(221, 90%, 52%, 0) 50%);
 }
 
 .newsletter-sec {
     background-color: #000000;
-    background-image: radial-gradient(
-            at 76% 60%,
+    background-image: radial-gradient(at 76% 60%,
             hsla(267, 94%, 59%, 1) 0,
-            hsla(267, 94%, 59%, 0) 50%
-        ),
-        radial-gradient(
-            at 42% 45%,
+            hsla(267, 94%, 59%, 0) 50%),
+        radial-gradient(at 42% 45%,
             hsla(239, 91%, 66%, 1) 0,
-            hsla(239, 91%, 66%, 0) 50%
-        ),
-        radial-gradient(
-            at 64% 38%,
+            hsla(239, 91%, 66%, 0) 50%),
+        radial-gradient(at 64% 38%,
             hsla(267, 85%, 50%, 1) 0,
-            hsla(267, 85%, 50%, 0) 50%
-        ),
-        radial-gradient(
-            at 10% 32%,
+            hsla(267, 85%, 50%, 0) 50%),
+        radial-gradient(at 10% 32%,
             hsla(313, 85%, 61%, 1) 0,
-            hsla(313, 85%, 61%, 0) 50%
-        ),
-        radial-gradient(
-            at 30% 85%,
+            hsla(313, 85%, 61%, 0) 50%),
+        radial-gradient(at 30% 85%,
             hsla(267, 85%, 50%, 1) 0,
-            hsla(267, 85%, 50%, 0) 50%
-        ),
-        radial-gradient(
-            at 42% 89%,
+            hsla(267, 85%, 50%, 0) 50%),
+        radial-gradient(at 42% 89%,
             hsla(221, 90%, 52%, 1) 0,
-            hsla(221, 90%, 52%, 0) 50%
-        ),
-        radial-gradient(
-            at 100% 70%,
+            hsla(221, 90%, 52%, 0) 50%),
+        radial-gradient(at 100% 70%,
             hsla(313, 85%, 61%, 1) 0,
-            hsla(313, 85%, 61%, 0) 50%
-        ),
-        radial-gradient(
-            at 100% 10%,
+            hsla(313, 85%, 61%, 0) 50%),
+        radial-gradient(at 100% 10%,
             hsla(267, 85%, 50%, 1) 0,
-            hsla(267, 85%, 50%, 0) 50%
-        );
+            hsla(267, 85%, 50%, 0) 50%);
 }
 
 .nft-card-det {
@@ -526,7 +521,7 @@ export default {
     -webkit-backdrop-filter: blur(50px);
 }
 
-.news-letter-sub{
+.news-letter-sub {
     background: rgba(255, 255, 255, 0.3);
     backdrop-filter: blur(50px);
     -webkit-backdrop-filter: blur(50px);
