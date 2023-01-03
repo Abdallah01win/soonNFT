@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\nft;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -38,6 +39,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+
+Route::controller(nft::class)->middleware(['auth', 'verified'])->group(function () {
+    Route::get('/nfts/list', 'index')->name('nfts/list');
+    Route::post('/nfts/store', 'store')->name('nfts/store');
+    Route::get('/nfts/count', 'count')->name('nfts/count');
 });
 
 require __DIR__.'/auth.php';

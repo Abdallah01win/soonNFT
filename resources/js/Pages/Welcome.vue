@@ -368,11 +368,11 @@ export default {
         <table class="w-full">
             <thead class="border-b border-white font-semibold">
                 <tr class="">
-                    <td class="py-3 text-xl pl-3">#</td>
+                    <td class="py-3 text-lg pl-3">#</td>
                     <td class="py-3 text-xl">Name</td>
                     <td class="py-3 text-xl">Social</td>
                     <td class="py-3 text-xl">Blockchain</td>
-                    <td class="py-3 text-xl">Quantity</td>
+                    <td class="py-3 text-xl">supply</td>
                     <td class="py-3 text-xl">Price</td>
                     <td class="py-3 text-xl">Floor</td>
                 </tr>
