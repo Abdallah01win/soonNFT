@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\nft;
 use Illuminate\Foundation\Application;
@@ -34,6 +35,7 @@ Route::get('/dashboard', function () {
 Route::get('/contact', function () {
     return Inertia::render('Contact');
 })->name('contact');
+Route::get('/users/count', [RegisteredUserController::class, 'count'])->name('users/count');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

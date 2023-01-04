@@ -51,12 +51,6 @@ const form = useForm({
             <div>
                 <h4 class="font-semibold mb-2 text-lg ">Community</h4>
                 <p class="mb-3 font-light">Lorem ipsum dolor sit. Lorem ipsum dolor.</p>
-                <!-- <form action="" class="flex relative mb-6">
-                    <input type="email" name="email" id="footerEmail"
-                        class="w-full bg-transparent border border-white rounded-full placeholder:text-white  placeholder:pl-[2%]"
-                        placeholder="Email Adress">
-                    <button type="submit" class="absolute right-[5%] top-[50%] translate-y-[-50%] z-10">Sign Up</button>
-                </form> -->
 
                 <form action="post" class="flex items-center gap-x-2 mb-6">
                     <div class="grow">
@@ -66,7 +60,6 @@ const form = useForm({
                             class="mt-1 block w-full"
                             v-model="form.email"
                             required
-                            autofocus
                             autocomplete="username"
                             placeholder="Email"
                         />

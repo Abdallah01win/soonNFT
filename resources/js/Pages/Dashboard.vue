@@ -1,7 +1,6 @@
 <script setup>
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import Checkbox from "@/Components/Checkbox.vue";
-import GuestLayout from "@/Layouts/GuestLayout.vue";
 import InputError from "@/Components/InputError.vue";
 import TextInput from "@/Components/TextInput.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
@@ -23,28 +22,11 @@ const form = useForm({
     supply: Number,
 });
 
-/*const submit = () => {
-    form.post(route("nfts/store"), {
-        onSuccess: () => {
-            form.reset(
-                "name",
-                "supply",
-                "imgurl",
-                "description",
-                "price",
-                "blockchain",
-                "twitter",
-                "website",
-                "discord",
-                "dropDate"
-            );
-        },
-    });
-};*/
 export default {
     data() {
         return {
             nftCount: this.getNftCount(),
+            usersCount: this.getUsersCount(),
             formMessage: false,
         };
     },
@@ -57,6 +39,11 @@ export default {
             axios
                 .get("nfts/count")
                 .then((response) => (this.nftCount = response.data));
+        },
+        getUsersCount() {
+            axios
+                .get("users/count")
+                .then((response) => (this.usersCount = response.data));
         },
         submit() {
             form.post(route("nfts/store"), {
@@ -74,9 +61,9 @@ export default {
                         "dropDate"
                     );
                     this.formMessage = true;
-                    setTimeout(()=>{
+                    setTimeout(() => {
                         this.formMessage = false;
-                    }, 3000)
+                    }, 3000);
                     this.getNftCount();
                 },
             });
@@ -86,6 +73,7 @@ export default {
         //this.getNftCount();
     },
 };
+
 </script>
 
 <template>
@@ -96,28 +84,30 @@ export default {
             <Navigation class="" />
 
             <!-- Add Nft Form -->
-            <section class="mx-auto my-12 max-w-[1180px]">
+            <section class="mx-auto my-8 max-w-[1180px]">
                 <div class="flex flex-col mb-6">
                     <div class="text-white opacity-50 text-lg">
                         Wellcom back
                     </div>
                     <h3 class="text-4xl font-bold">Dashboard</h3>
-
                 </div>
                 <div class="grid grid-cols-[2fr,0.9fr] gap-x-4">
                     <form
-                    @submit.prevent="this.submit"
-                    class="bg-myDark-200 px-8 py-10 rounded-xl"
+                        @submit.prevent="this.submit"
+                        class="bg-myDark-200 px-8 py-10 rounded-xl"
                     >
-                    <div class="flex items-center justify-between mb-4">
-                        <div class="text-2xl font-semibold">
-                            Add New NFT
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="text-2xl font-semibold">
+                                Add New NFT
+                            </div>
+                            <div
+                                v-if="formMessage != ''"
+                                class="py-1 px-4 text-xs rounded-full bg-green-400 flex items-center gap-2 transition-all ease-out duration-300"
+                            >
+                                <ion-icon name="checkmark-outline"></ion-icon>
+                                <span>NFT Saved Successfully</span>
+                            </div>
                         </div>
-                        <div v-if="formMessage != ''" class="py-1 px-4 text-xs rounded-full bg-green-400 flex items-center gap-2 transition-all ease-out duration-300">
-                        <ion-icon name="checkmark-outline"></ion-icon>
-                        <span>NFT Saved Successfully</span>
-                        </div>
-                    </div>
                         <div class="flex items-center gap-x-3 mt-4">
                             <div class="w-full">
                                 <TextInput
@@ -254,6 +244,14 @@ export default {
                                     v-model="form.blockchain"
                                     required
                                 >
+                                    <option
+                                        class="bg-black"
+                                        value=""
+                                        disabled
+                                        selected
+                                    >
+                                        Blockchain
+                                    </option>
                                     <option class="bg-black" value="ethereum">
                                         Ethereum
                                     </option>
@@ -287,11 +285,6 @@ export default {
                                 />
                             </div>
                         </div>
-                        <!-- <div>
-                            <TextInput id="img" type="file" class="mt-1 block w-full" v-model="form.imgUrl" required
-                                autocomplete="image" placeholder="image" />
-                            <InputError class="mt-2" :message="form.errors.imgUrl" />
-                        </div> -->
 
                         <PrimaryButton
                             class="w-full justify-center mt-5"
@@ -310,15 +303,19 @@ export default {
                         <div class="flex flex-col gap-y-4">
                             <div class="flex items-center justify-between">
                                 <span>Blog Posts</span>
-                                <span>124</span>
-                            </div>
-                            <div class="flex items-center justify-between">
-                                <span>Total NFTs</span>
-                                <span>{{ nftCount }}</span>
+                                <span class="font-bold">124</span>
                             </div>
                             <div class="flex items-center justify-between">
                                 <span>Total Users</span>
-                                <span>124</span>
+                                <span class="font-bold">{{ usersCount }}</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span>Total NFTs</span>
+                                <span class="font-bold">{{
+                                    nftCount[0].count +
+                                    nftCount[1].count +
+                                    nftCount[2].count
+                                }}</span>
                             </div>
                         </div>
                     </div>

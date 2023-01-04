@@ -444,7 +444,7 @@ export default {
                 <form action="post" class="flex items-center gap-x-3 mt-6">
                     <div class="grow">
                         <TextInput id="email" type="email" class="mt-1 block w-full" v-model="form.email" required
-                            autofocus autocomplete="username" placeholder="Email Adress" />
+                            autocomplete="username" placeholder="Email Adress" />
                         <InputError class="mt-2" :message="form.errors.email" />
                     </div>
                     <PrimaryButton class="w-fit justify-center px-6" :class="{ 'opacity-25': form.processing }"

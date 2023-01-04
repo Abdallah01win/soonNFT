@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Nfts;
 use Redirect;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class nft extends Controller
 {
@@ -11,8 +12,14 @@ class nft extends Controller
         return Nfts::all();
     }
     public function count(){
-        return Nfts::count();
-    }
+        //return Nfts::count();
+        return Nfts::orderBy('created_at','ASC')
+        ->groupBy('blockchain')
+        ->get(array(
+            DB::raw('blockchain'),
+            DB::raw('COUNT(blockchain) as count'),
+            ));
+        }
 
     public function store(Request $request){
         $request->validate([
