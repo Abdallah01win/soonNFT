@@ -12,7 +12,6 @@ class nft extends Controller
         return Nfts::all();
     }
     public function count(){
-        //return Nfts::count();
         return Nfts::orderBy('created_at','ASC')
         ->groupBy('blockchain')
         ->get(array(
@@ -20,7 +19,7 @@ class nft extends Controller
             DB::raw('COUNT(blockchain) as count'),
             ));
         }
-
+    
     public function store(Request $request){
         $request->validate([
             'name' => 'required',
@@ -48,7 +47,6 @@ class nft extends Controller
             'supply' => $request->get('supply'),
         ]);
         $nft->save();
-        //return redirect('/dashboard')->with('success', 'NFT saved!');
         return Redirect::route('dashboard');
     }
 }
