@@ -470,7 +470,7 @@ export default {
                     </td>
                     <td class="py-2 capitalize">{{ item.blockchain }}</td>
                     <td class="py-2">{{ item.supply }}</td>
-                    <td class="py-2">{{ item.price }}</td>
+                    <td class="py-2 uppercase">{{ item.price }} {{ item.blockchain.substr(0,3) }}</td>
                     <td class="py-2">{{ item.dropdate }}</td>
                 </tr>
             </tbody>
