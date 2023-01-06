@@ -39,24 +39,6 @@ export default {
                 img.onerror = () => resolve(false);
             });
         },
-        /*async getNfts() {
-            const settings = {
-                apiKey: "_pf4L_mT0GGNERcH7gUMRNsoLmYE60Rm",
-                network: Network.ETH_MAINNET,
-            };
-            const alchemy = new Alchemy(settings);
-            const nfts = await alchemy.nft.getNftsForOwner("0xshah.eth");
-            //const newArray = nfts.ownedNfts.filter(nft => this.checkImage(nft.rawMetadata.image) === true)
-            const newArray = nfts.ownedNfts.filter(
-                (nft) => nft.rawMetadata.image !== undefined
-            );
-            console.log(newArray);
-            this.Nfts = newArray;
-        },*/
-       /*getNfts() {
-          axios.get("nfts/paginate")
-            //.then((response) => (this.nfts = response.data));
-        },*/
     },
 };
 </script>
@@ -441,7 +423,7 @@ export default {
                         >
                             <span class="rounded-full /overflow-hidden">
                                 <img
-                                    src="https://dummyimage.com/106x106"
+                                    :src="item.imgurl"
                                     alt="testimonial"
                                     class="w-14 h-14 rounded-full flex-shrink-0 object-cover object-center"
                                 />
