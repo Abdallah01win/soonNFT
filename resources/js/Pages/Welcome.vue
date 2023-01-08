@@ -47,6 +47,8 @@ export default {
             this.nftId= id;
             console.log('clicked destroy', id)
             const confirmDelete = document.getElementById('confirmDelete')
+            const body = document.body;
+            body.classList.toggle('overflow-hidden');
             confirmDelete.classList.toggle('hidden');
         },
     },
@@ -255,24 +257,24 @@ export default {
         </div>
     </section>
 
-    <div class="bg-gray-700/50 absolute top-0 left-0 w-full h-screen z-10 hidden" id="confirmDelete" @click.self="close('')">
-        <div class=" bg-myDark-200 overflow-hidden shadow-sm sm:rounded-lg px-10 py-8 w-[40%] mx-auto translate-y-[130%]">
+    <div class="bg-myDark-300/80 fixed top-0 left-0 w-full h-screen z-10 hidden" id="confirmDelete" @click.self="close('')">
+        <div class=" bg-myDark-100 overflow-hidden shadow-sm sm:rounded-lg px-10 py-10 w-[45%] mx-auto translate-y-[130%]">
             <div class="flex justify-between items-center mb-2">
-                <h3 class="text-xl font-semibold">Delete NFT</h3>
+                <h3 class="text-2xl font-semibold">Delete NFT</h3>
                 <button class="p-2 bg-gray-200 rounded-full" @click="close('')">
                    <span class="w-6">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20"  fill="#000000" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><line x1="200" y1="56" x2="56" y2="200" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="12"></line><line x1="200" y1="200" x2="56" y2="56" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="12"></line></svg>
                    </span>
                 </button>
             </div>
-            <p>Are You sure you want to delete this nft?</p>
+            <p>Are You sure you want to delete this NFT? This can't be undone!</p>
             <div class="flex items-center justify-between mt-6 gap-x-5">
 
-                <PrimaryButton type="button" class="ml-4 grow w-full justify-center" @click="close('')">
+                <PrimaryButton type="button" class=" grow w-full justify-center" @click="close('')">
                     Cancel
                 </PrimaryButton>
 
-                <Link :href="route('/')" method="post" as="button" :data="{id : nftId}"
+                <Link :href="route('nfts/destroy')" method="post" as="button" :data="{id : nftId}"
                     class="w-full justify-center items-center px-4 py-3 bg-white border border-transparent rounded-full font-semibold  text-black uppercase tracking-widest hover:bg-white/90 focus:bg-white/90 active:bg-white/90 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150 text-sm">Delete
                 </Link>
 

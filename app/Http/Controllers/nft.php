@@ -54,4 +54,14 @@ class nft extends Controller
         $nft->save();
         return Redirect::route('dashboard');
     }
+
+    public function destroy(Request $request)
+    {
+        $id = $request->get('id');
+        $imgurl = nfts::where('id', $id)->limit(1)->get('imgurl');
+        $imagename = substr($imgurl[0]['imgurl'], strpos($imgurl[0]['imgurl'], 'images/') + 7);
+        @unlink('storage/images/'.$imagename);
+        DB::table('nfts')->Where('id', $id)->delete();
+        return redirect('/')->with('success', 'NFT Deleted');
+    }
 }
