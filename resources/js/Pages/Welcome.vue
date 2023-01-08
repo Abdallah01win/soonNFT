@@ -35,14 +35,6 @@ export default {
         Dialog,
     },
     methods: {
-        checkImage(url) {
-            new Promise((resolve) => {
-                const img = new Image();
-                img.src = url;
-                img.onload = () => resolve(true);
-                img.onerror = () => resolve(false);
-            });
-        },
         close(id){
             this.nftId= id;
             console.log('clicked destroy', id)
@@ -85,7 +77,7 @@ export default {
     <!-- Gallery Section -->
     <section class="mx-auto my-20 max-w-[1180px]">
         <div class="flex flex-col mb-6">
-            <div class="text-white opacity-50 text-lg">Gallery</div>
+            <div class="text-myGray text-lg">Gallery</div>
             <h3 class="text-4xl font-bold">Popular NFTs</h3>
         </div>
         <div class="grid grid-cols-4 gap-10">
@@ -145,7 +137,7 @@ export default {
     <!-- Table Section -->
     <section class="mx-auto my-20 max-w-[1180px] bg-myDark-200 px-10 py-12 rounded-xl">
         <div class="flex flex-col mb-6">
-            <div class="text-white opacity-50 text-lg">Gallery</div>
+            <div class="text-myGray text-lg">Gallery</div>
             <h3 class="text-4xl font-bold">Popular NFTs</h3>
         </div>
         <table class="w-full">
@@ -166,7 +158,7 @@ export default {
                 <tr v-for="item in nfts.data" :key="item.id" class="border-b border-myDark-100">
                     <td class="py-2 pl-3">{{ nfts.data.indexOf(item) + 1 }}</td>
                     <td class="py-2">
-                        <Link :href="route('/')" class="w-fit flex gap-x-3 items-center hover:text-white">
+                        <Link :href="route('nfts/nft')" method="post" as="button" :data="{id : item.id}" class="w-fit flex gap-x-3 items-center hover:text-white">
                         <span class="rounded-full /overflow-hidden">
                             <img :src="item.imgurl" alt="testimonial"
                                 class="w-14 h-14 rounded-full flex-shrink-0 object-cover object-center" />
@@ -221,7 +213,7 @@ export default {
     <!-- End Table Section -->
     <!-- News Letter -->
 
-    <section class="mx-auto my-20 max-w-[1180px] rounded-xl bg-gray-600 newsletter-sec">
+    <section class="mx-auto my-20 max-w-[1180px] rounded-xl newsletter-sec">
         <div class="grid grid-cols-2 py-16 px-10 gap-x-4">
             <div class="text">
                 <div class="flex flex-col">
@@ -274,7 +266,7 @@ export default {
                     Cancel
                 </PrimaryButton>
 
-                <Link :href="route('nfts/destroy')" method="post" as="button" :data="{id : nftId}"
+                <Link :href="route('nfts/destroy')" method="post" as="button" :data="{id : nftId}" @click="close('')"
                     class="w-full justify-center items-center px-4 py-3 bg-white border border-transparent rounded-full font-semibold  text-black uppercase tracking-widest hover:bg-white/90 focus:bg-white/90 active:bg-white/90 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150 text-sm">Delete
                 </Link>
 
@@ -286,7 +278,7 @@ export default {
 
 <style>
 .main {
-    background-color: #000000;
+    background-color: #0a0a0aff;
     background-image: radial-gradient(at 76% 58%,
             hsla(267, 94%, 59%, 1) 0,
             hsla(267, 94%, 59%, 0) 50%),

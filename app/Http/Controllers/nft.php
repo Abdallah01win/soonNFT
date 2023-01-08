@@ -23,6 +23,13 @@ class nft extends Controller
             ));
     }
 
+    public function view(Request $request)
+    {
+        $id = $request->get('id');
+        $nft = Nfts::where('id', $id)->limit(1)->get();
+        //return Redirect::route('dashboard', )
+    }
+
     public function store(Request $request)
     {
         $request->validate([

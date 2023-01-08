@@ -66,6 +66,7 @@ Route::controller(nft::class)->middleware(['auth', 'verified'])->group(function 
     Route::get('/nfts/count', 'count')->name('nfts/count');
     Route::get('/nfts/paginate', 'paginate')->name('nfts/paginate');
     Route::post('/nfts/destroy', 'destroy')->name('nfts/destroy');
+    Route::post('/nfts/nft', 'view')->name('nfts/nft');
 });
 
 require __DIR__.'/auth.php';

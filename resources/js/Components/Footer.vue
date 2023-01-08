@@ -11,7 +11,7 @@ const form = useForm({
 
 </script>
 <template>
-    <footer class="mx-auto mt-28 pt-10 max-w-[1180px] border-t border-white/50">
+    <footer class="mx-auto mt-28 pt-10 max-w-[1180px] border-t border-myDark-100">
         <div class="text-5xl uppercase font-black mb-4">
             <Link :href="route('/')">Soonnft</Link>
             </div>
@@ -83,7 +83,7 @@ const form = useForm({
                 </div>
             </div>
         </div>
-        <div class="border-t border-white/50 text-white/50 py-3 mt-10 flex items-center justify-between">
+        <div class="border-t border-myDark-100 text-myGray py-3 mt-10 flex items-center justify-between">
             <div>&copy; - 2022 SoonNFT, Inc</div>
             <div class="flex gap-3">
                 <span class="cursor-pointer hover:text-white">

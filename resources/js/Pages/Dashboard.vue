@@ -74,6 +74,8 @@ export default {
                         "discord",
                         "dropDate"
                     );
+                    let file = document.getElementById('image');
+                    file.value = null;
                     this.formMessage = true;
                     setTimeout(() => {
                         this.formMessage = false;
