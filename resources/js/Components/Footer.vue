@@ -55,7 +55,7 @@ const form = useForm({
                 <form action="post" class="flex items-center gap-x-2 mb-6">
                     <div class="grow">
                         <TextInput
-                            id="email"
+                            id="footerEmail"
                             type="email"
                             class="mt-1 block w-full"
                             v-model="form.email"

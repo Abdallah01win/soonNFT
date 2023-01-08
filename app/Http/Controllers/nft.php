@@ -32,9 +32,6 @@ class nft extends Controller
             'imgurl' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
             'price' => 'required',
             'blockchain' => 'required',
-            'twitter' => 'required',
-            'discord' => 'required',
-            'website' => 'required',
             'supply' => 'required',
         ]);
 
