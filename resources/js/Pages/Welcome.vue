@@ -43,6 +43,13 @@ export default {
             body.classList.toggle('overflow-hidden');
             confirmDelete.classList.toggle('hidden');
         },
+        dateConvert(date) {
+            let newDate = new Date(date)
+            let myDate = {}
+            myDate.date = newDate.toString().substring(0, 10)
+            myDate.time = newDate.toString().substring(16, 24)
+            return myDate
+        },
     },
 };
 </script>
@@ -188,7 +195,7 @@ export default {
                     <td class="py-2 capitalize">{{ item.blockchain }}</td>
                     <td class="py-2">{{ item.supply }}</td>
                     <td class="py-2 uppercase">{{ item.price }} {{ item.blockchain.substr(0, 3) }}</td>
-                    <td class="py-2">{{ item.dropdate }}</td>
+                    <td class="py-2">{{ dateConvert(item.dropdate).date }}</td>
                     <td class="py-2" v-if="$page.props.auth.user && $page.props.auth.user.type === 1">
                         <div class="flex items-center gap-x-3 text-2xl">
                             <span>
@@ -249,8 +256,8 @@ export default {
         </div>
     </section>
 
-    <div class="bg-myDark-300/80 fixed top-0 left-0 w-full h-screen z-10 hidden" id="confirmDelete" @click.self="close('')">
-        <div class=" bg-myDark-100 overflow-hidden shadow-sm sm:rounded-lg px-10 py-10 w-[45%] mx-auto translate-y-[130%]">
+    <div class="bg-myDark-300/80 fixed top-0 left-0 w-full h-screen flex items-center z-10 hidden" id="confirmDelete" @click.self="close('')">
+        <div class=" bg-myDark-100 overflow-hidden shadow-sm sm:rounded-lg px-10 py-10 w-[45%] mx-auto /////////translate-y-[130%]">
             <div class="flex justify-between items-center mb-2">
                 <h3 class="text-2xl font-semibold">Delete NFT</h3>
                 <button class="p-2 bg-gray-200 rounded-full" @click="close('')">

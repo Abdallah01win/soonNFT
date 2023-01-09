@@ -6,6 +6,7 @@ use App\Models\Nfts;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Inertia\Inertia;
 
 class nft extends Controller
 {
@@ -15,19 +16,14 @@ class nft extends Controller
     }
     public function count()
     {
-        return Nfts::orderBy('created_at', 'ASC')
-            ->groupBy('blockchain')
-            ->get(array(
-                DB::raw('blockchain'),
-                DB::raw('COUNT(blockchain) as count'),
-            ));
+        return Nfts::count();    
     }
 
     public function view(Request $request)
     {
         $id = $request->get('id');
         $nft = Nfts::where('id', $id)->limit(1)->get();
-        //return Redirect::route('dashboard', )
+        return Inertia::render('Nft', ['nft' => $nft[0]]);
     }
 
     public function store(Request $request)

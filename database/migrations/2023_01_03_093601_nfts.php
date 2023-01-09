@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('twitter')->nullable();
             $table->string('discord')->nullable();
             $table->string('website')->nullable();
-            $table->integer('price');
+            $table->float('price', 3, 1);
             $table->string('blockchain');
             $table->string('dropdate');
             $table->integer('supply');
