@@ -392,15 +392,15 @@ onMounted(() => {
                         </div>
                     </div> -->
                     <div class="flex flex-col gap-y-4">
-                        <div class="flex flex-col gap-y-2 bg-myDark-200 px-8 py-6 rounded-xl /items-center /justify-between">
+                        <div class="flex flex-col gap-y-2 bg-myDark-200 px-8 py-6 rounded-xl">
                             <span class="text-myGray text-sm">Total Users</span>
                             <span class="font-bold text-3xl">{{ usersCount }}</span>
                         </div>
-                        <div class="flex flex-col gap-y-2 bg-myDark-200 px-8 py-6 rounded-xl /items-center /justify-between">
+                        <div class="flex flex-col gap-y-2 bg-myDark-200 px-8 py-6 rounded-xl">
                             <span class="text-myGray text-sm">Total NFTs</span>
                             <span class="font-bold text-3xl">{{ nftCount }}</span>
                         </div>
-                        <div class="flex flex-col gap-y-2 bg-myDark-200 px-6 py-5 rounded-xl /items-center /justify-between">
+                        <div class="flex flex-col gap-y-2 bg-myDark-200 px-8 py-6 rounded-xl">
                             <span class="text-myGray text-sm">Blog Posts</span>
                             <span class="font-bold text-3xl">124</span>
                         </div>
