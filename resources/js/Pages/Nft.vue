@@ -49,11 +49,11 @@ export default {
                         </span>
                     </div>
                     <!-- <p>{{ nft.description }}</p> -->
-                    <p class="lg:w-[85%] mb-6 text-myGray">
+                    <p class="/lg:w-[85%] mb-6 text-myGray">
                         Lorem ipsum dolor sit amet consectetur adipisicing elit.
                         Veniam, inventore rem, expedita sapiente quas culpa
                         tempora nisi, labore iste repellendus beatae odio. Neque
-                        eligendi harum ad beatae, odit nobis quo!
+                        eligendi harum ad beatae, odit nobis quo! Lorem ipsum, dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit, amet consectetur adipisicing elit.
                     </p>
 
                     <div class="grid grid-cols-2 uppercase mb-10">
@@ -113,7 +113,7 @@ export default {
                                     <a
                                         :href="nft.website"
                                         target="_blank"
-                                        class="hover:text-white w-6 block"
+                                        class="bg-white rounded-full p-2 grid place-content-center text-black hover:bg-white/90"
                                     >
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
@@ -176,7 +176,7 @@ export default {
                                     <a
                                         :href="nft.twitter"
                                         target="_blank"
-                                        class="hover:text-white w-6 block"
+                                        class="bg-white rounded-full p-2 grid place-content-center text-black hover:bg-white/90"
                                     >
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
@@ -204,7 +204,7 @@ export default {
                                     <a
                                         :href="nft.discord"
                                         target="_blank"
-                                        class="hover:text-white w-6 block"
+                                        class="bg-white rounded-full p-2 grid place-content-center text-black hover:bg-white/90"
                                     >
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
