@@ -245,6 +245,28 @@ export default {
     </section> -->
     <!-- End Blog Section -->
 
+    <!-- Text Section -->
+
+    <section class="mx-auto my-20 max-w-[1180px] bg-myDark-200 px-10 py-12 rounded-xl">
+        <div class="grid grid-cols-2 gap-6">
+            <div>
+                <!-- Image -->
+            </div>
+            <div>
+                <!-- text -->
+                <h3 class="font-inter font-bold text-5xl mb-3">Some big Title</h3>
+                <p class="text-myGray leading-6 mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem eos nam iste sit perspiciatis error officiis repellat facere. Fugit pariatur dolore saepe nam dolorum at porro nostrum reprehenderit! Eos, facilis. Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati, quidem.</p>
+                <button class="bg-transparent border border-white rounded-full py-2 px-6 hover:bg-white hover:text-black">
+                    Explore
+                </button>
+                
+            </div>
+        </div>
+
+    </section>
+
+    <!-- End Text Section -->
+
     <!-- Table Section -->
     <section
         class="mx-auto my-20 max-w-[1180px] bg-myDark-200 px-10 py-12 rounded-xl"
