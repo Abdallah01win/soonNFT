@@ -2,6 +2,7 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import Navigation from "@/Components/Navigation.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
+import Footer from "@/Components/Footer.vue";
 </script>
 <script>
 export default {
@@ -11,6 +12,7 @@ export default {
     components: {
         Navigation,
         PrimaryButton,
+        Footer,
     },
     methods: {
         dateConvert(date) {
@@ -30,14 +32,14 @@ export default {
         <template v-slot:nav>
             <Navigation class="" />
         </template>
-        <section class="mx-auto my-8 max-w-[1180px]">
+        <section class="mx-auto my-12 max-w-[1180px]">
             <div class="grid grid-cols-[1fr,1.8fr] gap-x-12">
                 <div class="rounded-xl overflow-hidden w-[100%] h-[400px]">
                     <img :src="nft.imgurl" alt="" class="w-[100%] h-[100%]" />
                 </div>
                 <div class="flex flex-col">
                     <div
-                        class="font-bold uppercase mb-3 flex flex-col /items-center /justify-between"
+                        class="font-bold mb-3 flex flex-col /items-center /justify-between"
                     >
                         <span
                             class="text-xs uppercase px-4 py-1 mb-2 rounded-full bg-myGray w-fit"
@@ -268,5 +270,6 @@ export default {
                 </div>
             </div>
         </section>
+        <Footer />
     </AuthenticatedLayout>
 </template>
