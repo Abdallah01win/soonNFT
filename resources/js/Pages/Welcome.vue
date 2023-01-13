@@ -8,10 +8,9 @@ import Dialog from "@/Components/Dialog.vue";
 import { Network, Alchemy } from "alchemy-sdk";
 import Footer from "@/Components/Footer.vue";
 import Navigation from "@/Components/Navigation.vue";
+import NftSlider from "@/Components/NftSlider.vue"
 //import Pagination from "@/Components/Pagination.vue";
 import axios from "axios";
-import { Splide, SplideSlide } from "@splidejs/vue-splide";
-import '@splidejs/vue-splide/css';
 const form = useForm({
     email: "",
 });
@@ -34,8 +33,8 @@ export default {
         //Pagination,
         Link,
         Dialog,
-        Splide,
-        SplideSlide,
+        NftSlider,
+        Head,
     },
     methods: {
         close(id) {
@@ -103,142 +102,7 @@ export default {
                 </Link>
             </div>
        
-        <Splide
-            :options="{
-                rewind: true,
-                autoWidth: true,
-                focus: 'center',
-                perPage: 4,
-                perMove: 2,
-                gap: '2.2em',
-                padding: '5rem',
-            }"
-            :classes="{
-                pagination: 'splide__pagination no-pagination',
-            }"
-            aria-label="Viral Nfts"
-        >
-            <SplideSlide>
-                <div class="relative overflow-hidden rounded-2xl w-[255px] h-[340px] nft-card">
-                    <img
-                        src="/storage/assets/heart-g7eea2c9a6_1280.jpg"
-                        alt=""
-                        class="min-w-[100%] max-h-[400px] block"
-                    />
-                    <div
-                        class="nft-card-det flex justify-between items-center py-3 px-5 w-full absolute left-0 bottom-0"
-                    >
-                        <div
-                            class="flex flex-col  "
-                        >
-                            <span class="hover:underline underline-offset-4 cursor-pointer font-bold">
-                                Bord Ape #432
-                            </span>
-                            <span class="text-xs">Wed Jan 13</span>
-                        </div>
-                        <div class="text-sm">0.010 ETH</div>
-                    </div>
-                    <div class="nft-card-chain nft-card-det absolute top-0 right-0 mt-3 mr-5 p-2 grid place-content-center rounded-full hidden cursor-pointer">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="22" fill="#000000" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><path d="M133.7,211.9l81-81c19.9-20,22.8-52.7,4-73.6a52,52,0,0,0-75.5-2.1L128,70.5,114.9,57.3c-20-19.9-52.7-22.8-73.6-4a52,52,0,0,0-2.1,75.5l83.1,83.1A8.1,8.1,0,0,0,133.7,211.9Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="12"></path></svg>
-                    </div>
-                </div>
-            </SplideSlide>
-            <SplideSlide>
-                <div class="relative overflow-hidden rounded-t-2xl w-[255px] h-[340px]">
-                    <img
-                        src="/storage/assets/alien-gc688c9726_1280.jpg"
-                        alt=""
-                        class="min-w-[100%] max-h-[400px]"
-                    />
-                    <div
-                        class="nft-card-det flex justify-between items-center py-4 px-5 w-full absolute left-0 bottom-0"
-                    >
-                        <div
-                            class="hover:underline underline-offset-4 cursor-pointer"
-                        >
-                            NFT Name
-                        </div>
-                        <div class="font-bold">0.10 ETH</div>
-                    </div>
-                </div>
-            </SplideSlide>
-            <SplideSlide>
-                <div class="relative overflow-hidden rounded-t-2xl w-[255px] h-[340px]">
-                    <img
-                        src="/storage/assets/venus-g61bb11ec1_1280.jpg"
-                        alt=""
-                        class="min-w-[100%] max-h-[400px]"
-                    />
-                    <div
-                        class="nft-card-det flex justify-between items-center py-4 px-5 w-full absolute left-0 bottom-0"
-                    >
-                        <div
-                            class="hover:underline underline-offset-4 cursor-pointer"
-                        >
-                            NFT Name
-                        </div>
-                        <div class="font-bold">0.10 ETH</div>
-                    </div>
-                </div>
-            </SplideSlide>
-            <SplideSlide>
-                <div class="relative overflow-hidden rounded-t-2xl w-[255px] h-[340px]">
-                    <img
-                        src="/storage/assets/colorful-g0fd569376_1280.jpg"
-                        alt=""
-                        class="min-w-[100%] max-h-[400px]"
-                    />
-                    <div
-                        class="nft-card-det flex justify-between items-center py-4 px-5 w-full absolute left-0 bottom-0"
-                    >
-                        <div
-                            class="hover:underline underline-offset-4 cursor-pointer"
-                        >
-                            NFT Name
-                        </div>
-                        <div class="font-bold">0.10 ETH</div>
-                    </div>
-                </div>
-            </SplideSlide>
-            <SplideSlide>
-                <div class="relative overflow-hidden rounded-t-2xl w-[255px] h-[340px]">
-                    <img
-                        src="/storage/assets/eth.jpg"
-                        alt=""
-                        class="min-w-[100%] min-h-[100%]"
-                    />
-                    <div
-                        class="nft-card-det flex justify-between items-center py-4 px-5 w-full absolute left-0 bottom-0"
-                    >
-                        <div
-                            class="hover:underline underline-offset-4 cursor-pointer"
-                        >
-                            NFT Name
-                        </div>
-                        <div class="font-bold">0.10 ETH</div>
-                    </div>
-                </div>
-            </SplideSlide>
-            <SplideSlide>
-                <div class="relative overflow-hidden rounded-t-2xl w-[255px] h-[340px]">
-                    <img
-                        src="../../../storage/app/public/assets/heart-g7eea2c9a6_1280.jpg"
-                        alt=""
-                        class="min-w-[100%] max-h-[400px]"
-                    />
-                    <div
-                        class="nft-card-det flex justify-between items-center py-4 px-5 w-full absolute left-0 bottom-0"
-                    >
-                        <div
-                            class="hover:underline underline-offset-4 cursor-pointer"
-                        >
-                            NFT Name
-                        </div>
-                        <div class="font-bold">0.10 ETH</div>
-                    </div>
-                </div>
-            </SplideSlide>
-        </Splide>
+        <NftSlider :dataRoute="'nfts/list'" :nftId="''"/>
     </section>
     <!-- End Gallery Section -->
 
