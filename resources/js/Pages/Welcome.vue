@@ -97,7 +97,7 @@ export default {
                     <h3 class="text-4xl font-bold">Trending NFTs</h3>
                 </div>
 
-                <Link class="hover:underline underline-offset-4 font-semibold">
+                <Link :href="route('/nfts')" class="hover:underline underline-offset-4 font-semibold">
                 View All
                 </Link>
             </div>
@@ -117,14 +117,12 @@ export default {
 
     <!-- Text Section -->
 
-    <section class="mx-auto my-20 max-w-[1180px] bg-myDark-200 px-10 py-12 rounded-xl">
+    <!-- <section class="mx-auto my-20 max-w-[1180px] bg-myDark-200 px-10 py-12 rounded-xl">
         <div class="grid grid-cols-2 gap-10">
             <div class="rounded-xl overflow-hidden min-h-[300px]" style="background:url('/storage/assets/eth.jpg') no-repeat center center;">
-                <!-- Image -->
-                <!-- <img src="/storage/assets/eth.jpg" alt="ethereum" class=""> -->
             </div>
             <div>
-                <!-- text -->
+                
                 <h3 class="font-inter font-bold text-5xl mb-3">Some big Title</h3>
                 <p class="text-myGray leading-6 mb-6">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem eos nam iste sit perspiciatis error officiis repellat facere. Fugit pariatur dolore saepe nam dolorum at porro nostrum reprehenderit! Eos, facilis. Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati, quidem.</p>
                 <button class="bg-transparent border border-white rounded-full py-2 px-8 hover:bg-white hover:text-black">
@@ -134,7 +132,7 @@ export default {
             </div>
         </div>
 
-    </section>
+    </section> -->
 
     <!-- End Text Section -->
 
@@ -542,10 +540,10 @@ export default {
                     </PrimaryButton>
                 </form>
             </div>
-            <div class="rounded-2xl overflow-hidden">
+            <div class="overflow-hidden">
                 <!-- <div style="background:url('../../../storage/app/public/assets/eth.jpg')" class="h-[300px]">
                 </div> -->
-                <!-- <img src="../../../storage/app/public/assets/eth.jpg" alt="" class=" w-full"> -->
+                <!-- <img src="storage/assets/nft.svg" alt="" class="scale-150"> -->
             </div>
         </div>
     </section>

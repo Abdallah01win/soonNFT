@@ -51,6 +51,10 @@ Route::get('/dashboard', function () {
 Route::get('/contact', function () {
     return Inertia::render('Contact');
 })->name('contact');
+
+Route::get('/nfts', function () {
+    return Inertia::render('Allnfts');
+})->name('/nfts');
 Route::get('/users/count', [RegisteredUserController::class, 'count'])->name('users/count');
 
 Route::middleware('auth')->group(function () {
@@ -60,13 +64,17 @@ Route::middleware('auth')->group(function () {
 });
 
 
-Route::controller(nft::class)->middleware(['auth', 'verified'])->group(function () {
+Route::controller(nft::class)->group(function () {
+    Route::get('/nfts/all', 'index')->name('nfts/all');
+    Route::get('/nfts/eth', 'cripto')->name('nfts/eth');
     Route::get('/nfts/list', 'index')->name('nfts/list');
+    Route::get('/nfts/paginate', 'paginate')->name('nfts/paginate');
+    Route::post('/nfts/nft', 'view')->name('nfts/nft');
+});
+Route::controller(nft::class)->middleware(['auth', 'verified'])->group(function () {
     Route::post('/nfts/store', 'store')->name('nfts/store');
     Route::get('/nfts/count', 'count')->name('nfts/count');
-    Route::get('/nfts/paginate', 'paginate')->name('nfts/paginate');
     Route::post('/nfts/destroy', 'destroy')->name('nfts/destroy');
-    Route::post('/nfts/nft', 'view')->name('nfts/nft');
 });
 
 require __DIR__.'/auth.php';

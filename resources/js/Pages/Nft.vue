@@ -1,10 +1,10 @@
 <script setup>
-import { Head } from "@inertiajs/inertia-vue3";
+import { Head, Link } from "@inertiajs/inertia-vue3";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import Navigation from "@/Components/Navigation.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import NftSlider from "@/Components/NftSlider.vue"
-import Footer from "@/Components/Footer.vue";
+import Footer from "@/Components/Footer.vue"; 
 </script>
 <script>
 export default {
@@ -38,7 +38,7 @@ export default {
             <Navigation class="" />
         </template>
         <section class="mx-auto my-12 max-w-[1180px]">
-            <div class="grid grid-cols-[1fr,1.8fr] gap-x-12">
+            <div class="grid grid-cols-[.45fr,1fr] gap-x-12">
                 <div class="rounded-xl overflow-hidden w-[100%] h-[400px]">
                     <img :src="nft.imgurl" alt="" class="w-[100%] h-[100%]" />
                 </div>
@@ -183,7 +183,7 @@ export default {
                     <h3 class="text-4xl font-bold">Suggested NFTs</h3>
                 </div>
 
-                <Link class="hover:underline underline-offset-4 font-semibold">
+                <Link :href="route('/nfts')" class="hover:underline underline-offset-4 font-semibold">
                 View All
                 </Link>
             </div>
