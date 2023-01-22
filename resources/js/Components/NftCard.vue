@@ -3,7 +3,7 @@ import { Link } from '@inertiajs/inertia-vue3';
 </script>
 <script>
 export default {
-    props:{
+    props: {
         item: Object,
     },
     methods: {
@@ -14,11 +14,18 @@ export default {
             myDate.time = newDate.toString().substring(16, 24);
             return myDate;
         },
+        truncateString(num, str) {
+            if (str.length > num) {
+                return str.substring(0, num) + "...";
+            } else {
+                return str;
+            }
+        }
     },
 }
 </script>
 <template>
-    <div class="relative overflow-hidden rounded-2xl w-[255px] h-[320px] nft-card">
+    <!-- <div class="relative overflow-hidden rounded-2xl w-[255px] h-[320px] nft-card">
                 <img :src="item.imgurl" alt="" class="min-w-[100%] max-h-[400px] min-h-full block" />
                 <div class="nft-card-det flex justify-between items-center py-3 px-5 w-full absolute left-0 bottom-0">
                     <div class="flex flex-col  ">
@@ -43,5 +50,23 @@ export default {
                             stroke-width="12"></path>
                     </svg>
                 </div>
+            </div> -->
+
+    <div class="bg-myBlack-200 rounded-2xl relative overflow-hidden">
+        <div class="w-[255px] h-[320px]">
+            <img :src="item.image" alt="" class="min-w-[100%] h-full block rounded-2xl" />
+        </div>
+        <div class="py-3 px-4">
+            <div class="pb-1">
+                <Link :href="route('nfts/nft')" method="post" as="button" :data="{ id: item.symbol }"
+                    class="capitalize hover:text-myPurple-400 font-inter font-semibold text-base cursor-pointer lowercase/ ">
+                {{ truncateString(19, item.name) }}
+                </Link>
             </div>
+            <div class="flex items-center justify-between font-semibold text-myGray /border-t /border-myGray pt-1">
+                <div class="text-sm uppercase">{{ item.price }} SOL</div>
+                <div class="text-sm uppercase">{{ dateConvert(item.launchDatetime).date }}</div>
+            </div>
+        </div>
+    </div>
 </template>

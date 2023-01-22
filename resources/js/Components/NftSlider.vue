@@ -1,5 +1,4 @@
 <script setup>
-import axios from "axios";
 import { Splide, SplideSlide } from "@splidejs/vue-splide";
 import '@splidejs/vue-splide/css';
 import NftCard from "./NftCard.vue";
@@ -7,17 +6,17 @@ import NftCard from "./NftCard.vue";
 <script>
 export default {
     props: {
-        dataRoute: String,
+        drops: Object,
         nftId: '',
     },
     data() {
         return {
-            NftData: Object,
         }
     },
     components: {
         Splide,
         SplideSlide,
+        NftCard,
     },
     computed: {
         /* removeCurrentNft(){
@@ -28,20 +27,11 @@ export default {
              }
          }*/
     },
-    methods: {
-        getData(route) {
-            axios
-                .get(route)
-                .then((response) => (this.NftData = response.data));
-        },
-    },
-    mounted() {
-        this.getData(this.dataRoute);
-    },
 }
 </script>
 
 <template>
+    
     <Splide :options="{
         rewind: true,
         autoWidth: true,
@@ -53,8 +43,14 @@ export default {
     }" :classes="{
     pagination: 'splide__pagination no-pagination',
 }" aria-label="Viral Nfts">
-        <SplideSlide v-for="item in NftData" :key="item.id">
+        <SplideSlide v-for="item in drops" :key="item.id">
             <NftCard :item="item" />
         </SplideSlide>
     </Splide>
 </template>
+
+<style>
+.splide__arrow{
+    background: #5e45ff !important;
+}
+</style>

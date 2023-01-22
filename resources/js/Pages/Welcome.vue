@@ -24,6 +24,8 @@ export default {
     },
     props: {
         nfts: Object,
+        cols: Object,
+        drops: Object,
     },
     components: {
         Footer,
@@ -52,57 +54,100 @@ export default {
             myDate.time = newDate.toString().substring(16, 24);
             return myDate;
         },
+        truncateString(num, str) {
+            if (str.length > num) {
+                return str.substring(0, num) + "...";
+            } else {
+                return str;
+            }
+        }
     },
 };
 </script>
 
 <template>
+
     <Head title="Home" />
 
     <main class="main">
         <Navigation />
-        <section
-            class="flex items-center h-[100vh] max-h-[620px] mx-auto max-w-[1180px]"
-        >
-            <div class="flex flex-col items-center /translate-y-[-50%]">
+        <section class="grid grid-cols-2 gap-x-10 /h-[100vh] max-h-[620px] mx-auto max-w-[1180px] py-10">
+            <div class="flex flex-col justify-center">
                 <h1 class="font-inter font-black text-6xl mb-3 uppercase">
-                    The NFT World in your hands
+                    Unlocking a New Dimension of <span class="text-myPurple-400">NFT Collection</span>
                 </h1>
-                <p class="text-center max-w-[70%] mx-auto">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Porro quae velit modi voluptatem, iure explicabo! Lorem
-                    ipsum dolor sit, amet consectetur adipisicing elit.
+                <p class="text-myGray text-lg leading-relaxed">
+                    Discover the world of digital art, NFTs are more than just digital collectibles, they represent
+                    <span class="text-myPurple-400 font-semibold uppercase">a new way of thinking about
+                        ownership.</span> Join the future now with NFTs.
                 </p>
                 <div class="flex items-center gap-x-6 mt-8">
-                    <button
-                        class="text-lg rounded-full py-2 px-6 uppercase border border-white bg-none"
-                    >
+                    <button class="text-lg rounded-full py-2 px-6 uppercase /border /border-white bg-myPurple-400">
                         Get Started
                     </button>
-                    <button
-                        class="text-lg rounded-full py-2 px-6 border border-white bg-none"
-                    >
+                    <button class="text-lg rounded-full py-2 px-6 border border-white bg-none">
                         EXPLORE NFTs
                     </button>
                 </div>
             </div>
+            <div class="rounded-xl overflow-hidden">
+                <img src="/storage/assets/hero2.png" alt="" class="w-full">
+            </div>
         </section>
     </main>
+    <!-- collections -->
+    <section class="mx-auto my-20 max-w-[1180px]">
+        <div class="flex items-center justify-between">
+            <div class="flex flex-col mb-6">
+                <div class="text-myPurple-400 text-base font-semibold uppercase">Gallery</div>
+                <h3 class="text-4xl font-bold">Top Collections</h3>
+            </div>
+            <Link :href="route('/nfts')" class="text-base rounded-full py-2 px-6 bg-myPurple-400 transition-all">
+            View All
+            </Link>
+        </div>
+
+        <div class="grid grid-cols-3 gap-x-4 gap-y-3">
+            <div class="flex items-center gap-x-4  /border-b /border-myPurple-400 py-2 px-4" v-for="col in cols"
+                :key="col.symbol">
+                <div class="font-inter font-bold">{{ cols.indexOf(col) + 1 }}</div>
+                <div class="rounded-full overflow-hidden w-20 h-20">
+                    <img :src="col.image" alt="">
+                </div>
+                <div class="flex flex-col justify">
+                    <Link :href="route('/collection')" :data="{ id: col.symbol }" method="post" as="button"
+                        class="font-inter font-semibold text-lg hover:text-myPurple-400 flex items-center gap-x-2">{{
+                            truncateString(16, col.name) 
+                        }} <span v-if="col.isBadged">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" fill="#5e45ff" viewBox="0 0 256 256">
+                            <rect width="256" height="256" fill="none"></rect>
+                            <path
+                                d="M128,24A104,104,0,1,0,232,128,104.2,104.2,0,0,0,128,24Zm49.5,85.8-58.6,56a8.1,8.1,0,0,1-5.6,2.2,7.7,7.7,0,0,1-5.5-2.2l-29.3-28a8,8,0,1,1,11-11.6l23.8,22.7,53.2-50.7a8,8,0,0,1,11,11.6Z">
+                            </path>
+                        </svg>
+                    </span>
+                    </Link>
+                    <div class="text-myGray text-sm font-semibold">Floor: <span>0.001</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Gallery Section -->
     <section class="mx-auto my-20 max-w-[1180px]">
-            <div class="flex items-center justify-between">
+        <div class="flex items-center justify-between">
 
-                <div class="flex flex-col mb-6">
-                    <div class="text-myGray text-lg">Gallery</div>
-                    <h3 class="text-4xl font-bold">Trending NFTs</h3>
-                </div>
-
-                <Link :href="route('/nfts')" class="hover:underline underline-offset-4 font-semibold">
-                View All
-                </Link>
+            <div class="flex flex-col mb-6">
+                <div class="text-myPurple-400 text-base font-semibold uppercase">Drops</div>
+                <h3 class="text-4xl font-bold">Most Unticipated</h3>
             </div>
-       
-        <NftSlider :dataRoute="'nfts/list'" :nftId="''"/>
+
+            <Link :href="route('/nfts')" class="text-base rounded-full py-2 px-6 bg-myPurple-400 transition-all">
+            View All
+            </Link>
+        </div>
+
+        <NftSlider :drops="drops" :nftId="''" />
     </section>
     <!-- End Gallery Section -->
 
@@ -137,12 +182,10 @@ export default {
     <!-- End Text Section -->
 
     <!-- Table Section -->
-    <section
-        class="mx-auto my-20 max-w-[1180px] bg-myDark-200 px-10 py-12 rounded-xl"
-    >
+    <section class="mx-auto my-20 max-w-[1180px] bg-myDark-200 px-10 py-12 rounded-xl">
         <div class="flex flex-col mb-6">
-            <div class="text-myGray text-lg">Gallery</div>
-            <h3 class="text-4xl font-bold">Popular NFTs</h3>
+            <div class="text-myPurple-400 text-base font-semibold uppercase">NFTs</div>
+            <h3 class="text-4xl font-bold">Featured Selection</h3>
         </div>
         <table class="w-full">
             <thead class="border-b border-myDark-100 font-semibold">
@@ -154,193 +197,81 @@ export default {
                     <td class="py-3 //text-lg">supply</td>
                     <td class="py-3 //text-lg">Price</td>
                     <td class="py-3 //text-lg">Drop</td>
-                    <td
-                        class="py-3 //text-lg"
-                        v-if="
-                            $page.props.auth.user &&
-                            $page.props.auth.user.type === 1
-                        "
-                    >
+                    <td class="py-3 //text-lg" v-if="
+                        $page.props.auth.user &&
+                        $page.props.auth.user.type === 1
+                    ">
                         Actions
                     </td>
                 </tr>
             </thead>
 
             <tbody class="text-myGray">
-                <tr
-                    v-for="item in nfts.data"
-                    :key="item.id"
-                    class="border-b border-myDark-100"
-                >
+                <tr v-for="item in nfts.data" :key="item.id" class="border-b border-myDark-100">
                     <td class="py-2 pl-3">{{ nfts.data.indexOf(item) + 1 }}</td>
                     <td class="py-2">
-                        <Link
-                            :href="route('nfts/nft')"
-                            method="post"
-                            as="button"
-                            :data="{ id: item.id }"
-                            class="w-fit flex gap-x-3 items-center hover:text-white"
-                        >
-                            <span class="rounded-full /overflow-hidden">
-                                <img
-                                    :src="item.imgurl"
-                                    alt="testimonial"
-                                    class="w-14 h-14 rounded-full flex-shrink-0 object-cover object-center"
-                                />
-                            </span>
-                            <span class="//font-semibold capitalize">{{
-                                item.name
-                            }}</span>
+                        <Link :href="route('nfts/nft')" method="post" as="button" :data="{ id: item.id }"
+                            class="w-fit flex gap-x-3 items-center hover:text-white">
+                        <span class="rounded-full /overflow-hidden">
+                            <img :src="item.imgurl" alt="testimonial"
+                                class="w-14 h-14 rounded-full flex-shrink-0 object-cover object-center" />
+                        </span>
+                        <span class="//font-semibold capitalize">{{
+                            item.name
+                        }}</span>
                         </Link>
                     </td>
                     <td class="py-2">
                         <div class="flex items-center gap-x-3 text-2xl">
                             <span v-if="item.website">
-                                <a
-                                    :href="item.website"
-                                    target="_blank"
-                                    class="hover:text-white w-6 block"
-                                >
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        width="26"
-                                        fill="currentColor"
-                                        viewBox="0 0 256 256"
-                                    >
-                                        <rect
-                                            width="256"
-                                            height="256"
-                                            fill="none"
-                                        ></rect>
-                                        <circle
-                                            cx="128"
-                                            cy="128"
-                                            r="96"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            stroke-width="8"
-                                        ></circle>
-                                        <line
-                                            x1="37.5"
-                                            y1="96"
-                                            x2="218.5"
-                                            y2="96"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            stroke-width="8"
-                                        ></line>
-                                        <line
-                                            x1="37.5"
-                                            y1="160"
-                                            x2="218.5"
-                                            y2="160"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            stroke-width="8"
-                                        ></line>
-                                        <ellipse
-                                            cx="128"
-                                            cy="128"
-                                            rx="40"
-                                            ry="93.4"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            stroke-width="8"
-                                        ></ellipse>
+                                <a :href="item.website" target="_blank" class="hover:text-white w-6 block">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="26" fill="currentColor"
+                                        viewBox="0 0 256 256">
+                                        <rect width="256" height="256" fill="none"></rect>
+                                        <circle cx="128" cy="128" r="96" fill="none" stroke="currentColor"
+                                            stroke-linecap="round" stroke-linejoin="round" stroke-width="8"></circle>
+                                        <line x1="37.5" y1="96" x2="218.5" y2="96" fill="none" stroke="currentColor"
+                                            stroke-linecap="round" stroke-linejoin="round" stroke-width="8"></line>
+                                        <line x1="37.5" y1="160" x2="218.5" y2="160" fill="none" stroke="currentColor"
+                                            stroke-linecap="round" stroke-linejoin="round" stroke-width="8"></line>
+                                        <ellipse cx="128" cy="128" rx="40" ry="93.4" fill="none" stroke="currentColor"
+                                            stroke-linecap="round" stroke-linejoin="round" stroke-width="8"></ellipse>
                                     </svg>
                                 </a>
                             </span>
                             <span v-if="item.twitter">
-                                <a
-                                    :href="item.twitter"
-                                    target="_blank"
-                                    class="hover:text-white w-6 block"
-                                >
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        width="26"
-                                        fill="currentColor"
-                                        viewBox="0 0 256 256"
-                                    >
-                                        <rect
-                                            width="256"
-                                            height="256"
-                                            fill="none"
-                                        ></rect>
+                                <a :href="item.twitter" target="_blank" class="hover:text-white w-6 block">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="26" fill="currentColor"
+                                        viewBox="0 0 256 256">
+                                        <rect width="256" height="256" fill="none"></rect>
                                         <path
                                             d="M128,88c0-22,18.5-40.3,40.5-40a40,40,0,0,1,36.2,24H240l-32.3,32.3A127.9,127.9,0,0,1,80,224c-32,0-40-12-40-12s32-12,48-36c0,0-64-32-48-120,0,0,40,40,88,48Z"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            stroke-width="8"
-                                        ></path>
+                                            fill="none" stroke="currentColor" stroke-linecap="round"
+                                            stroke-linejoin="round" stroke-width="8"></path>
                                     </svg>
                                 </a>
                             </span>
                             <span v-if="item.discord">
-                                <a
-                                    :href="item.discord"
-                                    target="_blank"
-                                    class="hover:text-white w-6 block"
-                                >
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        width="26"
-                                        fill="currentColor"
-                                        viewBox="0 0 256 256"
-                                    >
-                                        <rect
-                                            width="256"
-                                            height="256"
-                                            fill="none"
-                                        ></rect>
+                                <a :href="item.discord" target="_blank" class="hover:text-white w-6 block">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="26" fill="currentColor"
+                                        viewBox="0 0 256 256">
+                                        <rect width="256" height="256" fill="none"></rect>
                                         <circle cx="96" cy="144" r="8"></circle>
-                                        <circle
-                                            cx="160"
-                                            cy="144"
-                                            r="8"
-                                        ></circle>
-                                        <path
-                                            d="M74.4,80A174.9,174.9,0,0,1,128,72a174.9,174.9,0,0,1,53.6,8"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            stroke-width="8"
-                                        ></path>
-                                        <path
-                                            d="M181.6,176a174.9,174.9,0,0,1-53.6,8,174.9,174.9,0,0,1-53.6-8"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            stroke-width="8"
-                                        ></path>
+                                        <circle cx="160" cy="144" r="8"></circle>
+                                        <path d="M74.4,80A174.9,174.9,0,0,1,128,72a174.9,174.9,0,0,1,53.6,8" fill="none"
+                                            stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="8"></path>
+                                        <path d="M181.6,176a174.9,174.9,0,0,1-53.6,8,174.9,174.9,0,0,1-53.6-8"
+                                            fill="none" stroke="currentColor" stroke-linecap="round"
+                                            stroke-linejoin="round" stroke-width="8"></path>
                                         <path
                                             d="M155,182.1l12.1,24a7.8,7.8,0,0,0,9,4.2c24.5-6,45.7-16.4,61.1-29.8a8.1,8.1,0,0,0,2.4-8.4L205.7,58.9a7.7,7.7,0,0,0-4.7-5.1,176.4,176.4,0,0,0-29.6-9.2,8.1,8.1,0,0,0-9.4,5.3l-7.9,23.9"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            stroke-width="8"
-                                        ></path>
+                                            fill="none" stroke="currentColor" stroke-linecap="round"
+                                            stroke-linejoin="round" stroke-width="8"></path>
                                         <path
                                             d="M101,182.1l-12.1,24a7.8,7.8,0,0,1-9,4.2c-24.5-6-45.7-16.4-61.1-29.8a8.1,8.1,0,0,1-2.4-8.4L50.3,58.9A7.7,7.7,0,0,1,55,53.8a176.4,176.4,0,0,1,29.6-9.2A8.1,8.1,0,0,1,94,49.9l7.9,23.9"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            stroke-width="8"
-                                        ></path>
+                                            fill="none" stroke="currentColor" stroke-linecap="round"
+                                            stroke-linejoin="round" stroke-width="8"></path>
                                     </svg>
                                 </a>
                             </span>
@@ -352,140 +283,48 @@ export default {
                         {{ item.price }} {{ item.blockchain.substr(0, 3) }}
                     </td>
                     <td class="py-2">{{ dateConvert(item.dropdate).date }}</td>
-                    <td
-                        class="py-2"
-                        v-if="
-                            $page.props.auth.user &&
-                            $page.props.auth.user.type === 1
-                        "
-                    >
+                    <td class="py-2" v-if="
+                        $page.props.auth.user &&
+                        $page.props.auth.user.type === 1
+                    ">
                         <div class="flex items-center gap-x-3 text-2xl">
                             <span>
-                                <div
-                                    class="hover:text-white cursor-pointer"
-                                    @click="close(item.id)"
-                                >
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        width="26"
-                                        fill="currentColor"
-                                        viewBox="0 0 256 256"
-                                    >
-                                        <rect
-                                            width="256"
-                                            height="256"
-                                            fill="none"
-                                        ></rect>
-                                        <line
-                                            x1="216"
-                                            y1="56"
-                                            x2="40"
-                                            y2="56"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            stroke-width="8"
-                                        ></line>
-                                        <line
-                                            x1="104"
-                                            y1="104"
-                                            x2="104"
-                                            y2="168"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            stroke-width="8"
-                                        ></line>
-                                        <line
-                                            x1="152"
-                                            y1="104"
-                                            x2="152"
-                                            y2="168"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            stroke-width="8"
-                                        ></line>
-                                        <path
-                                            d="M200,56V208a8,8,0,0,1-8,8H64a8,8,0,0,1-8-8V56"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            stroke-width="8"
-                                        ></path>
-                                        <path
-                                            d="M168,56V40a16,16,0,0,0-16-16H104A16,16,0,0,0,88,40V56"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            stroke-width="8"
-                                        ></path>
+                                <div class="hover:text-white cursor-pointer" @click="close(item.id)">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="26" fill="currentColor"
+                                        viewBox="0 0 256 256">
+                                        <rect width="256" height="256" fill="none"></rect>
+                                        <line x1="216" y1="56" x2="40" y2="56" fill="none" stroke="currentColor"
+                                            stroke-linecap="round" stroke-linejoin="round" stroke-width="8"></line>
+                                        <line x1="104" y1="104" x2="104" y2="168" fill="none" stroke="currentColor"
+                                            stroke-linecap="round" stroke-linejoin="round" stroke-width="8"></line>
+                                        <line x1="152" y1="104" x2="152" y2="168" fill="none" stroke="currentColor"
+                                            stroke-linecap="round" stroke-linejoin="round" stroke-width="8"></line>
+                                        <path d="M200,56V208a8,8,0,0,1-8,8H64a8,8,0,0,1-8-8V56" fill="none"
+                                            stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="8"></path>
+                                        <path d="M168,56V40a16,16,0,0,0-16-16H104A16,16,0,0,0,88,40V56" fill="none"
+                                            stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="8"></path>
                                     </svg>
                                 </div>
                             </span>
                             <span>
-                                <Link
-                                    class="cursor-pointer block"
-                                    :href="route('/')"
-                                    method="post"
-                                    as="button"
-                                    :data="{ id: item.id }"
-                                >
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        width="26"
-                                        fill="currentColor"
-                                        viewBox="0 0 256 256"
-                                    >
-                                        <rect
-                                            width="256"
-                                            height="256"
-                                            fill="none"
-                                        ></rect>
-                                        <path
-                                            d="M96,216H48a8,8,0,0,1-8-8V163.3a7.9,7.9,0,0,1,2.3-5.6l120-120a8,8,0,0,1,11.4,0l44.6,44.6a8,8,0,0,1,0,11.4Z"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            stroke-width="8"
-                                        ></path>
-                                        <line
-                                            x1="136"
-                                            y1="64"
-                                            x2="192"
-                                            y2="120"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            stroke-width="8"
-                                        ></line>
-                                        <polyline
-                                            points="216 216 96 216 40.5 160.5"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            stroke-width="8"
-                                        ></polyline>
-                                        <line
-                                            x1="164"
-                                            y1="92"
-                                            x2="68"
-                                            y2="188"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            stroke-width="8"
-                                        ></line>
-                                    </svg>
+                                <Link class="cursor-pointer block" :href="route('/')" method="post" as="button"
+                                    :data="{ id: item.id }">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="26" fill="currentColor"
+                                    viewBox="0 0 256 256">
+                                    <rect width="256" height="256" fill="none"></rect>
+                                    <path
+                                        d="M96,216H48a8,8,0,0,1-8-8V163.3a7.9,7.9,0,0,1,2.3-5.6l120-120a8,8,0,0,1,11.4,0l44.6,44.6a8,8,0,0,1,0,11.4Z"
+                                        fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="8"></path>
+                                    <line x1="136" y1="64" x2="192" y2="120" fill="none" stroke="currentColor"
+                                        stroke-linecap="round" stroke-linejoin="round" stroke-width="8"></line>
+                                    <polyline points="216 216 96 216 40.5 160.5" fill="none" stroke="currentColor"
+                                        stroke-linecap="round" stroke-linejoin="round" stroke-width="8"></polyline>
+                                    <line x1="164" y1="92" x2="68" y2="188" fill="none" stroke="currentColor"
+                                        stroke-linecap="round" stroke-linejoin="round" stroke-width="8"></line>
+                                </svg>
                                 </Link>
                             </span>
                         </div>
@@ -504,9 +343,7 @@ export default {
         <div class="grid grid-cols-2 py-16 px-10 gap-x-4">
             <div class="text">
                 <div class="flex flex-col">
-                    <div
-                        class="py-1 px-3 text-xs rounded-full news-letter-sub /bg-slate-400 w-fit mb-2"
-                    >
+                    <div class="py-1 px-3 text-xs rounded-full news-letter-sub /bg-slate-400 w-fit mb-2">
                         News-letter
                     </div>
                     <h3 class="text-5xl font-inter font-black mb-3">
@@ -520,22 +357,12 @@ export default {
                 </p>
                 <form action="post" class="flex items-center gap-x-3 mt-6">
                     <div class="grow">
-                        <TextInput
-                            id="email"
-                            type="email"
-                            class="mt-1 block w-full"
-                            v-model="form.email"
-                            required
-                            autocomplete="username"
-                            placeholder="Email Adress"
-                        />
+                        <TextInput id="email" type="email" class="mt-1 block w-full" v-model="form.email" required
+                            autocomplete="username" placeholder="Email Adress" />
                         <InputError class="mt-2" :message="form.errors.email" />
                     </div>
-                    <PrimaryButton
-                        class="w-fit justify-center px-6"
-                        :class="{ 'opacity-25': form.processing }"
-                        :disabled="form.processing"
-                    >
+                    <PrimaryButton class="w-fit justify-center px-6" :class="{ 'opacity-25': form.processing }"
+                        :disabled="form.processing">
                         Subscribe
                     </PrimaryButton>
                 </form>
@@ -548,47 +375,20 @@ export default {
         </div>
     </section>
 
-    <div
-        class="bg-myDark-300/80 fixed top-0 left-0 w-full h-screen flex items-center z-10 hidden"
-        id="confirmDelete"
-        @click.self="close('')"
-    >
+    <div class="bg-myDark-300/80 fixed top-0 left-0 w-full h-screen flex items-center z-10 hidden" id="confirmDelete"
+        @click.self="close('')">
         <div
-            class="bg-myDark-100 overflow-hidden shadow-sm sm:rounded-lg px-10 py-10 w-[45%] mx-auto /////////translate-y-[130%]"
-        >
+            class="bg-myDark-100 overflow-hidden shadow-sm sm:rounded-lg px-10 py-10 w-[45%] mx-auto /////////translate-y-[130%]">
             <div class="flex justify-between items-center mb-2">
                 <h3 class="text-2xl font-semibold">Delete NFT</h3>
                 <button class="p-2 bg-gray-200 rounded-full" @click="close('')">
                     <span class="w-6">
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="20"
-                            fill="#000000"
-                            viewBox="0 0 256 256"
-                        >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" fill="#000000" viewBox="0 0 256 256">
                             <rect width="256" height="256" fill="none"></rect>
-                            <line
-                                x1="200"
-                                y1="56"
-                                x2="56"
-                                y2="200"
-                                fill="none"
-                                stroke="#000000"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="12"
-                            ></line>
-                            <line
-                                x1="200"
-                                y1="200"
-                                x2="56"
-                                y2="56"
-                                fill="none"
-                                stroke="#000000"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="12"
-                            ></line>
+                            <line x1="200" y1="56" x2="56" y2="200" fill="none" stroke="#000000" stroke-linecap="round"
+                                stroke-linejoin="round" stroke-width="12"></line>
+                            <line x1="200" y1="200" x2="56" y2="56" fill="none" stroke="#000000" stroke-linecap="round"
+                                stroke-linejoin="round" stroke-width="12"></line>
                         </svg>
                     </span>
                 </button>
@@ -597,22 +397,13 @@ export default {
                 Are You sure you want to delete this NFT? This can't be undone!
             </p>
             <div class="flex items-center justify-between mt-6 gap-x-5">
-                <PrimaryButton
-                    type="button"
-                    class="grow w-full justify-center"
-                    @click="close('')"
-                >
+                <PrimaryButton type="button" class="grow w-full justify-center" @click="close('')">
                     Cancel
                 </PrimaryButton>
 
-                <Link
-                    :href="route('nfts/destroy')"
-                    method="post"
-                    as="button"
-                    :data="{ id: nftId }"
-                    @click="close('')"
-                    class="w-full justify-center items-center px-4 py-3 bg-white border border-transparent rounded-full font-semibold text-black uppercase tracking-widest hover:bg-white/90 focus:bg-white/90 active:bg-white/90 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150 text-sm"
-                    >Delete
+                <Link :href="route('nfts/destroy')" method="post" as="button" :data="{ id: nftId }" @click="close('')"
+                    class="w-full justify-center items-center px-4 py-3 bg-white border border-transparent rounded-full font-semibold text-black uppercase tracking-widest hover:bg-white/90 focus:bg-white/90 active:bg-white/90 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150 text-sm">
+                Delete
                 </Link>
             </div>
         </div>
@@ -621,7 +412,7 @@ export default {
 </template>
 
 <style>
-.main {
+/*.main {
     background-color: #0a0a0aff;
     background-image: radial-gradient(
             at 76% 58%,
@@ -653,50 +444,34 @@ export default {
             hsla(221, 90%, 52%, 1) 0,
             hsla(221, 90%, 52%, 0) 50%
         );
-}
+}*/
 
 .newsletter-sec {
     background-color: #000000;
-    background-image: radial-gradient(
-            at 76% 60%,
+    background-image: radial-gradient(at 76% 60%,
             hsla(267, 94%, 59%, 1) 0,
-            hsla(267, 94%, 59%, 0) 50%
-        ),
-        radial-gradient(
-            at 42% 45%,
+            hsla(267, 94%, 59%, 0) 50%),
+        radial-gradient(at 42% 45%,
             hsla(239, 91%, 66%, 1) 0,
-            hsla(239, 91%, 66%, 0) 50%
-        ),
-        radial-gradient(
-            at 64% 38%,
+            hsla(239, 91%, 66%, 0) 50%),
+        radial-gradient(at 64% 38%,
             hsla(267, 85%, 50%, 1) 0,
-            hsla(267, 85%, 50%, 0) 50%
-        ),
-        radial-gradient(
-            at 10% 32%,
+            hsla(267, 85%, 50%, 0) 50%),
+        radial-gradient(at 10% 32%,
             hsla(313, 85%, 61%, 1) 0,
-            hsla(313, 85%, 61%, 0) 50%
-        ),
-        radial-gradient(
-            at 30% 85%,
+            hsla(313, 85%, 61%, 0) 50%),
+        radial-gradient(at 30% 85%,
             hsla(267, 85%, 50%, 1) 0,
-            hsla(267, 85%, 50%, 0) 50%
-        ),
-        radial-gradient(
-            at 42% 89%,
+            hsla(267, 85%, 50%, 0) 50%),
+        radial-gradient(at 42% 89%,
             hsla(221, 90%, 52%, 1) 0,
-            hsla(221, 90%, 52%, 0) 50%
-        ),
-        radial-gradient(
-            at 100% 70%,
+            hsla(221, 90%, 52%, 0) 50%),
+        radial-gradient(at 100% 70%,
             hsla(313, 85%, 61%, 1) 0,
-            hsla(313, 85%, 61%, 0) 50%
-        ),
-        radial-gradient(
-            at 100% 10%,
+            hsla(313, 85%, 61%, 0) 50%),
+        radial-gradient(at 100% 10%,
             hsla(267, 85%, 50%, 1) 0,
-            hsla(267, 85%, 50%, 0) 50%
-        );
+            hsla(267, 85%, 50%, 0) 50%);
 }
 
 .nft-card-det {
@@ -704,7 +479,8 @@ export default {
     backdrop-filter: blur(50px);
     -webkit-backdrop-filter: blur(50px);
 }
-.nft-card:hover .nft-card-chain{
+
+.nft-card:hover .nft-card-chain {
     display: grid !important;
 }
 
@@ -714,7 +490,7 @@ export default {
     -webkit-backdrop-filter: blur(50px);
 }
 
-.splide__pagination{
+.splide__pagination {
     display: none !important;
 }
 </style>

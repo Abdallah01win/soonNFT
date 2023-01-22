@@ -14,6 +14,19 @@ class nft extends Controller
     {
         return Nfts::all();
     }
+    public function eth()
+    {
+        return Nfts::where('blockchain', 'ethereum')->get();
+    }
+    public function solana()
+    {
+        return Nfts::where('blockchain', 'solana')->get();
+    }
+    public function upcoming()
+    {
+        return Nfts::whereDate('dropdate', '>', date('Y-m-d'))
+        ->get();
+    }
     public function count()
     {
         return Nfts::count();    

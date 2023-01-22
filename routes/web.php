@@ -8,6 +8,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Http;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,12 +36,19 @@ Route::get('/', function () {
             'supply' => $item->supply,
         ];
     });
+    $response = Http::get('https://api-mainnet.magiceden.dev/v2/collections?offset=0&limit=20');
+    $cols = array_slice($response->json(), 0, 15);
+
+    $response2 = Http::get('https://api-mainnet.magiceden.dev/v2/launchpad/collections?offset=0&limit=20');
+    $drops = array_slice($response2->json(), 0, 12);
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
-        'nfts' => $items
+        'nfts' => $items,
+        'cols' => $cols,
+        'drops' => $drops
     ]);
 })->name('/');
 
@@ -66,10 +74,13 @@ Route::middleware('auth')->group(function () {
 
 Route::controller(nft::class)->group(function () {
     Route::get('/nfts/all', 'index')->name('nfts/all');
-    Route::get('/nfts/eth', 'cripto')->name('nfts/eth');
     Route::get('/nfts/list', 'index')->name('nfts/list');
     Route::get('/nfts/paginate', 'paginate')->name('nfts/paginate');
     Route::post('/nfts/nft', 'view')->name('nfts/nft');
+    Route::get('/nfts/eth', 'eth')->name('nfts/eth');
+    Route::get('/nfts/solana', 'solana')->name('nfts/solana');
+    Route::get('/nfts/upcoming', 'upcoming')->name('nfts/upcoming');
+    Route::get('/nfts/collection', 'collections')->name('/collection');
 });
 Route::controller(nft::class)->middleware(['auth', 'verified'])->group(function () {
     Route::post('/nfts/store', 'store')->name('nfts/store');

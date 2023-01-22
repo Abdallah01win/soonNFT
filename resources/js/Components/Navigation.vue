@@ -5,23 +5,24 @@ import DropdownLink from '@/Components/DropdownLink.vue';
 </script>
 <template>
     <nav class="flex justify-between items-center py-5 mx-auto max-w-[1180px]">
-        <ul class="flex items-center gap-x-8">
-            <li class="font-inter text-2xl font-extrabold">
-                <Link :href="route('/')">SOONNFT</Link>
-            </li>
-            <li>Ethereum</li>
-            <li>Solana</li>
-            <li>Upcoming</li>
-            <li>Blog</li>
-            <li v-if="$page.props.auth.user && $page.props.auth.user.type === 1">
+        <div class="font-inter text-2xl font-extrabold">
+            <Link :href="route('/')">SOONNFT</Link>
+        </div>
+        <ul class="flex items-center gap-x-8 font-semibold leading-relaxed">
+            <li class="hover:text-myPurple-400 cursor-pointer transition-all">Ethereum</li>
+            <li class="hover:text-myPurple-400 cursor-pointer transition-all">Solana</li>
+            <li class="hover:text-myPurple-400 cursor-pointer transition-all">Upcoming</li>
+            <li class="hover:text-myPurple-400 cursor-pointer transition-all">Blog</li>
+            <li v-if="$page.props.auth.user && $page.props.auth.user.type === 1" class="hover:text-myPurple-400 cursor-pointer transition-all">
                 <Link :href="route('dashboard')">Dashboard</Link>
             </li>
         </ul>
         <div v-if="!$page.props.auth.user" class="flex items-center gap-x-4 text-base">
-            <Link :href="route('login')" class="rounded-full py-2 px-6 uppercase border border-white bg-none">Log in
+            <Link :href="route('login')" class="rounded-full py-2 px-10 uppercase bg-myPurple-400 border border-myPurple-400
+            hover:bg-transparent hover:border-white transition-all">Log in
             </Link>
-            <Link :href="route('register')" class="rounded-full py-2 px-6 uppercase border border-white bg-none">
-            Register</Link>
+            <!-- <Link :href="route('register')" class="rounded-full py-2 px-6 uppercase border border-white bg-none">
+            Register</Link> -->
         </div>
         <div v-else>
             <Dropdown align="right" width="48">
