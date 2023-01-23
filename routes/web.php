@@ -36,11 +36,19 @@ Route::get('/', function () {
             'supply' => $item->supply,
         ];
     });
+    function filter_past_dates($array, $date_field) {
+       return array_filter($array, function($element) use($date_field) {
+            $date = new DateTime($element[$date_field]);
+            return $date > new DateTime();
+        });
+    }
     $response = Http::get('https://api-mainnet.magiceden.dev/v2/collections?offset=0&limit=20');
     $cols = array_slice($response->json(), 0, 15);
 
-    $response2 = Http::get('https://api-mainnet.magiceden.dev/v2/launchpad/collections?offset=0&limit=20');
-    $drops = array_slice($response2->json(), 0, 12);
+    $response2 = Http::get('https://api-mainnet.magiceden.dev/v2/launchpad/collections?offset=0&limit=500');
+    $filtered_by_date = filter_past_dates($response2->json(), 'launchDatetime');
+    $dropsCount = count($filtered_by_date);
+    $drops = array_slice($filtered_by_date, 0, 8);
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
@@ -48,7 +56,8 @@ Route::get('/', function () {
         'phpVersion' => PHP_VERSION,
         'nfts' => $items,
         'cols' => $cols,
-        'drops' => $drops
+        'drops' => $drops,
+        'dropsCount' => $dropsCount
     ]);
 })->name('/');
 

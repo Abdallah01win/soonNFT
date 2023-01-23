@@ -75,11 +75,21 @@ const form = useForm({
                 </form>
 
                 <div class="flex gap-4 items-center text-2xl">
-                    <ion-icon name="logo-instagram"></ion-icon>
-                    <ion-icon name="logo-youtube"></ion-icon>
-                    <ion-icon name="logo-facebook"></ion-icon>
-                    <ion-icon name="logo-twitter"></ion-icon>
-                    <ion-icon name="logo-discord"></ion-icon>
+                    <span class="hover:cursor-pointer">
+                        <ion-icon name="logo-instagram"></ion-icon>
+                    </span>
+                    <span class="hover:cursor-pointer">
+                        <ion-icon name="logo-youtube"></ion-icon>
+                    </span>
+                    <span class="hover:cursor-pointer">
+                        <ion-icon name="logo-facebook"></ion-icon>
+                    </span>
+                    <span class="hover:cursor-pointer">
+                        <ion-icon name="logo-twitter"></ion-icon>
+                    </span> 
+                    <span class="hover:cursor-pointer">
+                        <ion-icon name="logo-discord"></ion-icon>
+                </span>
                 </div>
             </div>
         </div>
