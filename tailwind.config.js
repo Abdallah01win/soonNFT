@@ -28,6 +28,7 @@ module.exports = {
                 },
                 'myGray': '#656565',
                 'myPurple' :{
+                    300: "#3930cf",
                     400: "#5e45ff"
                 }
             },

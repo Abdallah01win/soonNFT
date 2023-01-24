@@ -22,7 +22,6 @@ return new class extends Migration
             $table->string('website')->nullable();
             $table->float('price', 3, 1);
             $table->string('blockchain');
-            $table->string('dropdate');
             $table->integer('supply');
             $table->string('imgurl');
             $table->timestamps();

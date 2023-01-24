@@ -16,7 +16,6 @@ class Nfts extends Model
         'website',
         'price',
         'blockchain',
-        'dropdate',
         'supply',
         'imgurl',
     ];

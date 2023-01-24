@@ -18,11 +18,9 @@ import DropdownLink from '@/Components/DropdownLink.vue';
             </li>
         </ul>
         <div v-if="!$page.props.auth.user" class="flex items-center gap-x-4 text-base">
-            <Link :href="route('login')" class="rounded-full py-2 px-10 uppercase bg-myPurple-400 border border-myPurple-400
-            hover:bg-transparent hover:border-white transition-all">Log in
+            <Link :href="route('login')" class="rounded-full py-2 px-10 uppercase bg-myPurple-400 
+            hover:bg-myPurple-300 transition-all">Log in
             </Link>
-            <!-- <Link :href="route('register')" class="rounded-full py-2 px-6 uppercase border border-white bg-none">
-            Register</Link> -->
         </div>
         <div v-else>
             <Dropdown align="right" width="48">

@@ -33,7 +33,7 @@ Route::get('/', function () {
             'blockchain' => $item->blockchain,
             'price' => $item->price,
             'imgurl' => $item->imgurl,
-            'dropdate' => $item->dropdate,
+            'added' => $item->created_at,
             'supply' => $item->supply,
         ];
     });

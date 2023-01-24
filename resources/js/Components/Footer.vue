@@ -17,9 +17,9 @@ const form = useForm({
             </div>
         <div class="grid grid-cols-[2.5fr,0.7fr,1.8fr] gap-x-6">
             <div>
-                <p class="mb-4 font-light">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fugiat,
-                    accusantium. Lorem
-                    ipsum dolor sit amet.</p>
+                <p class="mb-4 font-light w-[85%]">
+                    Our mission is to provide a reliable source of NFT news and information and a platform for discovering digital art in a user-friendly environment.
+                </p>
                 <div>
                     <h4 class="font-semibold mb-1 text-lg ">Get in Touch</h4>
                     <p class="flex gap-x-2 items-center py-1">

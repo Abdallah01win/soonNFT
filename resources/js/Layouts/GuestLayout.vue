@@ -26,9 +26,7 @@ import { Link } from '@inertiajs/inertia-vue3';
               ></path>
             </svg>
             <p class="leading-relaxed mb-6 text-lg text-black">
-              Synth chartreuse iPhone lomo cray raw denim brunch everyday carry neutra
-              before they sold out fixie 90's microdosing. Tacos pinterest fanny pack venmo,
-              post-ironic heirloom try-hard pabst authentic iceland.
+              I recently discovered soonnfts and I'm impressed with the platform! It's been so easy for me to find all kinds of digital art and NFTs, and the news section is a great resource for staying up to date on the industry.
             </p>
             <a class="inline-flex items-center">
               <img
@@ -37,8 +35,8 @@ import { Link } from '@inertiajs/inertia-vue3';
                 class="w-12 h-12 rounded-full flex-shrink-0 object-cover object-center"
               />
               <span class="flex-grow flex flex-col pl-4 text-gray-900">
-                <span class="title-font font-medium">Holden Caulfield</span>
-                <span class="text-sm">WEB DEVELOPER</span>
+                <span class="title-font font-medium">Nathan Williams</span>
+                <span class="text-sm">Nath_Williams</span>
               </span>
             </a>
           </div>

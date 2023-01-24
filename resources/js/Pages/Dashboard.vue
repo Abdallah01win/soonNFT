@@ -67,8 +67,7 @@ export default {
                         "blockchain",
                         "twitter",
                         "website",
-                        "discord",
-                        "dropDate"
+                        "discord"
                     );
                     let file = document.getElementById("image");
                     file.value = null;
@@ -334,30 +333,10 @@ onMounted(() => {
                                     <option class="bg-black" value="solana">
                                         Solana
                                     </option>
-                                    <option class="bg-black" value="bitcoin">
-                                        Bitcoin
-                                    </option>
                                 </select>
                                 <InputError
                                     class="mt-2"
                                     :message="form.errors.blockchain"
-                                />
-                            </div>
-                            <div class="w-full">
-                                <TextInput
-                                    id="Date"
-                                    type="text"
-                                    class="mt-1 block w-full"
-                                    v-model="form.dropDate"
-                                    required
-                                    autocomplete="Date"
-                                    placeholder="Drop Date"
-                                    onfocus="(this.type='date')"
-                                    onblur="(this.type='text')"
-                                />
-                                <InputError
-                                    class="mt-2"
-                                    :message="form.errors.dropDate"
                                 />
                             </div>
                         </div>
@@ -371,26 +350,6 @@ onMounted(() => {
                         </PrimaryButton>
                     </form>
 
-                    <!-- stats -->
-                    <!-- <div class="bg-myDark-200 px-8 py-10 rounded-xl">
-                        <div class="text-2xl font-semibold mb-4">
-                            Statestics
-                        </div>
-                        <div class="flex flex-col gap-y-4">
-                            <div class="flex items-center justify-between">
-                                <span>Blog Posts</span>
-                                <span class="font-bold">124</span>
-                            </div>
-                            <div class="flex items-center justify-between">
-                                <span>Total Users</span>
-                                <span class="font-bold">{{ usersCount }}</span>
-                            </div>
-                            <div class="flex items-center justify-between">
-                                <span>Total NFTs</span>
-                                <span class="font-bold">{{ nftCount }}</span>
-                            </div>
-                        </div>
-                    </div> -->
                     <div class="flex flex-col gap-y-4">
                         <div class="flex flex-col gap-y-2 bg-myDark-200 px-8 py-6 rounded-xl">
                             <span class="text-myGray text-sm">Total Users</span>

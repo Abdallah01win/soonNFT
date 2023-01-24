@@ -20,6 +20,7 @@
         "vue": "^3.2.41"
     },
     "dependencies": {
+        "@ionic/vue": "^6.5.0",
         "@splidejs/splide": "^4.1.4",
         "@splidejs/vue-splide": "^0.6.12",
         "alchemy-sdk": "^2.2.5"

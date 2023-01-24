@@ -249,12 +249,12 @@ export default {
                 </p>
                 <div class="flex items-center gap-x-6 mt-8">
                     <button
-                        class="text-lg rounded-full py-2 px-6 uppercase /border /border-white bg-myPurple-400"
+                        class="text-lg rounded-full py-2 px-6 uppercase hover:bg-myPurple-300 bg-myPurple-400 transition-all"
                     >
                         Get Started
                     </button>
                     <button
-                        class="text-lg rounded-full py-2 px-6 border border-white bg-none"
+                        class="text-lg rounded-full py-2 px-6 border border-white bg-none hover:bg-white hover:text-black transition-all"
                     >
                         EXPLORE NFTs
                     </button>
@@ -280,7 +280,7 @@ export default {
             </div>
             <Link
                 :href="route('/nfts')"
-                class="text-base rounded-full py-2 px-6 bg-myPurple-400 transition-all"
+                class="text-base rounded-full py-2 px-6 bg-myPurple-400 hover:bg-myPurple-300 transition-all"
             >
                 View All
             </Link>
@@ -345,7 +345,7 @@ export default {
             <Link
                 v-if="dropsCount > 8"
                 :href="route('/nfts')"
-                class="text-base rounded-full py-2 px-6 bg-myPurple-400 transition-all"
+                class="text-base rounded-full py-2 px-6 bg-myPurple-400 hover:bg-myPurple-300 transition-all"
             >
                 View All
             </Link>
@@ -363,27 +363,6 @@ export default {
         </div>
     </section> -->
     <!-- End Blog Section -->
-
-    <!-- Text Section -->
-
-    <!-- <section class="mx-auto my-20 max-w-[1180px] bg-myDark-200 px-10 py-12 rounded-xl">
-        <div class="grid grid-cols-2 gap-10">
-            <div class="rounded-xl overflow-hidden min-h-[300px]" style="background:url('/storage/assets/eth.jpg') no-repeat center center;">
-            </div>
-            <div>
-                
-                <h3 class="font-inter font-bold text-5xl mb-3">Some big Title</h3>
-                <p class="text-myGray leading-6 mb-6">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem eos nam iste sit perspiciatis error officiis repellat facere. Fugit pariatur dolore saepe nam dolorum at porro nostrum reprehenderit! Eos, facilis. Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati, quidem.</p>
-                <button class="bg-transparent border border-white rounded-full py-2 px-8 hover:bg-white hover:text-black">
-                    Explore Now
-                </button>
-                
-            </div>
-        </div>
-
-    </section> -->
-
-    <!-- End Text Section -->
 
     <!-- Table Section -->
     <section
@@ -404,7 +383,7 @@ export default {
                     <td class="py-3 //text-lg">Blockchain</td>
                     <td class="py-3 //text-lg">supply</td>
                     <td class="py-3 //text-lg">Price</td>
-                    <td class="py-3 //text-lg">Drop</td>
+                    <td class="py-3 //text-lg">Added</td>
                     <td
                         class="py-3 //text-lg"
                         v-if="
@@ -541,7 +520,7 @@ export default {
                     <td class="py-2 uppercase">
                         {{ item.price }} {{ item.blockchain.substr(0, 3) }}
                     </td>
-                    <td class="py-2">{{ dateConvert(item.dropdate).date }}</td>
+                    <td class="py-2">{{ dateConvert(item.added).date }}</td>
                     <td
                         class="py-2"
                         v-if="
@@ -691,24 +670,22 @@ export default {
     <!-- News Letter -->
 
     <section class="mx-auto my-20 max-w-[1180px] rounded-xl newsletter-sec">
-        <div class="grid grid-cols-2 py-16 px-10 gap-x-4">
-            <div class="text">
+        <div class="/grid /grid-cols-2 py-16 px-10 /gap-x-4">
+            <div class="text-center">
                 <div class="flex flex-col">
-                    <div
+                    <!-- <div
                         class="py-1 px-3 text-xs rounded-full news-letter-sub /bg-slate-400 w-fit mb-2"
                     >
                         News-letter
-                    </div>
+                    </div> -->
                     <h3 class="text-5xl font-inter font-black mb-3">
                         Join The Future Now
                     </h3>
                 </div>
-                <p class="/max-w-[80%] mb-4">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Veniam magnam officia sequi debitis necessitatibus
-                    asperiores.
+                <p class="max-w-[50%] mx-auto mb-4">
+                    Don't miss out on the latest news, tips and insights from our experts. Sign up for our newsletter today and stay ahead of the curve.
                 </p>
-                <form action="post" class="flex items-center gap-x-3 mt-6">
+                <form action="post" class="flex items-center gap-x-3 mt-6 w-[50%] mx-auto">
                     <div class="grow">
                         <TextInput
                             id="email"
@@ -827,27 +804,27 @@ export default {
         radial-gradient(
             at 64% 38%,
             hsla(267, 85%, 50%, 1) 0,
-            hsla(267, 85%, 50%, 0) 50%
+            hsla(267, 85%, 50%, .1) 50%
         ),
         radial-gradient(
             at 10% 32%,
-            hsla(313, 85%, 61%, 1) 0,
+            hsla(178, 91%, 75%, 1) 0,
             hsla(313, 85%, 61%, 0) 50%
         ),
         radial-gradient(
             at 30% 85%,
             hsla(267, 85%, 50%, 1) 0,
-            hsla(267, 85%, 50%, 0) 50%
+            hsla(267, 85%, 50%, .2) 50%
         ),
         radial-gradient(
             at 42% 89%,
             hsla(221, 90%, 52%, 1) 0,
-            hsla(221, 90%, 52%, 0) 50%
+            hsla(221, 90%, 52%, .3) 50%
         ),
         radial-gradient(
             at 100% 70%,
-            hsla(313, 85%, 61%, 1) 0,
-            hsla(313, 85%, 61%, 0) 50%
+            hsla(178, 91%, 75%, 1) 0,
+            hsla(178, 91%, 75%, .6) 50%
         ),
         radial-gradient(
             at 100% 10%,

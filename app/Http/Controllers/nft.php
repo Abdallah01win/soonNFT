@@ -15,19 +15,6 @@ class nft extends Controller
     {
         return Nfts::all();
     }
-    public function eth()
-    {
-        return Nfts::where('blockchain', 'ethereum')->get();
-    }
-    public function solana()
-    {
-        return Nfts::where('blockchain', 'solana')->get();
-    }
-    public function upcoming()
-    {
-        return Nfts::whereDate('dropdate', '>', date('Y-m-d'))
-        ->get();
-    }
     public function count()
     {
         return Nfts::count();    
@@ -45,7 +32,6 @@ class nft extends Controller
         $request->validate([
             'name' => 'required',
             'description' => 'required',
-            'dropDate' => 'required',
             'imgurl' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
             'price' => 'required',
             'blockchain' => 'required',
@@ -58,7 +44,6 @@ class nft extends Controller
         $nft = new Nfts ([
             'name' => $request->get('name'),
             'discription' => $request->get('description'),
-            'dropdate' => $request->get('dropDate'),
             'imgurl' => asset('storage/'.$image_path),
             'price' => $request->get('price'),
             'blockchain' => $request->get('blockchain'),
