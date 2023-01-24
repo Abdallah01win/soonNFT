@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
+use GuzzleHttp\Client;
 
 class nft extends Controller
 {
@@ -80,4 +81,19 @@ class nft extends Controller
         DB::table('nfts')->Where('id', $id)->delete();
         return redirect('/')->with('success', 'NFT Deleted');
     }
+    /*public function collection(Request $request)
+    {
+        $id = $request->get('id');
+        $client = new Client();
+        $response = $client->get("https://api-devnet.magiceden.dev/v2/collections/{$id}/activities?offset=0&limit=100");
+        $col = json_decode($response->getBody(), true);
+
+        $response2 = $client->get("https://api-devnet.magiceden.dev/v2/collections/{$id}/stats");
+        $secondData = json_decode($response2->getBody(), true);
+        $combinedData = [];
+        $col = array_merge($col, $secondData);
+        return Inertia::render('Collection', [
+            'data' => $col,
+        ]);
+    }*/
 }

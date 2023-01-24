@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Http;
+use GuzzleHttp\Client;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,8 +43,21 @@ Route::get('/', function () {
             return $date > new DateTime();
         });
     }
-    $response = Http::get('https://api-mainnet.magiceden.dev/v2/collections?offset=0&limit=20');
-    $cols = array_slice($response->json(), 0, 15);
+    function filter_badged($array, $isBadged) {
+       return array_filter($array, function($element) use($isBadged) {
+           return $element[$isBadged] === true;
+        });
+    }
+
+    $client = new Client();
+    $response = $client->get('https://api-mainnet.magiceden.dev/v2/collections?offset=0&limit=500');
+    $firstData = array_slice(filter_badged(json_decode($response->getBody(), true), 'isBadged'), 0, 15);
+    /*$combinedData = [];
+    foreach($firstData as $item){
+        $response = $client->get("https://api-devnet.magiceden.dev/v2/collections/{$item['symbol']}/stats");
+        $secondData = json_decode($response->getBody(), true);
+        $combinedData[] = array_merge($item, $secondData);
+    };*/
 
     $response2 = Http::get('https://api-mainnet.magiceden.dev/v2/launchpad/collections?offset=0&limit=500');
     $filtered_by_date = filter_past_dates($response2->json(), 'launchDatetime');
@@ -55,7 +69,7 @@ Route::get('/', function () {
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
         'nfts' => $items,
-        'cols' => $cols,
+        'cols' => $firstData,
         'drops' => $drops,
         'dropsCount' => $dropsCount
     ]);
@@ -89,7 +103,7 @@ Route::controller(nft::class)->group(function () {
     Route::get('/nfts/eth', 'eth')->name('nfts/eth');
     Route::get('/nfts/solana', 'solana')->name('nfts/solana');
     Route::get('/nfts/upcoming', 'upcoming')->name('nfts/upcoming');
-    Route::get('/nfts/collection', 'collections')->name('/collection');
+    //Route::post('/nfts/collection', 'collection')->name('/collection');
 });
 Route::controller(nft::class)->middleware(['auth', 'verified'])->group(function () {
     Route::post('/nfts/store', 'store')->name('nfts/store');
