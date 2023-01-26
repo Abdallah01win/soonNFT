@@ -82,6 +82,9 @@ Route::get('/dashboard', function () {
 Route::get('/contact', function () {
     return Inertia::render('Contact');
 })->name('contact');
+Route::get('/blog', function () {
+    return Inertia::render('Blog');
+})->name('blog');
 
 Route::get('/nfts', function () {
     return Inertia::render('Allnfts');

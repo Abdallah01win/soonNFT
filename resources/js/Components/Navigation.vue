@@ -12,7 +12,9 @@ import DropdownLink from '@/Components/DropdownLink.vue';
             <li class="hover:text-myPurple-400 cursor-pointer transition-all">Ethereum</li>
             <li class="hover:text-myPurple-400 cursor-pointer transition-all">Solana</li>
             <li class="hover:text-myPurple-400 cursor-pointer transition-all">Upcoming</li>
-            <li class="hover:text-myPurple-400 cursor-pointer transition-all">Blog</li>
+            <li class="hover:text-myPurple-400 cursor-pointer transition-all">
+                <Link :href="route('blog')">Blog</Link>
+            </li>
             <li v-if="$page.props.auth.user && $page.props.auth.user.type === 1" class="hover:text-myPurple-400 cursor-pointer transition-all">
                 <Link :href="route('dashboard')">Dashboard</Link>
             </li>
