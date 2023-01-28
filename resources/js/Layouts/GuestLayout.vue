@@ -28,7 +28,7 @@ import { Link } from '@inertiajs/inertia-vue3';
             <p class="leading-relaxed mb-6 text-lg text-black">
               I recently discovered soonnfts and I'm impressed with the platform! It's been so easy for me to find all kinds of digital art and NFTs, and the news section is a great resource for staying up to date on the industry.
             </p>
-            <a class="inline-flex items-center">
+            <div class="inline-flex items-center">
               <img
                 alt="testimonial"
                 src="https://dummyimage.com/106x106"
@@ -38,7 +38,7 @@ import { Link } from '@inertiajs/inertia-vue3';
                 <span class="title-font font-medium">Nathan Williams</span>
                 <span class="text-sm">Nath_Williams</span>
               </span>
-            </a>
+            </div>
           </div>
         </div>
       </div>

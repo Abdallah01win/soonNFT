@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\nft;
+use App\Http\Controllers\PostController;
 use App\Models\Nfts;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Auth;
@@ -82,9 +83,7 @@ Route::get('/dashboard', function () {
 Route::get('/contact', function () {
     return Inertia::render('Contact');
 })->name('contact');
-Route::get('/blog', function () {
-    return Inertia::render('Blog');
-})->name('blog');
+
 
 Route::get('/nfts', function () {
     return Inertia::render('Allnfts');
@@ -113,5 +112,12 @@ Route::controller(nft::class)->middleware(['auth', 'verified'])->group(function 
     Route::get('/nfts/count', 'count')->name('nfts/count');
     Route::post('/nfts/destroy', 'destroy')->name('nfts/destroy');
 });
+Route::controller(PostController::class)->group(function () {
+    Route::get('/blog', 'index')->name('blog');
+    Route::post('/post', 'show')->name('post');
+    Route::get('/posts/count', 'count')->name('posts/count');
+    //Route::post('/nfts/destroy', 'destroy')->name('nfts/destroy');
+});
+
 
 require __DIR__.'/auth.php';
