@@ -1,30 +1,58 @@
-<script>
-import { Head, Link } from '@inertiajs/inertia-vue3';
-import Navigation from '@/Components/Navigation.vue';
-import Footer from '@/Components/Footer.vue';
+<script setup>
+import { Head, Link, useForm } from '@inertiajs/inertia-vue3';
+const form = useForm({
+    comment: "",
+    //post_id: "",
+});
+</script >
 
-export default {
-    data() {
+    <script>
+        import Navigation from '@/Components/Navigation.vue';
+        import Footer from '@/Components/Footer.vue';
+        import TextInput from '@/Components/TextInput.vue';
+        import PrimaryButton from '@/Components/PrimaryButton.vue';
+        import InputError from '@/Components/InputError.vue';
+
+        export default {
+            data() {
         return {
-            hover: false
+            hover: false,
+            //formMessage: this.$page.props.users.id ? ""
         }
     },
-    components: {
-        Head,
-        Link,
-        Navigation,
-        Footer,
+        components: {
+            Head,
+            Link,
+            Navigation,
+            Footer,
     },
-    props: {
-        post: Object,
+        props: {
+            post: Object,
+        similar: Object,
+        comments: Object,
     },
-    methods: {
-        dateConvert(date) {
+        methods: {
+            dateConvert(date) {
             let newDate = new Date(date);
-            let myDate = {};
-            myDate.date = newDate.toString().substring(0, 10);
-            myDate.time = newDate.toString().substring(16, 24);
-            return myDate;
+        let myDate = { };
+        myDate.date = newDate.toString().substring(0, 10);
+        myDate.time = newDate.toString().substring(16, 24);
+        return myDate;
+        },
+
+        submit() {
+            form.post(route("comment/creat"), {
+                onSuccess: () => {
+                    form.reset(
+                        "comment"
+                    );
+                    /*this.formMessage = "true";
+                    setTimeout(() => {
+                        this.formMessage = false;
+                    }, 3000);
+                    this.getNftCount();*/
+                },
+            });
         },
     }
 }
@@ -33,7 +61,6 @@ export default {
 
     <Head title="Post" />
     <Navigation />
-    <!-- {{ post }} -->
     <section class="mx-auto my-10 max-w-[1180px]">
 
         <div class="grid grid-cols-[1fr,0.5fr] gap-x-10">
@@ -99,6 +126,48 @@ export default {
                         voluptatibus amet sed dolor rem maiores reiciendis. Distinctio, est nisi!</p>
                 </div>
                 <!-- End Body -->
+
+                <!-- Comments Section -->
+                <div class="bg-myDark-400 rounded-3xl px-10 py-12">
+                    <div class="text-myPurple-400 text-sm font-semibold uppercase">
+                        Comments
+                    </div>
+                    <h3 class="text-2xl font-bold ">
+                        <span v-if="comments.length > 0">Join The</span>
+                        <span v-else>Start A</span>
+                        Conversation
+                    </h3>
+
+                    <div v-if="comments.length > 0" class="flex flex-col gap-y-6 mt-6 pb-6 border-b border-myDark-100">
+                        <div v-for="comment in comments" :key="comment.id">
+                            <div class="inline-flex items-center">
+                                <img alt="testimonial" src="https://dummyimage.com/106x106"
+                                    class="w-12 h-12 rounded-full flex-shrink-0 object-cover object-center" />
+                                <div class="flex-grow flex flex-col pl-4 /text-white">
+                                    <span class="title-font font-medium">
+                                        <span>{{ comment.name }} | </span>
+                                        <span>{{ dateConvert(comment.created_at).date }}</span>
+                                    </span>
+                                    <span class="text-sm text-myGray font-semibold">{{ comment.comment }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <form @submit.prevent="this.submit">
+                            <p v-if="!$page.props.auth.user" class="py-4">Login and let us know what you think.</p>
+                            <div class="w-full flex items-center gap-x-3">
+                                <!-- <input type="hidden" v-model="form.post_id" v-bind:value="post.id" /> -->
+                                <TextInput id="comment" type="text" class="block grow" autocomplete="comment"
+                                    placeholder="Your Comment" max="75" v-model="form.comment" />
+                                <InputError class="mt-2" :message="form.errors.comment" />
+                                <PrimaryButton class="px-6">Submit comment</PrimaryButton>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- End Comments Section -->
             </div>
 
 
@@ -111,9 +180,9 @@ export default {
                         <h3 class="text-2xl font-bold">Suggested Stories</h3>
                     </div>
                     <div class="flex flex-col gap-y-6">
-                        <div class="relative">
+                        <div class="relative" v-for="post in similar" :key="post.id">
                             <img src="../../../storage/app/public/assets/hero2.png" alt=""
-                                class="w-full h-[265px] rounded-3xl overflow-hidden">
+                                class="w-full h-[250px] rounded-3xl overflow-hidden">
                             <div class="absolute top-0 left-0 w-full h-full flex items-end py-6 px-6 rounded-3xl overflow-hidden"
                                 style="background: linear-gradient(180deg, rgba(30,30,30,0.25) 0%, rgba(3,3,3,.9) 100%);">
                                 <div class="flex flex-col">
@@ -122,37 +191,10 @@ export default {
                                             post.category
                                         }}</div>
                                     </div>
-                                    <div class="text-xl font-semibold /mb-4">{{ post.title }}</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="relative">
-                            <img src="../../../storage/app/public/assets/hero2.png" alt=""
-                                class="w-full h-[265px] rounded-3xl overflow-hidden">
-                            <div class="absolute top-0 left-0 w-full h-full flex items-end py-6 px-6 rounded-3xl overflow-hidden"
-                                style="background: linear-gradient(180deg, rgba(30,30,30,0.25) 0%, rgba(3,3,3,.9) 100%);">
-                                <div class="flex flex-col">
-                                    <div class="flex items-center justify-between mb-1">
-                                        <div class="bg-myPurple-400 rounded-full px-4 py-1 w-fit text-xs">{{
-                                            post.category
-                                        }}</div>
-                                    </div>
-                                    <div class="text-xl font-semibold /mb-4">{{ post.title }}</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="relative">
-                            <img src="../../../storage/app/public/assets/hero2.png" alt=""
-                                class="w-full h-[265px] rounded-3xl overflow-hidden">
-                            <div class="absolute top-0 left-0 w-full h-full flex items-end py-6 px-6 rounded-3xl overflow-hidden"
-                                style="background: linear-gradient(180deg, rgba(30,30,30,0.25) 0%, rgba(3,3,3,.9) 100%);">
-                                <div class="flex flex-col">
-                                    <div class="flex items-center justify-between mb-1">
-                                        <div class="bg-myPurple-400 rounded-full px-4 py-1 w-fit text-xs">{{
-                                            post.category
-                                        }}</div>
-                                    </div>
-                                    <div class="text-xl font-semibold /mb-4">{{ post.title }}</div>
+                                    <Link class="text-xl font-semibold hover:text-myPurple-400 cursor-pointer text-left"
+                                        :href="route('post')" method="POST" as="button" :data="{ id: post.id }">
+                                    {{ post.title }}
+                                    </Link>
                                 </div>
                             </div>
                         </div>

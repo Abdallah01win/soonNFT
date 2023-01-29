@@ -78,7 +78,7 @@ export default {
               />
               <span class="flex-grow flex flex-col pl-4">
                 <span class="title-font font-medium">{{ firstPost.name }}</span>
-                <span class="text-sm text-myGray">{{ dateConvert(firstPost.created_at).date }}</span>
+                <span class="text-sm text-myGray font-semibold">{{ dateConvert(firstPost.created_at).date }}</span>
               </span>
             </div>
         </div>

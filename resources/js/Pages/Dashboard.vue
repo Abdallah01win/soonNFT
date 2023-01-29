@@ -24,6 +24,12 @@ const form = useForm({
     website: "",
     supply: Number,
 });
+const postForm = useForm({
+    postTitle: "",
+    postDescription : "",
+    postCategory: "",
+    postImage: "",
+});
 
 export default {
     data() {
@@ -260,16 +266,16 @@ onMounted(() => {
                 </div>
                 <div class="flex items-center gap-x-3 mt-4">
                     <div class="w-full">
-                        <TextInput id="NFTname" type="text" class="mt-1 block w-full" v-model="form.name" required
-                            autocomplete="name" placeholder="NFT name" />
-                        <InputError class="mt-2" :message="form.errors.name" />
+                        <TextInput id="postTitle" type="text" class="mt-1 block w-full" v-model="postForm.postTitle" required
+                            autocomplete="postTitle" placeholder="NFT name" />
+                        <InputError class="mt-2" :message="postForm.errors.postTitle" />
                     </div>
                     <div class="w-full">
                         <select
                             class="border-white focus:border-white focus:ring-white rounded-full bg-transparent placeholder:text-white/50 pl-5 w-full"
-                            name="Blockchain" id="Blockchain" v-model="form.blockchain" required>
+                            name="Blockchain" id="Blockchain" v-model="postForm.blockchain" required>
                             <option class="bg-black" value="" disabled selected>
-                                Blockchain
+                                Category
                             </option>
                             <option class="bg-black" value="ethereum">
                                 Ethereum
@@ -278,7 +284,7 @@ onMounted(() => {
                                 Solana
                             </option>
                         </select>
-                        <InputError class="mt-2" :message="form.errors.blockchain" />
+                        <InputError class="mt-2" :message="postForm.errors.blockchain" />
                     </div>
                     <div class="w-full">
                         <lable for="image"
@@ -315,10 +321,15 @@ onMounted(() => {
                             </span>
                             <input class="absolute top-0 left-0 w-full h-[100%] opacity-0" type="file" name="image"
                                 id="image" @input="
-                                    form.imgurl = $event.target.files[0]
+                                    postForm.imgurl = $event.target.files[0]
                                 " />
                         </lable>
-                        <InputError class="mt-2" :message="form.errors.imgurl" />
+                        <InputError class="mt-2" :message="postForm.errors.imgurl" />
+                    </div>
+                    <div class="w-full">
+                        <TextInput id="postDescription" type="text" class="mt-1 block w-full" v-model="postForm.postDescription" required
+                            autocomplete="postDescription" placeholder="Description" />
+                        <InputError class="mt-2" :message="postForm.errors.postDescription" />
                     </div>
                 </div>
                 <div class="flex items-center gap-x-4 w-full">

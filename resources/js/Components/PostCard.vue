@@ -54,11 +54,11 @@ export default {
               <img
                 alt="testimonial"
                 src="https://dummyimage.com/106x106"
-                class="w-12 h-12 rounded-full flex-shrink-0 object-cover object-center"
+                class="w-10 h-10 rounded-full flex-shrink-0 object-cover object-center"
               />
               <span class="flex-grow flex flex-col pl-4">
-                <span class="title-font font-medium">{{ item.name }}</span>
-                <span class="text-sm text-myGray">{{ dateConvert(item.created_at).date }}</span>
+                <span class="title-font text-sm font-medium">{{ item.name }}</span>
+                <span class="text-xs text-myGray font-semibold">{{ dateConvert(item.created_at).date }}</span>
               </span>
             </div>
         </div>

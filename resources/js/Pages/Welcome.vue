@@ -5,7 +5,6 @@ import InputError from "@/Components/InputError.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import { Head, Link, useForm } from "@inertiajs/inertia-vue3";
 import Dialog from "@/Components/Dialog.vue";
-import { Network, Alchemy } from "alchemy-sdk";
 import Footer from "@/Components/Footer.vue";
 import Navigation from "@/Components/Navigation.vue";
 import NftSlider from "@/Components/NftSlider.vue";
@@ -64,7 +63,6 @@ export default {
             }
         },
         showPopup(col) {
-            //this.col === '' ? col : '';
             this.col = col;
             const body = document.body;
             body.classList.toggle("overflow-hidden");
@@ -267,7 +265,7 @@ export default {
     </main>
     <!-- collections -->
     <section
-        class="mx-auto my-20 max-w-[1180px] bg-[#0D0D0D] px-10 py-12 rounded-xl"
+        class="mx-auto my-20 max-w-[1180px] bg-myDark-400 px-10 py-12 rounded-xl"
     >
         <div class="flex items-center justify-between">
             <div class="flex flex-col mb-6">

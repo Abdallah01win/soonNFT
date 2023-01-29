@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Models\Comment;
 use Inertia\Inertia;
 use App\Models\Post;
 use Illuminate\Http\Request;
@@ -15,9 +17,9 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::join('users', 'users.id', '=', 'posts.user_id')
-        ->where('status', 1)
-        ->select('posts.*', 'users.name', 'users.image_url')
-        ->get();
+            ->where('status', 1)
+            ->select('posts.*', 'users.name', 'users.image_url')
+            ->get();
         return Inertia::render('Blog', ['posts' => $posts]);
     }
     public function count()
@@ -54,23 +56,32 @@ class PostController extends Controller
      */
     public function show(Request $request)
     {
-       $postId = $request->get('id');
-       $post = Post::join('users', 'users.id', '=', 'posts.user_id')
-       ->where('posts.id', $postId)->limit(1)
-       ->select('posts.*', 'users.name', 'users.image_url')
-       ->get();
+        $postId = $request->get('id');
+        $post = Post::join('users', 'users.id', '=', 'posts.user_id')
+            ->where('posts.id', $postId)->limit(1)
+            ->select('posts.*', 'users.name', 'users.image_url')
+            ->get();
 
-        //get selected post's category
+        $comments = Comment::join('users', 'users.id', '=', 'comments.user_id')
+            ->where('post_id', $postId)
+            ->where('comments.status', 1)->limit(10)
+            ->select('comments.*', 'users.name', 'users.image_url')
+            ->get();
 
-        //get 3 other posts max that have the same category
-
-        //pass them to the page as similar
-
+        $post_category = $post[0]['category'];
+        $similar_posts = Post::where('id', '!=', $postId)
+            ->where('category', $post_category)->limit(4)
+            ->select('id', 'title', 'category', 'image')
+            ->get();
         // make them an inertia link
 
         // add comments section, table, controller and form on post page
 
-       return Inertia::render('Post', ['post' => $post[0]]);
+        return Inertia::render('Post', [
+            'post' => $post[0],
+            'similar' => $similar_posts,
+            'comments' => $comments
+        ]);
     }
 
     /**

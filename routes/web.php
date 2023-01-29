@@ -118,6 +118,9 @@ Route::controller(PostController::class)->group(function () {
     Route::get('/posts/count', 'count')->name('posts/count');
     //Route::post('/nfts/destroy', 'destroy')->name('nfts/destroy');
 });
+Route::middleware('auth')->controller(CommentController::class)->group(function () {
+    Route::post('/comment/creat', 'store')->name('comment/creat');
+});
 
 
 require __DIR__.'/auth.php';
