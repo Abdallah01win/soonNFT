@@ -46,6 +46,9 @@ export default {
         Dialog,
         //Editor
     },
+    props:{
+        comments: Object
+    },
     computed: {},
     methods: {
         getNftData() {
@@ -353,6 +356,10 @@ onMounted(() => {
             </form>
         </section>
         <!-- End Add Blogpost Form -->
+
+        <!-- Commments -->
+        {{ comments }}
+        <!-- End Commments -->
 
     </AuthenticatedLayout>
 </template>

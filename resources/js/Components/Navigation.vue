@@ -9,8 +9,12 @@ import DropdownLink from '@/Components/DropdownLink.vue';
             <Link :href="route('/')">SOONNFT</Link>
         </div>
         <ul class="flex items-center gap-x-8 font-semibold leading-relaxed">
-            <li class="hover:text-myPurple-400 cursor-pointer transition-all">Ethereum</li>
-            <li class="hover:text-myPurple-400 cursor-pointer transition-all">Solana</li>
+            <li class="hover:text-myPurple-400 cursor-pointer transition-all">
+                <Link :href="route('nfts/all')">NFTs</Link>
+            </li>
+            <li class="hover:text-myPurple-400 cursor-pointer transition-all">
+                <Link :href="route('/collections')">Collections</Link>
+            </li>
             <li class="hover:text-myPurple-400 cursor-pointer transition-all">Upcoming</li>
             <li class="hover:text-myPurple-400 cursor-pointer transition-all">
                 <Link :href="route('blog')">Blog</Link>
