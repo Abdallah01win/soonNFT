@@ -1,10 +1,10 @@
-<script setup>
+<!-- <script setup>
 import { Head, Link, useForm } from '@inertiajs/inertia-vue3';
 const form = useForm({
     comment: "",
     //post_id: "",
 });
-</script >
+</script > -->
 
     <script>
         import Navigation from '@/Components/Navigation.vue';
