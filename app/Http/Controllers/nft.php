@@ -13,7 +13,8 @@ class nft extends Controller
 {
     public function index()
     {
-        return Nfts::all();
+        $nfts = Nfts::all();
+        return Inertia::render('Allnfts', ['NftData' => $nfts]);
     }
     public function count()
     {

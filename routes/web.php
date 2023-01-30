@@ -59,6 +59,7 @@ Route::get('/', function () {
         $secondData = json_decode($response->getBody(), true);
         $combinedData[] = array_merge($item, $secondData);
     };*/
+    $featuredCount = Nfts::count();
 
     $response2 = Http::get('https://api-mainnet.magiceden.dev/v2/launchpad/collections?offset=0&limit=500');
     $filtered_by_date = filter_past_dates($response2->json(), 'launchDatetime');
@@ -72,7 +73,8 @@ Route::get('/', function () {
         'nfts' => $items,
         'cols' => $firstData,
         'drops' => $drops,
-        'dropsCount' => $dropsCount
+        'dropsCount' => $dropsCount,
+        'featuredCount' => $featuredCount
     ]);
 })->name('/');
 

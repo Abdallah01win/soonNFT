@@ -11,14 +11,16 @@ import axios from "axios";
 export default {
     data() {
         return {
-            NftData: Object,
-        }
+            selectedBlockchain: "",
+            selectedOrder: "desc",
+            selectedPrice: "desc",
+            blockchains: [],
+        };
+    },
+    props: {
+        NftData: Object,
     },
     methods: {
-        getAllNfts() {
-            axios.get('nfts/all')
-                .then((response) => (this.NftData = response.data));
-        },
         dateConvert(date) {
             let newDate = new Date(date);
             let myDate = {};
@@ -27,26 +29,86 @@ export default {
             return myDate;
         },
     },
+    computed: {
+    filteredNfts() {
+      let filtered = this.NftData;
+      
+      if (this.selectedBlockchain) {
+        filtered = filtered.filter(nft => nft.blockchain === this.selectedBlockchain);
+      }
+      
+      filtered.sort((a, b) => {
+        if (this.selectedOrder === 'asc') {
+          return new Date(a.created_at) - new Date(b.created_at);
+        } else {
+          return new Date(b.created_at) - new Date(a.created_at);
+        }
+      });
+      filtered.sort((a, b) => {
+        if (this.selectedPrice === 'asc') {
+          return a.price - b.price;
+        } else {
+          return b.price - a.price;
+        }
+      });
+      
+      return filtered;
+    }
+  },
     mounted() {
-        this.getAllNfts(this.dataRoute);
+        this.blockchains = [...new Set(this.NftData.map(nft => nft.blockchain))];
     },
-}
+};
 </script>
 <template>
-
     <Head title="All NFTs" />
     <AuthenticatedLayout class="bg-myDark-300">
         <template v-slot:nav>
             <Navigation class="" />
         </template>
         <section class="mx-auto my-12 max-w-[1180px]">
-                <div class="flex flex-col mb-6">
-                    <div class="text-myGray text-lg">Brows</div>
-                    <h3 class="text-4xl font-bold">All NFTs</h3>
+            <div class="flex items-center justify-between">
+                <div class="flex flex-col mb-10">
+                    <div
+                        class="text-myPurple-400 text-base font-semibold uppercase"
+                    >
+                        Brows
+                    </div>
+                    <h3 class="text-4xl font-bold">All Nfts</h3>
                 </div>
-            
+
+                <div class="flex items-center gap-x-5">
+                    <select
+                        v-model="selectedBlockchain"
+                        class="bg-transparent border-white rounded-full"
+                    >
+                        <option value="">All</option>
+                        <option
+                            v-for="blockchain in blockchains"
+                            :value="blockchain"
+                        >
+                            {{ blockchain }}
+                        </option>
+                    </select>
+                    <select
+                        v-model="selectedOrder"
+                        class="bg-transparent border-white rounded-full capitalize"
+                    >
+                        <option class="capitalize" value="desc">Newest</option>
+                        <option class="capitalize" value="asc">Oldest</option>
+                    </select>
+                    <select
+                        v-model="selectedPrice"
+                        class="bg-transparent border-white rounded-full"
+                    >
+                        <option value="desc">Heighest</option>
+                        <option value="asc">Lowest</option>
+                    </select>
+                </div>
+            </div>
+
             <div class="grid grid-cols-4 gap-12">
-                <div v-for="item in NftData" :key="item.id" class="w-fit">
+                <div v-for="item in filteredNfts" :key="item.id" class="w-fit">
                     <NftCard :item="item" />
                 </div>
             </div>

@@ -27,6 +27,7 @@ export default {
         cols: Object,
         drops: Object,
         dropsCount: Number,
+        featuredCount: Number,
     },
     components: {
         Footer,
@@ -111,9 +112,8 @@ export default {
                         {{ col.description }}
                     </div>
                     <div class="mt-4 mb-2 font-semibold">Links:</div>
-                    <div  class="flex itams-center gap-x-3">
+                    <div class="flex itams-center gap-x-3">
                         <span v-if="col.website">
-                            
                             <a
                                 :href="col.website"
                                 target="_blank"
@@ -199,9 +199,7 @@ export default {
                         </span>
                     </div>
 
-                    <div
-                        v-if="col.categories && col.categories.length != 0"
-                    >
+                    <div v-if="col.categories && col.categories.length != 0">
                         <div class="mt-4 mb-2 font-semibold">Categories:</div>
                         <div class="flex items-center gap-x-2">
                             <div v-for="category in col.categories">
@@ -366,11 +364,23 @@ export default {
     <section
         class="mx-auto my-20 max-w-[1180px] /bg-myDark-200 bg-[#0D0D0D] px-10 pt-12 pb-3 rounded-xl leading-relaxed"
     >
-        <div class="flex flex-col mb-6">
-            <div class="text-myPurple-400 text-base font-semibold uppercase">
-                NFTs
+        <div class="flex items-center justify-between">
+            <div class="flex flex-col mb-6">
+                <div
+                    class="text-myPurple-400 text-base font-semibold uppercase"
+                >
+                    NFTS
+                </div>
+                <h3 class="text-4xl font-bold">Featured Selection</h3>
             </div>
-            <h3 class="text-4xl font-bold">Featured Selection</h3>
+
+            <Link
+                v-if="featuredCount > 10"
+                :href="route('nfts/all')"
+                class="text-base rounded-full py-2 px-6 bg-myPurple-400 hover:bg-myPurple-300 transition-all"
+            >
+                View All
+            </Link>
         </div>
         <table class="w-full">
             <thead class="border-b border-myDark-100 font-semibold">
@@ -382,15 +392,6 @@ export default {
                     <td class="py-3 //text-lg">supply</td>
                     <td class="py-3 //text-lg">Price</td>
                     <td class="py-3 //text-lg">Added</td>
-                    <td
-                        class="py-3 //text-lg"
-                        v-if="
-                            $page.props.auth.user &&
-                            $page.props.auth.user.type === 1
-                        "
-                    >
-                        Actions
-                    </td>
                 </tr>
             </thead>
 
@@ -519,144 +520,6 @@ export default {
                         {{ item.price }} {{ item.blockchain.substr(0, 3) }}
                     </td>
                     <td class="py-2">{{ dateConvert(item.added).date }}</td>
-                    <td
-                        class="py-2"
-                        v-if="
-                            $page.props.auth.user &&
-                            $page.props.auth.user.type === 1
-                        "
-                    >
-                        <div class="flex items-center gap-x-3 text-2xl">
-                            <span>
-                                <div
-                                    class="hover:text-white cursor-pointer"
-                                    @click="close(item.id)"
-                                >
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        width="26"
-                                        fill="currentColor"
-                                        viewBox="0 0 256 256"
-                                    >
-                                        <rect
-                                            width="256"
-                                            height="256"
-                                            fill="none"
-                                        ></rect>
-                                        <line
-                                            x1="216"
-                                            y1="56"
-                                            x2="40"
-                                            y2="56"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            stroke-width="8"
-                                        ></line>
-                                        <line
-                                            x1="104"
-                                            y1="104"
-                                            x2="104"
-                                            y2="168"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            stroke-width="8"
-                                        ></line>
-                                        <line
-                                            x1="152"
-                                            y1="104"
-                                            x2="152"
-                                            y2="168"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            stroke-width="8"
-                                        ></line>
-                                        <path
-                                            d="M200,56V208a8,8,0,0,1-8,8H64a8,8,0,0,1-8-8V56"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            stroke-width="8"
-                                        ></path>
-                                        <path
-                                            d="M168,56V40a16,16,0,0,0-16-16H104A16,16,0,0,0,88,40V56"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            stroke-width="8"
-                                        ></path>
-                                    </svg>
-                                </div>
-                            </span>
-                            <span>
-                                <Link
-                                    class="cursor-pointer block"
-                                    :href="route('/')"
-                                    method="post"
-                                    as="button"
-                                    :data="{ id: item.id }"
-                                >
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        width="26"
-                                        fill="currentColor"
-                                        viewBox="0 0 256 256"
-                                    >
-                                        <rect
-                                            width="256"
-                                            height="256"
-                                            fill="none"
-                                        ></rect>
-                                        <path
-                                            d="M96,216H48a8,8,0,0,1-8-8V163.3a7.9,7.9,0,0,1,2.3-5.6l120-120a8,8,0,0,1,11.4,0l44.6,44.6a8,8,0,0,1,0,11.4Z"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            stroke-width="8"
-                                        ></path>
-                                        <line
-                                            x1="136"
-                                            y1="64"
-                                            x2="192"
-                                            y2="120"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            stroke-width="8"
-                                        ></line>
-                                        <polyline
-                                            points="216 216 96 216 40.5 160.5"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            stroke-width="8"
-                                        ></polyline>
-                                        <line
-                                            x1="164"
-                                            y1="92"
-                                            x2="68"
-                                            y2="188"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            stroke-width="8"
-                                        ></line>
-                                    </svg>
-                                </Link>
-                            </span>
-                        </div>
-                    </td>
                 </tr>
             </tbody>
         </table>
@@ -681,9 +544,14 @@ export default {
                     </h3>
                 </div>
                 <p class="max-w-[50%] mx-auto mb-4">
-                    Don't miss out on the latest news, tips and insights from our experts. Sign up for our newsletter today and stay ahead of the curve.
+                    Don't miss out on the latest news, tips and insights from
+                    our experts. Sign up for our newsletter today and stay ahead
+                    of the curve.
                 </p>
-                <form action="post" class="flex items-center gap-x-3 mt-6 w-[50%] mx-auto">
+                <form
+                    action="post"
+                    class="flex items-center gap-x-3 mt-6 w-[50%] mx-auto"
+                >
                     <div class="grow">
                         <TextInput
                             id="email"
@@ -802,7 +670,7 @@ export default {
         radial-gradient(
             at 64% 38%,
             hsla(267, 85%, 50%, 1) 0,
-            hsla(267, 85%, 50%, .1) 50%
+            hsla(267, 85%, 50%, 0.1) 50%
         ),
         radial-gradient(
             at 10% 32%,
@@ -812,17 +680,17 @@ export default {
         radial-gradient(
             at 30% 85%,
             hsla(267, 85%, 50%, 1) 0,
-            hsla(267, 85%, 50%, .2) 50%
+            hsla(267, 85%, 50%, 0.2) 50%
         ),
         radial-gradient(
             at 42% 89%,
             hsla(221, 90%, 52%, 1) 0,
-            hsla(221, 90%, 52%, .3) 50%
+            hsla(221, 90%, 52%, 0.3) 50%
         ),
         radial-gradient(
             at 100% 70%,
             hsla(178, 91%, 75%, 1) 0,
-            hsla(178, 91%, 75%, .6) 50%
+            hsla(178, 91%, 75%, 0.6) 50%
         ),
         radial-gradient(
             at 100% 10%,
