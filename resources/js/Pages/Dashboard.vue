@@ -9,9 +9,9 @@ import Dialog from "@/Components/Dialog.vue";
 import { Head, Link, useForm } from "@inertiajs/inertia-vue3";
 import axios from "axios";
 import { onMounted } from "vue";
+import Navigation from "@/Components/Navigation.vue";
 </script>
 <script>
-import Navigation from "@/Components/Navigation.vue";
 const form = useForm({
     name: "",
     description: "",
@@ -26,7 +26,7 @@ const form = useForm({
 });
 const postForm = useForm({
     postTitle: "",
-    postDescription : "",
+    postDescription: "",
     postCategory: "",
     postImage: "",
 });
@@ -46,7 +46,7 @@ export default {
         Dialog,
         //Editor
     },
-    props:{
+    props: {
         comments: Object
     },
     computed: {},
@@ -269,8 +269,8 @@ onMounted(() => {
                 </div>
                 <div class="flex items-center gap-x-3 mt-4">
                     <div class="w-full">
-                        <TextInput id="postTitle" type="text" class="mt-1 block w-full" v-model="postForm.postTitle" required
-                            autocomplete="postTitle" placeholder="NFT name" />
+                        <TextInput id="postTitle" type="text" class="mt-1 block w-full" v-model="postForm.postTitle"
+                            required autocomplete="postTitle" placeholder="NFT name" />
                         <InputError class="mt-2" :message="postForm.errors.postTitle" />
                     </div>
                     <div class="w-full">
@@ -330,8 +330,9 @@ onMounted(() => {
                         <InputError class="mt-2" :message="postForm.errors.imgurl" />
                     </div>
                     <div class="w-full">
-                        <TextInput id="postDescription" type="text" class="mt-1 block w-full" v-model="postForm.postDescription" required
-                            autocomplete="postDescription" placeholder="Description" />
+                        <TextInput id="postDescription" type="text" class="mt-1 block w-full"
+                            v-model="postForm.postDescription" required autocomplete="postDescription"
+                            placeholder="Description" />
                         <InputError class="mt-2" :message="postForm.errors.postDescription" />
                     </div>
                 </div>
@@ -358,7 +359,36 @@ onMounted(() => {
         <!-- End Add Blogpost Form -->
 
         <!-- Commments -->
-        {{ comments }}
+        <section class="mx-auto my-8 max-w-[1180px]">
+            <div class="bg-myDark-200 px-8 py-10 rounded-xl">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="text-2xl font-semibold">
+                        Aprove Comments
+                    </div>
+                    <div v-if="commentApproved != ''"
+                        class="py-1 px-4 text-xs rounded-full bg-green-400 flex items-center gap-2 transition-all ease-out duration-300">
+                        <ion-icon name="checkmark-outline"></ion-icon>
+                        <span>Comment Approved</span>
+                    </div>
+                </div>
+                <div v-if="comments.lenght != 0" class="grid grid-cols-4 gap-6 my-6">
+                    <div v-for="comment in comments" :key="comment.id">
+                        <div class="bg-myDark-100 rounded-xl py-3 px-4">
+                            <div class="my-3">
+                                {{ comment.comment }}
+                            </div>
+                            <div class="flex items-center gap-x-3">
+                                <Link class="w-full rounded-full px-2 py-1 bg-white text-black hover:bg-white/70 flex items-center justify-center">Add</Link>
+                                <Link class="w-full rounded-full px-2 py-1 bg-white text-black hover:bg-white/70 flex items-center justify-center">Remove</Link>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div v-else>
+                    <p>No More Comments to Show.</p>
+                </div>
+            </div>
+        </section>
         <!-- End Commments -->
 
     </AuthenticatedLayout>

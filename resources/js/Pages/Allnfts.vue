@@ -13,7 +13,6 @@ export default {
         return {
             selectedBlockchain: "",
             selectedOrder: "desc",
-            selectedPrice: "desc",
             blockchains: [],
         };
     },
@@ -47,15 +46,12 @@ export default {
       filtered.sort((a, b) => {
         if (this.selectedOrder === 'asc') {
           return new Date(a.created_at) - new Date(b.created_at);
-        } else {
+        } else if (this.selectedOrder === 'desc'){
           return new Date(b.created_at) - new Date(a.created_at);
-        }
-      });
-      filtered.sort((a, b) => {
-        if (this.selectedPrice === 'asc') {
-          return a.price - b.price;
-        } else {
-          return b.price - a.price;
+        } else if (this.selectedOrder === 'heighest'){
+            return b.price - a.price;
+        } else if (this.selectedOrder === 'lowest'){
+            return a.price - b.price;
         }
       });
       
@@ -74,8 +70,8 @@ export default {
             <Navigation class="" />
         </template>
         <section class="mx-auto my-12 max-w-[1180px]">
-            <div class="flex items-center justify-between">
-                <div class="flex flex-col mb-10">
+            <div class="flex items-center justify-between mb-10">
+                <div class="flex flex-col">
                     <div
                         class="text-myPurple-400 text-base font-semibold uppercase"
                     >
@@ -87,29 +83,25 @@ export default {
                 <div class="flex items-center gap-x-5">
                     <select
                         v-model="selectedBlockchain"
-                        class="bg-transparent border-white rounded-full"
+                        :class="{ 'custom-select': true }"
+                        class="bg-black border-white rounded-full pl-[15px] w-48"
                     >
-                        <option value="">All</option>
+                        <option value="">All Blockchains</option>
                         <option
                             v-for="blockchain in blockchains"
-                            :value="blockchain"
+                            :value="blockchain" :key="blockchain"
                         >
                             {{ blockchain }}
                         </option>
                     </select>
                     <select
-                        v-model="selectedOrder"
-                        class="bg-transparent border-white rounded-full capitalize"
+                        v-model="selectedOrder" :class="{ 'custom-options': true }"
+                        class="bg-black border-white rounded-full capitalize pl-[15px] w-48"
                     >
-                        <option class="capitalize" value="desc">Newest</option>
-                        <option class="capitalize" value="asc">Oldest</option>
-                    </select>
-                    <select
-                        v-model="selectedPrice"
-                        class="bg-transparent border-white rounded-full"
-                    >
-                        <option value="desc">Heighest</option>
-                        <option value="asc">Lowest</option>
+                        <option value="desc">Newest</option>
+                        <option value="asc">Oldest</option>
+                         <option value="heighest">Heighest price</option>
+                        <option value="lowest">Lowest price</option>
                     </select>
                 </div>
             </div>
@@ -151,6 +143,18 @@ export default {
 </template>
 
 <style>
+
+.custom-options {
+  background-image: url('/storage/svg/options-outline.svg');
+  background-repeat: no-repeat;
+  background-position: right 13px top 50%;
+}
+.custom-select {
+  background-image: url('/storage/svg/arrow-d.svg');
+  background-repeat: no-repeat;
+  background-position: right 13px top 50%;
+}
+
 .nft-card-det {
     background: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(50px);

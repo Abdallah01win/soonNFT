@@ -33,7 +33,7 @@ class nft extends Controller
         $request->validate([
             'name' => 'required',
             'description' => 'required',
-            'imgurl' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
+            'imgurl' => 'required|image|mimes:jpg,png,jpeg,gif,webp|max:2048',
             'price' => 'required',
             'blockchain' => 'required',
             'supply' => 'required',

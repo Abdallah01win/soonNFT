@@ -1,58 +1,65 @@
-<!-- <script setup>
+<script setup>
 import { Head, Link, useForm } from '@inertiajs/inertia-vue3';
+import Navigation from '@/Components/Navigation.vue';
+import Footer from '@/Components/Footer.vue';
+import TextInput from '@/Components/TextInput.vue';
+import PrimaryButton from '@/Components/PrimaryButton.vue';
+import InputError from '@/Components/InputError.vue';
+
+</script >
+
+<script>
+
+
 const form = useForm({
     comment: "",
-    //post_id: "",
+    post_id: "",
 });
-</script > -->
 
-    <script>
-        import Navigation from '@/Components/Navigation.vue';
-        import Footer from '@/Components/Footer.vue';
-        import TextInput from '@/Components/TextInput.vue';
-        import PrimaryButton from '@/Components/PrimaryButton.vue';
-        import InputError from '@/Components/InputError.vue';
-
-        export default {
-            data() {
+export default {
+    data() {
         return {
             hover: false,
-            //formMessage: this.$page.props.users.id ? ""
+            formMessage: false,
         }
     },
-        components: {
-            Head,
-            Link,
-            Navigation,
-            Footer,
+    components: {
+        Head,
+        Link,
+        Navigation,
+        Footer,
     },
-        props: {
-            post: Object,
+    props: {
+        post: Object,
         similar: Object,
         comments: Object,
     },
-        methods: {
-            dateConvert(date) {
+    methods: {
+        dateConvert(date) {
             let newDate = new Date(date);
-        let myDate = { };
-        myDate.date = newDate.toString().substring(0, 10);
-        myDate.time = newDate.toString().substring(16, 24);
-        return myDate;
+            let myDate = {};
+            myDate.date = newDate.toString().substring(0, 10);
+            myDate.time = newDate.toString().substring(16, 24);
+            return myDate;
         },
 
         submit() {
-            form.post(route("comment/creat"), {
-                onSuccess: () => {
-                    form.reset(
-                        "comment"
-                    );
-                    /*this.formMessage = "true";
-                    setTimeout(() => {
-                        this.formMessage = false;
-                    }, 3000);
-                    this.getNftCount();*/
-                },
-            });
+            form.transform((data) => ({
+                ...data,
+                post_id: data.post_id ? this.post.id : this.post.id,
+            }))
+                .post(route("comment/creat"), {
+                    onSuccess: () => {
+                        form.reset(
+                            "comment"
+                        );
+                        this.formMessage = true;
+                        setTimeout(() => {
+                            this.formMessage = false;
+                        }, 3000);
+                        this.getNftCount();
+                    },
+                });
         },
     }
 }
@@ -129,16 +136,24 @@ const form = useForm({
 
                 <!-- Comments Section -->
                 <div class="bg-myDark-400 rounded-3xl px-10 py-12">
-                    <div class="text-myPurple-400 text-sm font-semibold uppercase">
-                        Comments
-                    </div>
-                    <h3 class="text-2xl font-bold ">
-                        <span v-if="comments.length > 0">Join The</span>
-                        <span v-else>Start A</span>
-                        Conversation
-                    </h3>
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <div class="text-myPurple-400 text-sm font-semibold uppercase">
+                                Comments
+                            </div>
+                            <h3 class="text-2xl font-bold ">
+                                <span v-if="comments.length > 0">Join The</span>
+                                <span v-else>Start A</span>
+                                Conversation
+                            </h3>
+                        </div>
 
-                    <div v-if="comments.length > 0" class="flex flex-col gap-y-6 mt-6 pb-6 border-b border-myDark-100">
+                        <div v-if="formMessage" class="py-1 px-4 text-sm bg-green-600 rounded-full w-fit mt-3">Your
+                            Comment is uder review. Thank you.</div>
+                    </div>
+
+
+                    <div v-if="comments.length > 0" class="flex flex-col gap-y-6 mt-6 pb-6">
                         <div v-for="comment in comments" :key="comment.id">
                             <div class="inline-flex items-center">
                                 <img alt="testimonial" src="https://dummyimage.com/106x106"
@@ -148,7 +163,9 @@ const form = useForm({
                                         <span>{{ comment.name }} | </span>
                                         <span>{{ dateConvert(comment.created_at).date }}</span>
                                     </span>
-                                    <span class="text-sm text-myGray font-semibold">{{ comment.comment }}</span>
+                                    <span class="text-base capitalize text-myGray font-semibold">{{
+                                        comment.comment
+                                    }}</span>
                                 </div>
                             </div>
                         </div>
@@ -156,14 +173,15 @@ const form = useForm({
 
                     <div>
                         <form @submit.prevent="this.submit">
-                            <p v-if="!$page.props.auth.user" class="py-4">Login and let us know what you think.</p>
-                            <div class="w-full flex items-center gap-x-3">
+                            <p v-if="!$page.props.auth.user" class="mt-4">Login and let us know what you think.</p>
+                            <div class="w-full flex items-center gap-x-3 mt-4">
                                 <!-- <input type="hidden" v-model="form.post_id" v-bind:value="post.id" /> -->
                                 <TextInput id="comment" type="text" class="block grow" autocomplete="comment"
                                     placeholder="Your Comment" max="75" v-model="form.comment" />
                                 <InputError class="mt-2" :message="form.errors.comment" />
                                 <PrimaryButton class="px-6">Submit comment</PrimaryButton>
                             </div>
+
                         </form>
                     </div>
                 </div>

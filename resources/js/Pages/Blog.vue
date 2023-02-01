@@ -64,8 +64,8 @@ export default {
     <Navigation />
     <!-- {{ posts }} -->
     <section class="mx-auto my-12 max-w-[1180px]">
-        <div class="flex items-center justify-between">
-            <div class="flex flex-col mb-10">
+        <div class="flex items-center justify-between mb-10">
+            <div class="flex flex-col">
                 <div
                     class="text-myPurple-400 text-base font-semibold uppercase"
                 >
@@ -75,13 +75,17 @@ export default {
             </div>
 
             <div class="flex items-center gap-x-5">
-                <select v-model="selectedCategory" class="bg-transparent border-white rounded-full">
+                <select v-model="selectedCategory"
+                :class="{ 'custom-select': true }"
+                class="bg-myDark-300 border-white rounded-full pl-[15px] w-32">
                     <option value="">All</option>
-                    <option v-for="category in categories" :value="category">
+                    <option v-for="category in categories" :value="category" :key="category">
                         {{ category }}
                     </option>
                 </select>
-                <select v-model="selectedOrder" class="bg-transparent border-white rounded-full">
+                <select v-model="selectedOrder"
+                :class="{ 'custom-options': true }"
+                class="bg-myDark-300 border-white rounded-full pl-[15px] w-32">
                     <option value="desc">Newest</option>
                     <option value="asc">Oldest</option>
                 </select>

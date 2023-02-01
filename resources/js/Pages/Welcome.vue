@@ -292,7 +292,7 @@ export default {
                     {{ cols.indexOf(col) + 1 }}
                 </div>
                 <div class="rounded-full overflow-hidden w-20 h-20">
-                    <img :src="col.image" alt="" />
+                    <img :src="col.image" alt="" class="min-w-full min-h-full"/>
                 </div>
                 <div class="flex flex-col">
                     <div
