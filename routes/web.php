@@ -146,6 +146,9 @@ Route::controller(PostController::class)->group(function () {
 Route::middleware('auth')->controller(CommentController::class)->group(function () {
     Route::post('/comment/creat', 'store')->name('comment/creat');
 });
+Route::middleware('auth')->controller(PostController::class)->group(function () {
+    Route::post('/posts/store', 'store')->name('posts/store');
+});
 
 
 require __DIR__.'/auth.php';

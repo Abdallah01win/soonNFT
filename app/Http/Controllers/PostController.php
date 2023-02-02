@@ -6,6 +6,8 @@ use App\Models\Comment;
 use Inertia\Inertia;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -45,7 +47,30 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        /* dump($request->get('postDescription'));
+        die();*/
+        $request->validate([
+            'postTitle' => 'required',
+            'postDescription' => 'required',
+            'postImage' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
+            'postCategory' => 'required',
+            'content' => 'required',
+        ]);
+
+        $image_path = $request->file('postImage')->store('posts', 'public');
+        $user_id = Auth::id();
+        $postDesc = $request->get('postDescription');
+        $post = new Post ([
+            'title' => $request->get('postTitle'),
+            'description' => $postDesc,
+            'image' => asset('storage/'.$image_path),
+            'category' => $request->get('postCategory'),
+            'user_id' => $user_id,
+            'body' => $request->get('content'),
+        ]);
+        sleep(1);
+        $post->save();
+        return Redirect::route('dashboard');
     }
 
     /**
