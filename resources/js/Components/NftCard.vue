@@ -10,10 +10,10 @@ export default {
     },
     props: {
         item: Object,
-        handleClick: {
+        /*handleClick: {
             type: Function,
             required: true,
-        },
+        },*/
     },
     methods: {
         dateConvert(date) {
