@@ -60,16 +60,18 @@ class PostController extends Controller
         $image_path = $request->file('postImage')->store('posts', 'public');
         $user_id = Auth::id();
         $postDesc = $request->get('postDescription');
-        $post = new Post ([
-            'title' => $request->get('postTitle'),
+        /*dump($postDesc);
+        die();*/
+        $post = Post::create([
+            'user_id' => $user_id,
             'description' => $postDesc,
+            'title' => $request->get('postTitle'),
             'image' => asset('storage/'.$image_path),
             'category' => $request->get('postCategory'),
-            'user_id' => $user_id,
             'body' => $request->get('content'),
         ]);
         sleep(1);
-        $post->save();
+        //$post->save();
         return Redirect::route('dashboard');
     }
 

@@ -38,6 +38,7 @@ Route::get('/', function () {
             'imgurl' => $item->imgurl,
             'added' => $item->created_at,
             'supply' => $item->supply,
+            'is_featured' => $item->is_featured,
         ];
     });
     function filter_past_dates($array, $date_field) {

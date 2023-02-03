@@ -18,5 +18,6 @@ class Nfts extends Model
         'blockchain',
         'supply',
         'imgurl',
+        'is_featured'
     ];
 }

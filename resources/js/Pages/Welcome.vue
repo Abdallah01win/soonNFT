@@ -74,6 +74,7 @@ export default {
 </script>
 
 <template>
+    
     <div
         id="popup"
         ref="popup"
@@ -244,16 +245,16 @@ export default {
                     Join the future now with NFTs.
                 </p>
                 <div class="flex items-center gap-x-6 mt-8">
-                    <button
+                    <Link :href="route('login')"
                         class="text-lg rounded-full py-2 px-6 uppercase hover:bg-myPurple-300 bg-myPurple-400 transition-all"
                     >
                         Get Started
-                    </button>
-                    <button
+                </Link>
+                    <Link :href="route('nfts/all')"
                         class="text-lg rounded-full py-2 px-6 border border-white bg-none hover:bg-white hover:text-black transition-all"
                     >
                         EXPLORE NFTs
-                    </button>
+            </Link>
                 </div>
             </div>
             <div class="rounded-xl overflow-hidden">
@@ -292,7 +293,11 @@ export default {
                     {{ cols.indexOf(col) + 1 }}
                 </div>
                 <div class="rounded-full overflow-hidden w-20 h-20">
-                    <img :src="col.image" alt="" class="min-w-full min-h-full"/>
+                    <img
+                        :src="col.image"
+                        alt=""
+                        class="min-w-full min-h-full"
+                    />
                 </div>
                 <div class="flex flex-col">
                     <div
@@ -326,7 +331,7 @@ export default {
         </div>
     </section>
 
-    <!-- Gallery Section -->
+    <!-- Upcoming Section -->
     <section class="mx-auto my-20 max-w-[1180px]" v-if="dropsCount !== 0">
         <div class="flex items-center justify-between">
             <div class="flex flex-col mb-6">
@@ -349,7 +354,7 @@ export default {
 
         <NftSlider :drops="drops" :nftId="''" />
     </section>
-    <!-- End Gallery Section -->
+    <!-- End Upcoming Section -->
 
     <!-- Blog Section -->
     <!-- <section class="mx-auto my-20 max-w-[1180px]">
@@ -421,9 +426,28 @@ export default {
                                     class="w-14 h-14 rounded-full flex-shrink-0 object-cover object-center"
                                 />
                             </span>
-                            <span class="//font-semibold capitalize">{{
-                                item.name
-                            }}</span>
+                            <div class="flex items-center gap-x-2">
+                                <span class="//font-semibold capitalize">{{
+                                    item.name
+                                }}</span>
+                                <span v-if="item.is_featured">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="20"
+                                        fill="#5e45ff"
+                                        viewBox="0 0 256 256"
+                                    >
+                                        <rect
+                                            width="256"
+                                            height="256"
+                                            fill="none"
+                                        ></rect>
+                                        <path
+                                            d="M128,24A104,104,0,1,0,232,128,104.2,104.2,0,0,0,128,24Zm49.5,85.8-58.6,56a8.1,8.1,0,0,1-5.6,2.2,7.7,7.7,0,0,1-5.5-2.2l-29.3-28a8,8,0,1,1,11-11.6l23.8,22.7,53.2-50.7a8,8,0,0,1,11,11.6Z"
+                                        ></path>
+                                    </svg>
+                                </span>
+                            </div>
                         </Link>
                     </td>
                     <td class="py-2">

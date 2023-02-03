@@ -23,6 +23,7 @@ const form = useForm({
     twitter: "",
     discord: "",
     website: "",
+    is_featured: "",
     supply: Number,
 });
 const postForm = useForm({
@@ -86,6 +87,7 @@ export default {
                         "blockchain",
                         "twitter",
                         "website",
+                        "is_featured",
                         "discord"
                     );
                     let file = document.getElementById("image");
@@ -238,6 +240,19 @@ onMounted(() => {
                                 </option>
                             </select>
                             <InputError class="mt-2" :message="form.errors.blockchain" />
+                        </div>
+                        <div class="w-full">
+                            <select
+                                class="border-white focus:border-white focus:ring-white rounded-full bg-transparent placeholder:text-white/50 pl-5 w-full"
+                                name="is_featured" id="is_featured" v-model="form.is_featured" required>
+                                <option class="bg-black" value="true">
+                                    Featured
+                                </option>
+                                <option class="bg-black" value="false">
+                                    Not Featured
+                                </option>
+                            </select>
+                            <InputError class="mt-2" :message="form.errors.is_featured" />
                         </div>
                     </div>
 

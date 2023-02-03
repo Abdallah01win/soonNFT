@@ -37,6 +37,7 @@ class nft extends Controller
             'price' => 'required',
             'blockchain' => 'required',
             'supply' => 'required',
+            'is_featured' => 'required',
         ]);
 
 
@@ -52,6 +53,7 @@ class nft extends Controller
             'discord' => $request->get('discord'),
             'website' => $request->get('website'),
             'supply' => $request->get('supply'),
+            'is_featured' => $request->get('is_featured'),
         ]);
         sleep(1);
         $nft->save();

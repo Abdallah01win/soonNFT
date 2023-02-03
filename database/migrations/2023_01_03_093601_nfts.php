@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('blockchain');
             $table->integer('supply');
             $table->string('imgurl');
+            $table->boolval('is_featured');
             $table->timestamps();
         });
     }
