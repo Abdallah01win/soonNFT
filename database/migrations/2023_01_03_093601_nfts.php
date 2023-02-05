@@ -20,11 +20,11 @@ return new class extends Migration
             $table->string('twitter')->nullable();
             $table->string('discord')->nullable();
             $table->string('website')->nullable();
-            $table->float('price', 3, 1);
+            $table->float('price', 5, 3);
             $table->string('blockchain');
             $table->integer('supply');
             $table->string('imgurl');
-            $table->boolval('is_featured');
+            $table->boolean('is_featured');
             $table->timestamps();
         });
     }

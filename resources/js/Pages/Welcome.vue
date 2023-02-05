@@ -8,6 +8,7 @@ import Dialog from "@/Components/Dialog.vue";
 import Footer from "@/Components/Footer.vue";
 import Navigation from "@/Components/Navigation.vue";
 import NftSlider from "@/Components/NftSlider.vue";
+import PostCard from "@/Components/PostCard.vue"
 //import Pagination from "@/Components/Pagination.vue";
 import axios from "axios";
 const form = useForm({
@@ -26,6 +27,7 @@ export default {
         nfts: Object,
         cols: Object,
         drops: Object,
+        posts: Object,
         dropsCount: Number,
         featuredCount: Number,
     },
@@ -34,7 +36,7 @@ export default {
         Navigation,
         PrimaryButton,
         PrimaryButton,
-        //Pagination,
+        PostCard,
         Link,
         Dialog,
         NftSlider,
@@ -203,7 +205,7 @@ export default {
                     <div v-if="col.categories && col.categories.length != 0">
                         <div class="mt-4 mb-2 font-semibold">Categories:</div>
                         <div class="flex items-center gap-x-2">
-                            <div v-for="category in col.categories">
+                            <div v-for="category in col.categories" :key="category">
                                 <div
                                     class="py-1 px-3 bg-myPurple-400 rounded-full text-sm font-semibold capitalize"
                                     v-if="category === 'launchpad'"
@@ -276,7 +278,7 @@ export default {
                 <h3 class="text-4xl font-bold">Top Collections</h3>
             </div>
             <Link
-                :href="route('/nfts')"
+                :href="route('/collections')"
                 class="text-base rounded-full py-2 px-6 bg-myPurple-400 hover:bg-myPurple-300 transition-all"
             >
                 View All
@@ -344,7 +346,6 @@ export default {
             </div>
 
             <Link
-                v-if="dropsCount > 8"
                 :href="route('/nfts')"
                 class="text-base rounded-full py-2 px-6 bg-myPurple-400 hover:bg-myPurple-300 transition-all"
             >
@@ -356,14 +357,6 @@ export default {
     </section>
     <!-- End Upcoming Section -->
 
-    <!-- Blog Section -->
-    <!-- <section class="mx-auto my-20 max-w-[1180px]">
-        <div class="flex flex-col mb-6">
-            <div class="text-white opacity-50 text-lg">Blog</div>
-            <h3 class="text-4xl font-bold">Recent posts</h3>
-        </div>
-    </section> -->
-    <!-- End Blog Section -->
 
     <!-- Table Section -->
     <section
@@ -380,7 +373,6 @@ export default {
             </div>
 
             <Link
-                v-if="featuredCount > 10"
                 :href="route('nfts/all')"
                 class="text-base rounded-full py-2 px-6 bg-myPurple-400 hover:bg-myPurple-300 transition-all"
             >
@@ -552,8 +544,36 @@ export default {
         </div>
     </section>
     <!-- End Table Section -->
-    <!-- News Letter -->
 
+    <!-- Blog Section -->
+    <section
+        class="mx-auto my-20 max-w-[1180px] bg-myDark-400 px-10 py-10 rounded-xl"
+    >
+        <div class="flex items-center justify-between">
+            <div class="flex flex-col mb-6">
+                <div
+                    class="text-myPurple-400 text-base font-semibold uppercase"
+                >
+                    Blog
+                </div>
+                <h3 class="text-4xl font-bold">Latest News</h3>
+            </div>
+            <Link
+                :href="route('blog')"
+                class="text-base rounded-full py-2 px-6 bg-myPurple-400 hover:bg-myPurple-300 transition-all"
+            >
+                View All
+            </Link>
+        </div>
+        <div class="grid grid-cols-3 gap-10 mt-4">
+        <div v-for="item in posts" :key="item.id">
+            <PostCard :item="item" />
+        </div>
+    </div>
+    </section>
+    <!-- End Blog Section -->
+
+    <!-- News Letter -->
     <section class="mx-auto my-20 max-w-[1180px] rounded-xl newsletter-sec">
         <div class="/grid /grid-cols-2 py-16 px-10 /gap-x-4">
             <div class="text-center">
@@ -604,6 +624,7 @@ export default {
             </div>
         </div>
     </section>
+    <!-- End News Letter -->
 
     <div
         class="bg-myDark-300/80 fixed top-0 left-0 w-full h-screen flex items-center z-10 hidden"

@@ -74,12 +74,11 @@ export default {
             <div>
                 <!-- Post Header -->
                 <div class="relative">
-                    <img src="../../../storage/app/public/assets/hero2.png" alt=""
-                        class="w-full h-[440px] rounded-3xl overflow-hidden">
+                    <img :src="post.image" alt="" class="w-full h-[440px] rounded-3xl overflow-hidden">
                     <div class="absolute top-0 left-0 w-full h-full flex items-end py-8 px-8 rounded-3xl overflow-hidden"
                         style="background: linear-gradient(180deg, rgba(30,30,30,0.25) 0%, rgba(3,3,3,.9) 100%);">
                         <div class="flex flex-col">
-                            <div class="flex items-center justify-between mb-2">
+                            <div class="flex items-center justify-between mb-2 w-full">
                                 <div class="bg-myPurple-400 mb-1 rounded-full px-5 py-1 w-fit">{{ post.category }}</div>
 
                                 <div class="flex items-center">
@@ -116,21 +115,7 @@ export default {
 
                 <!-- Post Body -->
                 <div class="leading-relaxed my-10 text-myGray">
-                    <p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor consectetur iure
-                        rerum deserunt esse! Porro perferendis, totam explicabo laboriosam reiciendis doloremque
-                        laudantium, mollitia obcaecati laborum magni omnis libero architecto repudiandae est?
-                        Consequatur, officiis error eligendi, iusto itaque voluptatum, necessitatibus tempore
-                        voluptatibus amet sed dolor rem maiores reiciendis. Distinctio, est nisi!</p>
-                    <p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor consectetur iure
-                        rerum deserunt esse! Porro perferendis, totam explicabo laboriosam reiciendis doloremque
-                        laudantium, mollitia obcaecati laborum magni omnis libero architecto repudiandae est?
-                        Consequatur, officiis error eligendi, iusto itaque voluptatum, necessitatibus tempore
-                        voluptatibus amet sed dolor rem maiores reiciendis. Distinctio, est nisi!</p>
-                    <p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor consectetur iure
-                        rerum deserunt esse! Porro perferendis, totam explicabo laboriosam reiciendis doloremque
-                        laudantium, mollitia obcaecati laborum magni omnis libero architecto repudiandae est?
-                        Consequatur, officiis error eligendi, iusto itaque voluptatum, necessitatibus tempore
-                        voluptatibus amet sed dolor rem maiores reiciendis. Distinctio, est nisi!</p>
+                    {{ post.body }}
                 </div>
                 <!-- End Body -->
 

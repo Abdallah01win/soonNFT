@@ -6,6 +6,7 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\nft;
 use App\Http\Controllers\PostController;
 use App\Models\Nfts;
+use App\Models\Post;
 use App\Models\Comment;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Auth;
@@ -41,15 +42,17 @@ Route::get('/', function () {
             'is_featured' => $item->is_featured,
         ];
     });
-    function filter_past_dates($array, $date_field) {
-       return array_filter($array, function($element) use($date_field) {
+    function filter_past_dates($array, $date_field)
+    {
+        return array_filter($array, function ($element) use ($date_field) {
             $date = new DateTime($element[$date_field]);
             return $date > new DateTime();
         });
     }
-    function filter_badged($array, $isBadged) {
-       return array_filter($array, function($element) use($isBadged) {
-           return $element[$isBadged] === true;
+    function filter_badged($array, $isBadged)
+    {
+        return array_filter($array, function ($element) use ($isBadged) {
+            return $element[$isBadged] === true;
         });
     }
 
@@ -68,6 +71,13 @@ Route::get('/', function () {
     $filtered_by_date = filter_past_dates($response2->json(), 'launchDatetime');
     $dropsCount = count($filtered_by_date);
     $drops = array_slice($filtered_by_date, 0, 8);
+
+    $posts = Post::join('users', 'users.id', '=', 'posts.userId')
+        ->where('status', 1)
+        ->limit(3)
+        ->select('posts.*', 'users.name', 'users.image_url')
+        ->get();
+
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
@@ -76,6 +86,7 @@ Route::get('/', function () {
         'nfts' => $items,
         'cols' => $firstData,
         'drops' => $drops,
+        'posts' => $posts,
         'dropsCount' => $dropsCount,
         'featuredCount' => $featuredCount
     ]);
@@ -83,8 +94,8 @@ Route::get('/', function () {
 
 Route::get('/dashboard', function () {
     $comments = Comment::where('status', 2)
-    ->select('id', 'comment',)
-    ->get();
+        ->select('id', 'comment',)
+        ->get();
     return Inertia::render('Dashboard', ['comments' => $comments]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
@@ -94,21 +105,23 @@ Route::get('/contact', function () {
 
 
 Route::get('/collections', function () {
-    function filter_past_dates($array, $date_field) {
-        return array_filter($array, function($element) use($date_field) {
-             $date = new DateTime($element[$date_field]);
-             return $date > new DateTime();
-         });
-     }
-     function filter_badged($array, $isBadged) {
-        return array_filter($array, function($element) use($isBadged) {
+    function filter_past_dates($array, $date_field)
+    {
+        return array_filter($array, function ($element) use ($date_field) {
+            $date = new DateTime($element[$date_field]);
+            return $date > new DateTime();
+        });
+    }
+    function filter_badged($array, $isBadged)
+    {
+        return array_filter($array, function ($element) use ($isBadged) {
             return $element[$isBadged] === true;
-         });
-     }
- 
-     $client = new Client();
-     $response = $client->get('https://api-mainnet.magiceden.dev/v2/collections?offset=0&limit=500');
-     $firstData = filter_badged(json_decode($response->getBody(), true), 'isBadged');
+        });
+    }
+
+    $client = new Client();
+    $response = $client->get('https://api-mainnet.magiceden.dev/v2/collections?offset=0&limit=500');
+    $firstData = filter_badged(json_decode($response->getBody(), true), 'isBadged');
     return Inertia::render('Collections', [
         'cols' => $firstData,
     ]);
@@ -152,4 +165,4 @@ Route::middleware('auth')->controller(PostController::class)->group(function () 
 });
 
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

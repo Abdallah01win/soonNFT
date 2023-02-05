@@ -99,7 +99,7 @@ export default {
                 @mouseleave="hover = false"
             >
                 <img
-                    src="../../../storage/app/public/assets/hero2.png"
+                    :src="filteredPosts[0].image"
                     alt=""
                     class="w-full h-[300px] rounded-3xl overflow-hidden"
                 />

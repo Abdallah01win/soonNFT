@@ -47,7 +47,7 @@ export default {
         <div class="w-[255px] h-[320px]">
             <img v-if="isImage(item.image)" :src="item.image" @error="(event) => handleError(event)" alt=""
                 class="min-w-[100%] h-full block rounded-2xl" />
-            <video v-else :src="item.image" autoplay loop class="min-w-[100%] h-full block rounded-2xl" />
+            <video v-else :src="item.image" autoplay loop height="320px" class="min-w-[100%] h-full block rounded-2xl" />
         </div>
         <div class="py-3 px-4">
             <div class="pb-1">

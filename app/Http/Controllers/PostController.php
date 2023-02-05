@@ -18,7 +18,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::join('users', 'users.id', '=', 'posts.user_id')
+        $posts = Post::join('users', 'users.id', '=', 'posts.userId')
             ->where('status', 1)
             ->select('posts.*', 'users.name', 'users.image_url')
             ->get();
@@ -47,31 +47,26 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        /* dump($request->get('postDescription'));
-        die();*/
+        $user_id = Auth::id();
+        $postDesc = $request->get('description');
         $request->validate([
-            'postTitle' => 'required',
-            'postDescription' => 'required',
-            'postImage' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
-            'postCategory' => 'required',
-            'content' => 'required',
+            'title' => 'required',
+            'description' => 'required',
+            'image' => 'required|image|mimes:jpg,png,jpeg,gif,webp|max:2048',
+            'category' => 'required',
+            'body' => 'required',
         ]);
 
-        $image_path = $request->file('postImage')->store('posts', 'public');
-        $user_id = Auth::id();
-        $postDesc = $request->get('postDescription');
-        /*dump($postDesc);
-        die();*/
+        $image_path = $request->file('image')->store('posts', 'public');
         $post = Post::create([
-            'user_id' => $user_id,
-            'description' => $postDesc,
-            'title' => $request->get('postTitle'),
+            'title' => $request->get('title'),
             'image' => asset('storage/'.$image_path),
-            'category' => $request->get('postCategory'),
-            'body' => $request->get('content'),
+            'category' => $request->get('category'),
+            'body' => $request->get('body'),
+            'description' => $postDesc,
+            'userId' => $user_id,
         ]);
         sleep(1);
-        //$post->save();
         return Redirect::route('dashboard');
     }
 
@@ -84,7 +79,7 @@ class PostController extends Controller
     public function show(Request $request)
     {
         $postId = $request->get('id');
-        $post = Post::join('users', 'users.id', '=', 'posts.user_id')
+        $post = Post::join('users', 'users.id', '=', 'posts.userId')
             ->where('posts.id', $postId)->limit(1)
             ->select('posts.*', 'users.name', 'users.image_url')
             ->get();
