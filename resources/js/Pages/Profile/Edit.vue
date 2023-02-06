@@ -3,7 +3,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import DeleteUserForm from './Partials/DeleteUserForm.vue';
 import UpdatePasswordForm from './Partials/UpdatePasswordForm.vue';
 import UpdateProfileInformationForm from './Partials/UpdateProfileInformationForm.vue';
-import { Head } from '@inertiajs/inertia-vue3';
+import { Head, usePage } from '@inertiajs/inertia-vue3';
 import Navigation from '@/Components/Navigation.vue';
 import Footer from '@/Components/Footer.vue';
 
@@ -14,6 +14,11 @@ defineProps({
 </script>
 <script>
 export default{
+    data(){
+        return{
+            user: usePage().props.value.auth.user,
+        }
+    },
     components:{
         Navigation,
         Footer
@@ -26,24 +31,25 @@ export default{
     <AuthenticatedLayout>
         <Navigation />
         <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">Profile</h2>
+            <h2 class="font-semibold text-xl text-myGray leading-relaxed">Profile</h2>
         </template>
 
         <div class="py-12">
             <div class="mx-auto max-w-[1180px] sm:px-6 lg:px-8 space-y-6">
-                <div class="p-4 sm:p-8 bg-black border-white border sm:rounded-lg">
+                <div class="p-4 sm:p-8 bg-myDark-400 rounded-xl /grid /grid-cols-2 /gap-x-6">
                     <UpdateProfileInformationForm
                         :must-verify-email="mustVerifyEmail"
                         :status="status"
-                        class="max-w-xl"
+                        class="max-w-full"
                     />
+                    
                 </div>
 
-                <div class="p-4 sm:p-8 bg-black border-white border sm:rounded-lg">
+                <div class="p-4 sm:p-8 bg-myDark-400 rounded-xl">
                     <UpdatePasswordForm class="max-w-xl" />
                 </div>
 
-                <div class="p-4 sm:p-8 bg-black border-white border sm:rounded-lg">
+                <div class="p-4 sm:p-8 bg-myDark-400 rounded-xl">
                     <DeleteUserForm class="max-w-xl" />
                 </div>
             </div>
