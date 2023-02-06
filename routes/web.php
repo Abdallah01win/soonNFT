@@ -25,6 +25,19 @@ use GuzzleHttp\Client;
 | contains the "web" middleware group. Now create something great!
 |
 */
+function filter_badged($array, $isBadged)
+    {
+        return array_filter($array, function ($element) use ($isBadged) {
+            return $element[$isBadged] === true;
+        });
+    }
+function filter_past_dates($array, $date_field)
+    {
+        return array_filter($array, function ($element) use ($date_field) {
+            $date = new DateTime($element[$date_field]);
+            return $date > new DateTime();
+        });
+    }
 
 Route::get('/', function () {
     $items = Nfts::paginate(10)->through(function ($item) {
@@ -42,19 +55,6 @@ Route::get('/', function () {
             'is_featured' => $item->is_featured,
         ];
     });
-    function filter_past_dates($array, $date_field)
-    {
-        return array_filter($array, function ($element) use ($date_field) {
-            $date = new DateTime($element[$date_field]);
-            return $date > new DateTime();
-        });
-    }
-    function filter_badged($array, $isBadged)
-    {
-        return array_filter($array, function ($element) use ($isBadged) {
-            return $element[$isBadged] === true;
-        });
-    }
 
     $client = new Client();
     $response = $client->get('https://api-mainnet.magiceden.dev/v2/collections?offset=0&limit=500');
@@ -92,6 +92,13 @@ Route::get('/', function () {
     ]);
 })->name('/');
 
+Route::get('/upcoming', function () {
+    $response2 = Http::get('https://api-mainnet.magiceden.dev/v2/launchpad/collections?offset=0&limit=500');
+    $drops = filter_past_dates($response2->json(), 'launchDatetime');
+    return Inertia::render('Upcoming', [
+        'drops' => $drops,
+    ]);
+})->name('upcoming');
 Route::get('/dashboard', function () {
     $comments = Comment::where('status', 2)
         ->select('id', 'comment',)
@@ -105,20 +112,6 @@ Route::get('/contact', function () {
 
 
 Route::get('/collections', function () {
-    function filter_past_dates($array, $date_field)
-    {
-        return array_filter($array, function ($element) use ($date_field) {
-            $date = new DateTime($element[$date_field]);
-            return $date > new DateTime();
-        });
-    }
-    function filter_badged($array, $isBadged)
-    {
-        return array_filter($array, function ($element) use ($isBadged) {
-            return $element[$isBadged] === true;
-        });
-    }
-
     $client = new Client();
     $response = $client->get('https://api-mainnet.magiceden.dev/v2/collections?offset=0&limit=500');
     $firstData = filter_badged(json_decode($response->getBody(), true), 'isBadged');

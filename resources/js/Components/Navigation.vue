@@ -15,7 +15,9 @@ import DropdownLink from '@/Components/DropdownLink.vue';
             <li class="hover:text-myPurple-400 cursor-pointer transition-all">
                 <Link :href="route('/collections')">Collections</Link>
             </li>
-            <li class="hover:text-myPurple-400 cursor-pointer transition-all">Upcoming</li>
+            <li class="hover:text-myPurple-400 cursor-pointer transition-all">
+                <Link :href="route('upcoming')">Upcoming</Link>
+                </li>
             <li class="hover:text-myPurple-400 cursor-pointer transition-all">
                 <Link :href="route('blog')">Blog</Link>
             </li>

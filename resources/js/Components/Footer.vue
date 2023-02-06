@@ -37,15 +37,29 @@ const form = useForm({
                 </div>
             </div>
             <div>
-                <h4 class="font-semibold mb-2 text-lg">Useful Links</h4>
+                <h4 class="font-semibold mb-2 text-lg">Navigate</h4>
                 <ul class="flex flex-col gap-y-2 font-light">
-                    <li>Blog</li>
-                    <li>Etherum</li>
-                    <li>Solana</li>
-                    <li>
+                    <li class="hover:text-myPurple-400 w-fit">
+                        <Link :href="route('blog')">
+                            Blog
+                        </Link>
+                    </li>
+                    <li class="hover:text-myPurple-400 w-fit">
+                        <Link :href="route('nfts/all')">
+                            NFTs
+                        </Link>
+                    </li>
+                    <li class="hover:text-myPurple-400 w-fit">
+                        <Link :href="route('upcoming')">Upcoming</Link>
+                    </li>
+                    <li class="hover:text-myPurple-400 w-fit">
+                        <Link :href="route('/collections')">
+                            Collections
+                        </Link>
+                    </li>
+                    <li class="hover:text-myPurple-400 w-fit">
                         <Link :href="route('contact')">Contact</Link>
                     </li>
-                    <li>Help</li>
                 </ul>
             </div>
             <div>
