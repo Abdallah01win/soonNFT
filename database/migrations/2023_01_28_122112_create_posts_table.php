@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('description');
             $table->string('title');
             $table->string('image');
-            $table->string('body');
+            $table->text('body');
             $table->string('category');
             $table->integer('status')->default(1);
             $table->timestamps();

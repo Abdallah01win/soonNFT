@@ -77,9 +77,9 @@ export default {
                     <img :src="post.image" alt="" class="w-full h-[440px] rounded-3xl overflow-hidden">
                     <div class="absolute top-0 left-0 w-full h-full flex items-end py-8 px-8 rounded-3xl overflow-hidden"
                         style="background: linear-gradient(180deg, rgba(30,30,30,0.25) 0%, rgba(3,3,3,.9) 100%);">
-                        <div class="flex flex-col">
-                            <div class="flex items-center justify-between mb-2 w-full">
-                                <div class="bg-myPurple-400 mb-1 rounded-full px-5 py-1 w-fit">{{ post.category }}</div>
+                        <div class="flex flex-col w-full">
+                            <div class="flex items-center justify-between mb-2">
+                                <div class="bg-myPurple-400 mb-1 rounded-full px-5 py-1 w-fit font-semibold">{{ post.category }}</div>
 
                                 <div class="flex items-center">
                                     <img alt="testimonial" src="https://dummyimage.com/106x106"
@@ -106,7 +106,7 @@ export default {
                                     </span>
                                 </div>
                             </div>
-                            <div class="text-3xl font-semibold /mb-4">{{ post.title }}</div>
+                            <div class="text-3xl font-semibold">{{ post.title }}</div>
 
                         </div>
                     </div>
@@ -114,13 +114,12 @@ export default {
                 <!-- End Post Header -->
 
                 <!-- Post Body -->
-                <div class="leading-relaxed my-10 text-myGray">
-                    {{ post.body }}
+                <div v-html="post.body" class="leading-relaxed my-10 text-myGray" id="postBody">
                 </div>
                 <!-- End Body -->
 
                 <!-- Comments Section -->
-                <div class="bg-myDark-400 rounded-3xl px-10 py-12">
+                <!-- <div class="bg-myDark-400 rounded-3xl px-10 py-12">
                     <div class="flex items-center justify-between">
                         <div>
                             <div class="text-myPurple-400 text-sm font-semibold uppercase">
@@ -160,7 +159,6 @@ export default {
                         <form @submit.prevent="this.submit">
                             <p v-if="!$page.props.auth.user" class="mt-4">Login and let us know what you think.</p>
                             <div class="w-full flex items-center gap-x-3 mt-4">
-                                <!-- <input type="hidden" v-model="form.post_id" v-bind:value="post.id" /> -->
                                 <TextInput id="comment" type="text" class="block grow" autocomplete="comment"
                                     placeholder="Your Comment" max="75" v-model="form.comment" />
                                 <InputError class="mt-2" :message="form.errors.comment" />
@@ -169,7 +167,7 @@ export default {
 
                         </form>
                     </div>
-                </div>
+                </div> -->
                 <!-- End Comments Section -->
             </div>
 
@@ -184,7 +182,7 @@ export default {
                     </div>
                     <div class="flex flex-col gap-y-6">
                         <div class="relative" v-for="post in similar" :key="post.id">
-                            <img src="../../../storage/app/public/assets/hero2.png" alt=""
+                            <img :src="post.image" alt=""
                                 class="w-full h-[250px] rounded-3xl overflow-hidden">
                             <div class="absolute top-0 left-0 w-full h-full flex items-end py-6 px-6 rounded-3xl overflow-hidden"
                                 style="background: linear-gradient(180deg, rgba(30,30,30,0.25) 0%, rgba(3,3,3,.9) 100%);">
@@ -214,3 +212,52 @@ export default {
     </section>
     <Footer />
 </template>
+
+<style>
+#postBody h1, h2, h3, h4, h5, h6{
+    color: white;
+    font-size: larger;
+    font-weight: 700;
+    margin: 6px 0px;
+}
+#postBody h6{
+    font-size: 14px;
+}
+#postBody h5{
+    font-size: 16px;
+}
+#postBody h4{
+    font-size: 18px;
+}
+#postBody h3{
+    font-size: 20px;
+}
+#postBody h2{
+    font-size: 24px;
+}
+#postBody h1{
+    font-size: 30px;
+}
+
+#postBody a{
+    color:#5e45ff;
+    text-underline-offset: 2px;
+    text-decoration: underline;
+}
+
+#postBody a:hover{
+    color:#3930cf;
+}
+
+#postBody ul, ol{
+    list-style-type: disc;
+    display: block;
+    padding: 12px 0px 0px 30px;
+}
+#postBody ul{
+    list-style-type: disc;
+}
+#postBody ol{
+    list-style-type: decimal;
+}
+</style>

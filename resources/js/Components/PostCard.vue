@@ -37,7 +37,7 @@ export default {
 <template>
     <div class="w-full">
         <div class="relative" @mouseover="hover = true" @mouseleave="hover = false">
-            <img src="../../../storage/app/public/assets/hero2.png" alt="" class="w-full h-[240px] rounded-3xl overflow-hidden">
+            <img :src="item.image" alt="" class="w-full h-[240px] rounded-3xl overflow-hidden">
             <div v-if="hover" class="transition-all absolute top-0 left-0 flex items-center justify-center w-full h-full bg-myDark-100/60 rounded-3xl">
                 <Link :href="route('post')" method="post" as="button" :data="{ id: item.id }">
                     <div class="w-16 h-16 rounded-full bg-myPurple-400 hover:bg-myPurple-300 text-white flex items-center justify-center">

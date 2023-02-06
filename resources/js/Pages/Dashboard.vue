@@ -312,6 +312,9 @@ onMounted(() => {
                             <option class="bg-black" value="solana">
                                 Solana
                             </option>
+                            <option class="bg-black" value="NFTs">
+                                NFTs
+                            </option>
                         </select>
                         <InputError class="mt-2" :message="postForm.errors.category" />
                     </div>
@@ -355,12 +358,12 @@ onMounted(() => {
                         </lable>
                         <InputError class="mt-2" :message="postForm.errors.image" />
                     </div>
-                    <div class="w-full">
-                        <TextInput id="postDescription" type="text" class="mt-1 block w-full"
-                            v-model="postForm.description" required autocomplete="postDescription"
-                            placeholder="Description" />
-                        <InputError class="mt-2" :message="postForm.errors.description" />
-                    </div>
+                </div>
+                <div class="w-full mb-4">
+                    <TextInput id="postDescription" max="255" type="text" class="mt-1 block w-full"
+                        v-model="postForm.description" required autocomplete="postDescription"
+                        placeholder="Description" />
+                    <InputError class="mt-2" :message="postForm.errors.description" />
                 </div>
                 <!-- Editor -->
                 <editor v-model="postForm.body" api-key="qy087j2ri5rtqec2z8zfm30dlp512h2wdodz9lu5gziom42d" :init="{
@@ -381,20 +384,13 @@ onMounted(() => {
                         :class="{ 'opacity-25': postForm.processing }" :disabled="postForm.processing">
                         Publish Post
                     </PrimaryButton>
-                    <!-- <PrimaryButton
-                        class="w-full justify-center mt-5"
-                        :class="{ 'opacity-25': postForm.processing }"
-                        :disabled="postForm.processing"
-                    >
-                        Save as Draft
-                    </PrimaryButton> -->
                 </div>
             </form>
         </section>
         <!-- End Add Blogpost Form -->
 
         <!-- Commments -->
-        <section class="mx-auto my-8 max-w-[1180px]">
+        <!-- <section class="mx-auto my-8 max-w-[1180px]">
             <div class="bg-myDark-200 px-8 py-10 rounded-xl">
                 <div class="flex items-center justify-between mb-4">
                     <div class="text-2xl font-semibold">
@@ -427,7 +423,7 @@ onMounted(() => {
                     <p>No More Comments to Show.</p>
                 </div>
             </div>
-        </section>
+        </section> -->
         <!-- End Commments -->
 
     </AuthenticatedLayout>
