@@ -125,19 +125,11 @@ Route::get('/nfts', function () {
 })->name('/nfts');
 Route::get('/users/count', [RegisteredUserController::class, 'count'])->name('users/count');
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
-
-
 Route::controller(nft::class)->group(function () {
     Route::get('/nfts/all', 'index')->name('nfts/all');
     Route::get('/nfts/list', 'index')->name('nfts/list');
     //Route::get('/nfts/paginate', 'paginate')->name('nfts/paginate');
     Route::post('/nfts/nft', 'view')->name('nfts/nft');
-    //Route::get('/nfts/upcoming', 'upcoming')->name('nfts/upcoming');
 });
 Route::controller(nft::class)->middleware(['auth', 'verified'])->group(function () {
     Route::post('/nfts/store', 'store')->name('nfts/store');
@@ -148,14 +140,21 @@ Route::controller(PostController::class)->group(function () {
     Route::get('/blog', 'index')->name('blog');
     Route::post('/post', 'show')->name('post');
     Route::get('/posts/count', 'count')->name('posts/count');
-    //Route::post('/nfts/destroy', 'destroy')->name('nfts/destroy');
-});
-Route::middleware('auth')->controller(CommentController::class)->group(function () {
-    Route::post('/comment/creat', 'store')->name('comment/creat');
-});
-Route::middleware('auth')->controller(PostController::class)->group(function () {
-    Route::post('/posts/store', 'store')->name('posts/store');
 });
 
+////--- Authonticated Routes
+
+Route::middleware(['auth', 'verified'])->controller(CommentController::class)->group(function () {
+    Route::post('/comment/creat', 'store')->name('comment/creat');
+});
+Route::middleware(['auth', 'verified'])->controller(PostController::class)->group(function () {
+    Route::post('/posts/store', 'store')->name('posts/store');
+    Route::post('/posts/destroy', 'destroy')->name('posts/destroy');
+});
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
 
 require __DIR__ . '/auth.php';

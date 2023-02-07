@@ -4,7 +4,9 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import Navigation from "@/Components/Navigation.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import NftSlider from "@/Components/NftSlider.vue"
-import Footer from "@/Components/Footer.vue"; 
+import Footer from "@/Components/Footer.vue";
+import { Splide, SplideSlide } from "@splidejs/vue-splide";
+import "@splidejs/vue-splide/css";
 </script>
 <script>
 export default {
@@ -12,6 +14,8 @@ export default {
         nft: Object,
     },
     components: {
+        Splide,
+        SplideSlide,
         Head,
         Navigation,
         PrimaryButton,
@@ -136,18 +140,35 @@ export default {
         <!-- Gallery Section -->
         <section class="mx-auto my-20 max-w-[1180px]">
             <div class="flex items-center justify-between">
-
                 <div class="flex flex-col mb-6">
-                    <div class="text-myGray text-lg">NFTs</div>
+                    <div class="text-myPurple-400 text-base font-semibold uppercase">
+                        NFTS
+                    </div>
                     <h3 class="text-4xl font-bold">Suggested NFTs</h3>
                 </div>
 
-                <Link :href="route('/nfts')" class="hover:underline underline-offset-4 font-semibold">
+                <Link :href="route('nfts/all')"
+                    class="text-base rounded-full py-2 px-6 bg-myPurple-400 hover:bg-myPurple-300 transition-all">
                 View All
                 </Link>
             </div>
 
-            <NftSlider :dataRoute="'list'" :nftId="nft.id" />
+            <Splide :options="{
+                rewind: true,
+                autoWidth: true,
+                focus: 'center',
+                perPage: 4,
+                perMove: 2,
+                gap: '2em',
+                padding: '4rem',
+                }"
+                :classes="{
+                pagination: 'splide__pagination no-pagination',
+                }" aria-label="Viral Nfts">
+                <SplideSlide v-for="item in drops" :key="item.id">
+                    <!-- <NftCard :item="item" @onClick="handleClick" /> -->
+                </SplideSlide>
+            </Splide>
         </section>
 
         <div class="bg-myDark-300/80 fixed top-0 left-0 w-full h-screen flex items-center z-10 hidden"
@@ -172,15 +193,17 @@ export default {
                     Are You sure you want to delete this NFT? This can't be undone!
                 </p>
                 <div class="flex items-center justify-between mt-6 gap-x-5">
-                    <PrimaryButton type="button" class="grow w-full justify-center" @click="close">
-                        Cancel
-                    </PrimaryButton>
 
-                    <Link :href="route('nfts/destroy')" method="post" as="button" :data="{ id: nft.id }"
-                        @click="close"
+                    <Link :href="route('nfts/destroy')" method="post" as="button" :data="{ id: nft.id }" @click="close"
                         class="w-full justify-center items-center px-4 py-3 bg-white border border-transparent rounded-full font-semibold text-black uppercase tracking-widest hover:bg-white/90 focus:bg-white/90 active:bg-white/90 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150 text-sm">
                     Delete
                     </Link>
+
+                    <div type="button"
+                        class="grow flex cursor-pointer w-full justify-center px-4 py-3 rounded-full bg-transparent border border-white text-white/100"
+                        @click="close">
+                        Cancel
+                    </div>
                 </div>
             </div>
         </div>
