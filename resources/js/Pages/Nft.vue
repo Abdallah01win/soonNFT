@@ -17,6 +17,7 @@ export default {
         PrimaryButton,
         NftSlider,
         Footer,
+        Link
     },
     methods: {
         dateConvert(date) {
@@ -25,6 +26,12 @@ export default {
             myDate.date = newDate.toString().substring(0, 10);
             myDate.time = newDate.toString().substring(16, 24);
             return myDate;
+        },
+        close() {
+            const confirmDelete = document.getElementById("confirmDelete");
+            const body = document.body;
+            body.classList.toggle("overflow-hidden");
+            confirmDelete.classList.toggle("hidden");
         },
     },
 };
@@ -39,138 +46,90 @@ export default {
         </template>
         <section class="mx-auto my-12 max-w-[1180px]">
             <div class="grid grid-cols-[.45fr,1fr] gap-x-12">
-                <div class="rounded-xl overflow-hidden w-[100%] h-[400px]">
+                <div class="rounded-xl overflow-hidden w-[100%] h-[350px]">
                     <img :src="nft.imgurl" alt="" class="w-[100%] h-[100%]" />
                 </div>
                 <div class="flex flex-col">
                     <div class="font-bold mb-3 flex flex-col /items-center /justify-between">
-                        <span class="text-xs uppercase px-4 py-1 mb-2 rounded-full bg-myGray w-fit">
+                        <div class="text-xs uppercase px-4 py-1 mb-2 rounded-full bg-myPurple-400 w-fit">
                             {{ nft.blockchain }}
-                        </span>
-                        <span class="text-6xl font-inter capitalize">
-                            {{ nft.name }}
-                        </span>
+                        </div>
+                        <div class="text-6xl font-inter capitalize flex gap-x-2">
+                            <span>
+                                {{ nft.name }}
+                            </span>
+                            <span v-if="nft.is_featured">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="#5e45ff"
+                                    viewBox="0 0 256 256">
+                                    <rect width="256" height="256" fill="none"></rect>
+                                    <path
+                                        d="M128,24A104,104,0,1,0,232,128,104.2,104.2,0,0,0,128,24Zm49.5,85.8-58.6,56a8.1,8.1,0,0,1-5.6,2.2,7.7,7.7,0,0,1-5.5-2.2l-29.3-28a8,8,0,1,1,11-11.6l23.8,22.7,53.2-50.7a8,8,0,0,1,11,11.6Z">
+                                    </path>
+                                </svg>
+                            </span>
+                        </div>
                     </div>
-                    <!-- <p>{{ nft.description }}</p> -->
-                    <p class="/lg:w-[85%] mb-6 text-myGray">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Veniam, inventore rem, expedita sapiente quas culpa
-                        tempora nisi, labore iste repellendus beatae odio. Neque
-                        eligendi harum ad beatae, odit nobis quo! Lorem ipsum, dolor sit amet consectetur adipisicing
-                        elit. Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                    <p class="mb-6 text-myGray">
+                        {{ nft.discription }}
                     </p>
-
-                    <div class="grid grid-cols-2 uppercase mb-10">
-                        <div class="flex flex-col gap-y-3 border-r border-myGray">
-                            <div class="text-base font-semibold">
-                                Floor Price
+                    <div class="flex items-center justify-between">
+                        <div class="flex flex-col gap-y-1 /border-r /border-myGray">
+                            <div class="text-base font-semibold uppercase">
+                                Price
                             </div>
                             <div class="font-bold text-4xl">
                                 {{ nft.price }}
                                 {{ nft.blockchain.substring(0, 3) }}
                             </div>
                         </div>
-
-                        <div class="flex flex-col gap-y-3 pl-12">
-                            <div class="text-base font-semibold">Drop Date</div>
-                            <div class="font-bold text-4xl">
-                                {{ dateConvert(nft.dropdate).date }}
-                            </div>
-                        </div>
-                    </div>
-                    <div class="flex items-center justify-between">
-                        <div class="flex items-center gap-x-4">
-                            <PrimaryButton class="flex items-center gap-y-3">
-                                <span class="mr-2"> Add to Favorits </span>
-                                <span>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="26" fill="#000000"
-                                        viewBox="0 0 256 256">
-                                        <rect width="256" height="256" fill="none"></rect>
-                                        <path
-                                            d="M133.7,211.9l81-81c19.9-20,22.8-52.7,4-73.6a52,52,0,0,0-75.5-2.1L128,70.5,114.9,57.3c-20-19.9-52.7-22.8-73.6-4a52,52,0,0,0-2.1,75.5l83.1,83.1A8.1,8.1,0,0,0,133.7,211.9Z"
-                                            fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round"
-                                            stroke-width="12"></path>
-                                    </svg>
-                                </span>
-
-                            </PrimaryButton>
-                            <PrimaryButton
-                                class="bg-transparent text-white/100 border border-white/100 hover:bg-white hover:text-black">
-                                <span class="mr-2">Share</span>
-                                <span class="w-[26px]">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512">
-                                        <title>Arrow Redo</title>
-                                        <path
-                                            d="M448 256L272 88v96C103.57 184 64 304.77 64 424c48.61-62.24 91.6-96 208-96v96z"
-                                            fill="none" stroke="currentColor" stroke-linejoin="round"
-                                            stroke-width="32" />
-                                    </svg>
-                                </span>
-                            </PrimaryButton>
-                        </div>
                         <div>
                             <div class="flex items-center gap-x-3 text-2xl">
-                                <span v-if="nft.website" class="">
-                                    <a :href="nft.website" target="_blank"
-                                        class="bg-white rounded-full p-2 grid place-content-center text-black hover:bg-white/90">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="26" fill="currentColor"
-                                            viewBox="0 0 256 256">
-                                            <rect width="256" height="256" fill="none"></rect>
-                                            <circle cx="128" cy="128" r="96" fill="none" stroke="currentColor"
-                                                stroke-linecap="round" stroke-linejoin="round" stroke-width="8">
-                                            </circle>
-                                            <line x1="37.5" y1="96" x2="218.5" y2="96" fill="none" stroke="currentColor"
-                                                stroke-linecap="round" stroke-linejoin="round" stroke-width="8"></line>
-                                            <line x1="37.5" y1="160" x2="218.5" y2="160" fill="none"
-                                                stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                                stroke-width="8"></line>
-                                            <ellipse cx="128" cy="128" rx="40" ry="93.4" fill="none"
-                                                stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                                stroke-width="8"></ellipse>
+                                <span v-if="nft.website">
+                                    <a :href="nft.website" target="_blank" class="hover:text-white block">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" width="26px"
+                                            height="26px" viewBox="0 0 512 512">
+                                            <title>Globe</title>
+                                            <path
+                                                d="M256 48C141.13 48 48 141.13 48 256s93.13 208 208 208 208-93.13 208-208S370.87 48 256 48z"
+                                                fill="none" stroke="currentColor" stroke-miterlimit="10"
+                                                stroke-width="32" />
+                                            <path
+                                                d="M256 48c-58.07 0-112.67 93.13-112.67 208S197.93 464 256 464s112.67-93.13 112.67-208S314.07 48 256 48z"
+                                                fill="none" stroke="currentColor" stroke-miterlimit="10"
+                                                stroke-width="32" />
+                                            <path
+                                                d="M117.33 117.33c38.24 27.15 86.38 43.34 138.67 43.34s100.43-16.19 138.67-43.34M394.67 394.67c-38.24-27.15-86.38-43.34-138.67-43.34s-100.43 16.19-138.67 43.34"
+                                                fill="none" stroke="currentColor" stroke-linecap="round"
+                                                stroke-linejoin="round" stroke-width="32" />
+                                            <path fill="none" stroke="currentColor" stroke-miterlimit="10"
+                                                stroke-width="32" d="M256 48v416M464 256H48" />
                                         </svg>
                                     </a>
                                 </span>
-                                <span v-if="nft.twitter" class="">
-                                    <a :href="nft.twitter" target="_blank"
-                                        class="bg-white rounded-full p-2 grid place-content-center text-black hover:bg-white/90">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="26" fill="currentColor"
-                                            viewBox="0 0 256 256">
-                                            <rect width="256" height="256" fill="none"></rect>
+                                <span v-if="nft.twitter">
+                                    <a :href="nft.twitter" target="_blank" class="hover:text-white font-sm block">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30" width="28px"
+                                            height="28px" fill="currentColor">
                                             <path
-                                                d="M128,88c0-22,18.5-40.3,40.5-40a40,40,0,0,1,36.2,24H240l-32.3,32.3A127.9,127.9,0,0,1,80,224c-32,0-40-12-40-12s32-12,48-36c0,0-64-32-48-120,0,0,40,40,88,48Z"
-                                                fill="none" stroke="currentColor" stroke-linecap="round"
-                                                stroke-linejoin="round" stroke-width="8"></path>
+                                                d="M28,6.937c-0.957,0.425-1.985,0.711-3.064,0.84c1.102-0.66,1.947-1.705,2.345-2.951c-1.03,0.611-2.172,1.055-3.388,1.295 c-0.973-1.037-2.359-1.685-3.893-1.685c-2.946,0-5.334,2.389-5.334,5.334c0,0.418,0.048,0.826,0.138,1.215 c-4.433-0.222-8.363-2.346-10.995-5.574C3.351,6.199,3.088,7.115,3.088,8.094c0,1.85,0.941,3.483,2.372,4.439 c-0.874-0.028-1.697-0.268-2.416-0.667c0,0.023,0,0.044,0,0.067c0,2.585,1.838,4.741,4.279,5.23 c-0.447,0.122-0.919,0.187-1.406,0.187c-0.343,0-0.678-0.034-1.003-0.095c0.679,2.119,2.649,3.662,4.983,3.705 c-1.825,1.431-4.125,2.284-6.625,2.284c-0.43,0-0.855-0.025-1.273-0.075c2.361,1.513,5.164,2.396,8.177,2.396 c9.812,0,15.176-8.128,15.176-15.177c0-0.231-0.005-0.461-0.015-0.69C26.38,8.945,27.285,8.006,28,6.937z" />
                                         </svg>
                                     </a>
                                 </span>
-                                <span v-if="nft.discord" class="">
-                                    <a :href="nft.discord" target="_blank"
-                                        class="bg-white rounded-full p-2 grid place-content-center text-black hover:bg-white/90">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="26" fill="currentColor"
-                                            viewBox="0 0 256 256">
-                                            <rect width="256" height="256" fill="none"></rect>
-                                            <circle cx="96" cy="144" r="8"></circle>
-                                            <circle cx="160" cy="144" r="8"></circle>
-                                            <path d="M74.4,80A174.9,174.9,0,0,1,128,72a174.9,174.9,0,0,1,53.6,8"
-                                                fill="none" stroke="currentColor" stroke-linecap="round"
-                                                stroke-linejoin="round" stroke-width="8"></path>
-                                            <path d="M181.6,176a174.9,174.9,0,0,1-53.6,8,174.9,174.9,0,0,1-53.6-8"
-                                                fill="none" stroke="currentColor" stroke-linecap="round"
-                                                stroke-linejoin="round" stroke-width="8"></path>
+                                <span v-if="nft.discord">
+                                    <a :href="nft.discord" target="_blank" class="hover:text-white block">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 72" width="28px"
+                                            height="28px" fill="currentColor">
                                             <path
-                                                d="M155,182.1l12.1,24a7.8,7.8,0,0,0,9,4.2c24.5-6,45.7-16.4,61.1-29.8a8.1,8.1,0,0,0,2.4-8.4L205.7,58.9a7.7,7.7,0,0,0-4.7-5.1,176.4,176.4,0,0,0-29.6-9.2,8.1,8.1,0,0,0-9.4,5.3l-7.9,23.9"
-                                                fill="none" stroke="currentColor" stroke-linecap="round"
-                                                stroke-linejoin="round" stroke-width="8"></path>
-                                            <path
-                                                d="M101,182.1l-12.1,24a7.8,7.8,0,0,1-9,4.2c-24.5-6-45.7-16.4-61.1-29.8a8.1,8.1,0,0,1-2.4-8.4L50.3,58.9A7.7,7.7,0,0,1,55,53.8a176.4,176.4,0,0,1,29.6-9.2A8.1,8.1,0,0,1,94,49.9l7.9,23.9"
-                                                fill="none" stroke="currentColor" stroke-linecap="round"
-                                                stroke-linejoin="round" stroke-width="8"></path>
+                                                d="M54.657,19.077c0,0,8.343,9.663,8.343,27.069v3.65c0,0-10.536,6.866-13.747,6.866l-3.115-4.529	c1.936-0.867,4.577-2.372,4.577-2.372l-0.965-0.747c0,0-6.173,2.86-13.749,2.86s-13.749-2.86-13.749-2.86l-0.965,0.747	c0,0,2.641,1.505,4.577,2.372l-3.115,4.529C19.536,56.662,9,49.796,9,49.796v-3.65c0-17.406,8.343-27.069,8.343-27.069	s5.707-2.762,10.977-3.489l1.635,3.1c0,0,2.599-0.602,6.045-0.602s6.045,0.602,6.045,0.602l1.635-3.1	C48.95,16.315,54.657,19.077,54.657,19.077z M27.01,43.603c2.656,0,4.808-2.418,4.808-5.401c0-2.983-2.153-5.401-4.808-5.401	s-4.808,2.418-4.808,5.401C22.202,41.185,24.354,43.603,27.01,43.603z M44.99,43.603c2.656,0,4.808-2.418,4.808-5.401	c0-2.983-2.153-5.401-4.808-5.401c-2.656,0-4.808,2.418-4.808,5.401C40.182,41.185,42.334,43.603,44.99,43.603z" />
                                         </svg>
                                     </a>
                                 </span>
                             </div>
                         </div>
                     </div>
+                    <!-- <Link :href="route('nfts/destroy')" method="post" as="button" :data="{ id: nft.id }">Delete Nft
+                    </Link> -->
+                    <div @click="close">Delete Nft</div>
                 </div>
             </div>
         </section>
@@ -190,6 +149,41 @@ export default {
 
             <NftSlider :dataRoute="'list'" :nftId="nft.id" />
         </section>
+
+        <div class="bg-myDark-300/80 fixed top-0 left-0 w-full h-screen flex items-center z-10 hidden"
+            id="confirmDelete" @click.self="close">
+            <div
+                class="bg-myDark-100 overflow-hidden shadow-sm sm:rounded-lg px-10 py-10 w-[45%] mx-auto /////////translate-y-[130%]">
+                <div class="flex justify-between items-center mb-2">
+                    <h3 class="text-2xl font-semibold">Delete NFT</h3>
+                    <button class="p-2 bg-gray-200 rounded-full" @click="close">
+                        <span class="w-6">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" fill="#000000" viewBox="0 0 256 256">
+                                <rect width="256" height="256" fill="none"></rect>
+                                <line x1="200" y1="56" x2="56" y2="200" fill="none" stroke="#000000"
+                                    stroke-linecap="round" stroke-linejoin="round" stroke-width="12"></line>
+                                <line x1="200" y1="200" x2="56" y2="56" fill="none" stroke="#000000"
+                                    stroke-linecap="round" stroke-linejoin="round" stroke-width="12"></line>
+                            </svg>
+                        </span>
+                    </button>
+                </div>
+                <p>
+                    Are You sure you want to delete this NFT? This can't be undone!
+                </p>
+                <div class="flex items-center justify-between mt-6 gap-x-5">
+                    <PrimaryButton type="button" class="grow w-full justify-center" @click="close">
+                        Cancel
+                    </PrimaryButton>
+
+                    <Link :href="route('nfts/destroy')" method="post" as="button" :data="{ id: nft.id }"
+                        @click="close"
+                        class="w-full justify-center items-center px-4 py-3 bg-white border border-transparent rounded-full font-semibold text-black uppercase tracking-widest hover:bg-white/90 focus:bg-white/90 active:bg-white/90 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150 text-sm">
+                    Delete
+                    </Link>
+                </div>
+            </div>
+        </div>
         <Footer />
     </AuthenticatedLayout>
 </template>

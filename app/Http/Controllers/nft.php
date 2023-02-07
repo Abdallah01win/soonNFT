@@ -67,7 +67,7 @@ class nft extends Controller
         $imagename = substr($imgurl[0]['imgurl'], strpos($imgurl[0]['imgurl'], 'images/') + 7);
         @unlink('storage/images/'.$imagename);
         DB::table('nfts')->Where('id', $id)->delete();
-        return redirect('/')->with('success', 'NFT Deleted');
+        return redirect('nfts/all')->with('success', 'NFT Deleted');
     }
     /*public function collection(Request $request)
     {

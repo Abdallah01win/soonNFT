@@ -134,7 +134,7 @@ export default {
             </div>
 
             <div class="leading-relaxed flex flex-col justify-center">
-                <div class="text-myPurple-400 text-base font-semibold my-1">
+                <div class="bg-myPurple-400 text-base text-white w-fit rounded-full px-4 py-2-1 font-semibold my-1">
                     {{ filteredPosts[0].category }}
                 </div>
                 <div class="text-4xl font-semibold mb-4">
