@@ -137,7 +137,7 @@ Route::controller(nft::class)->group(function () {
     Route::get('/nfts/list', 'index')->name('nfts/list');
     //Route::get('/nfts/paginate', 'paginate')->name('nfts/paginate');
     Route::post('/nfts/nft', 'view')->name('nfts/nft');
-    Route::get('/nfts/upcoming', 'upcoming')->name('nfts/upcoming');
+    //Route::get('/nfts/upcoming', 'upcoming')->name('nfts/upcoming');
 });
 Route::controller(nft::class)->middleware(['auth', 'verified'])->group(function () {
     Route::post('/nfts/store', 'store')->name('nfts/store');

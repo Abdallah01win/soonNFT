@@ -1,14 +1,14 @@
 <script>
-import { Head, Link } from '@inertiajs/inertia-vue3';
-import Navigation from '@/Components/Navigation.vue';
+import { Head, Link } from "@inertiajs/inertia-vue3";
+import Navigation from "@/Components/Navigation.vue";
 import NftCard from "@/Components/NftCard.vue";
-import Footer from '@/Components/Footer.vue';
+import Footer from "@/Components/Footer.vue";
 export default {
     data() {
         return {
             searchTerm: "",
-            drop: ""
-        }
+            drop: "",
+        };
     },
     props: {
         drops: Object,
@@ -16,10 +16,12 @@ export default {
     computed: {
         filteredData() {
             const dataArray = Object.values(this.drops);
-            return dataArray.filter(item => {
-                return item.name.toLowerCase().includes(this.searchTerm.toLowerCase());
+            return dataArray.filter((item) => {
+                return item.name
+                    .toLowerCase()
+                    .includes(this.searchTerm.toLowerCase());
             });
-        }
+        },
     },
     components: {
         Navigation,
@@ -48,30 +50,45 @@ export default {
             myDate.time = newDate.toString().substring(16, 24);
             return myDate;
         },
-    }
-}
+        isImage(link) {
+            if (this.drop != '') {
+                return !link.endsWith("mp4");
+            } else{
+                return false;
+            }
+        },
+    },
+};
 </script>
 
 <template>
-
     <Head title="Upcoming" />
     <Navigation />
 
-    <section class="mx-auto my-12 max-w-[1180px] ">
+    <section class="mx-auto my-12 max-w-[1180px]">
         <div class="flex items-center justify-between">
             <div class="flex flex-col mb-6">
-                <div class="text-myPurple-400 text-base font-semibold uppercase">
+                <div
+                    class="text-myPurple-400 text-base font-semibold uppercase"
+                >
                     Drops
                 </div>
                 <h3 class="text-4xl font-bold">All Upcoming</h3>
             </div>
-            <input type="text" class="border-white rounded-full bg-transparent placeholder:text-myGray"
-                placeholder="Search" v-model="searchTerm" @input="searchData" />
+            <input
+                type="text"
+                class="border-white rounded-full bg-transparent placeholder:text-myGray"
+                placeholder="Search"
+                v-model="searchTerm"
+                @input="searchData"
+            />
         </div>
         <div class="grid grid-cols-4 gap-6 mt-8">
-            <div v-if="!filteredData.length" class="text-lg text-myGray">No upcoming NFTs</div>
+            <div v-if="!filteredData.length" class="text-lg text-myGray">
+                No upcoming NFTs
+            </div>
             <div v-else v-for="item in filteredData" :key="item.symbol">
-                <NftCard :item="item" @onClick="handleClick"/>
+                <NftCard :item="item" @onClick="handleClick" />
             </div>
         </div>
     </section>
@@ -86,7 +103,20 @@ export default {
         <div class="bg-[#0D0D0D] rounded-xl p-6 w-[70%] mx-auto">
             <div class="grid grid-cols-[1.5fr,2fr] gap-x-8">
                 <div class="w-[100%] rounded-xl overflow-hidden">
-                    <img :src="drop.image" alt="" />
+                    <img
+                        v-if="isImage(drop.image)"
+                        :src="drop.image"
+                        @error="(event) => handleError(event)"
+                        alt=""
+                        class="min-w-[100%] h-full block rounded-2xl"
+                    />
+                    <video
+                        v-else
+                        :src="drop.image"
+                        autoplay
+                        loop
+                        class="min-w-[100%] h-full block rounded-2xl"
+                    />
                 </div>
                 <div class="flex.flex-col">
                     <div
@@ -121,8 +151,15 @@ export default {
                         </div>
 
                         <div class="flex items-center gap-x-2 font-semibold">
-                            <span>{{ dateConvert(drop.launchDatetime).date }}</span>
-                            <span>{{ dateConvert(drop.launchDatetime).time.slice(0, 5) }}</span>
+                            <span>{{
+                                dateConvert(drop.launchDatetime).date
+                            }}</span>
+                            <span>{{
+                                dateConvert(drop.launchDatetime).time.slice(
+                                    0,
+                                    5
+                                )
+                            }}</span>
                         </div>
                     </div>
                 </div>

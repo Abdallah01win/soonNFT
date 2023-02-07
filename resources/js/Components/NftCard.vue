@@ -10,10 +10,6 @@ export default {
     },
     props: {
         item: Object,
-        /*handleClick: {
-            type: Function,
-            required: true,
-        },*/
     },
     methods: {
         dateConvert(date) {
@@ -43,8 +39,8 @@ export default {
 };
 </script>
 <template>
-    <div class="bg-[#0D0D0D] rounded-2xl relative overflow-hidden">
-        <div class="w-[255px] h-[320px]">
+    <div class="bg-[#0D0D0D] rounded-2xl relative overflow-hidden w-[255px]">
+        <div class="w-[255px] h-[255px]">
             <img v-if="isImage(item.image)" :src="item.image" @error="(event) => handleError(event)" alt=""
                 class="min-w-[100%] h-full block rounded-2xl" />
             <video v-else :src="item.image" autoplay loop height="320px" class="min-w-[100%] h-full block rounded-2xl" />

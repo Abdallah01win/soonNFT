@@ -346,7 +346,7 @@ export default {
             </div>
 
             <Link
-                :href="route('/nfts')"
+                :href="route('upcoming')"
                 class="text-base rounded-full py-2 px-6 bg-myPurple-400 hover:bg-myPurple-300 transition-all"
             >
                 View All
@@ -574,7 +574,7 @@ export default {
     <!-- End Blog Section -->
 
     <!-- News Letter -->
-    <section class="mx-auto my-20 max-w-[1180px] rounded-xl newsletter-sec">
+    <section v-if="!$page.props.auth.user" class="mx-auto my-20 max-w-[1180px] rounded-xl newsletter-sec">
         <div class="py-16 px-10">
             <div class="text-center">
                 <div class="flex flex-col">

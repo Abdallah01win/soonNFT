@@ -85,7 +85,7 @@ const form = useForm({
                         </div>
                     </div>
                 </div>
-                <Link :href="route('login')" class="w-full px-12 py-3 rounded-full bg-myPurple-400 text-white cursor-pointer font-semibold hover:bg-myPurple-300">Creat Your Account Now</Link>
+                <Link v-if="!$page.props.auth.user" :href="route('login')" class="w-full px-12 py-3 rounded-full bg-myPurple-400 text-white cursor-pointer font-semibold hover:bg-myPurple-300">Creat Your Account Now</Link>
             </div>
         </div>
         <div
