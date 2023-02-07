@@ -26,7 +26,7 @@ import { Link } from '@inertiajs/inertia-vue3';
               ></path>
             </svg>
             <p class="leading-relaxed mb-6 text-lg text-black">
-              I recently discovered soonnfts and I'm impressed with the platform! It's been so easy for me to find all kinds of digital art and NFTs, and the news section is a great resource for staying up to date on the industry.
+              I recently discovered soonnft and I'm impressed with the platform! It's been so easy for me to find all kinds of digital art and NFTs, and the news section is a great resource for staying up to date on the industry.
             </p>
             <div class="inline-flex items-center">
               <img

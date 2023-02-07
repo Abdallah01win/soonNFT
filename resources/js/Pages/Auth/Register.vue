@@ -82,15 +82,7 @@ const submit = () => {
                         </span>
                     </label>
                 </div>
-                <div class="block">
-                    <label class="flex items-center">
-                        <Checkbox name="newsLetter" checked v-model:checked="form.newsLetter" />
-                        <span class="ml-2 text-sm text-white/50">Signup to newsLetter</span>
-                    </label>
-                </div>
             </div>
-
-
 
             <PrimaryButton class="w-full justify-center mt-5" :class="{ 'opacity-25': form.processing }"
                 :disabled="form.processing">

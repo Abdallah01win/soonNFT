@@ -575,14 +575,9 @@ export default {
 
     <!-- News Letter -->
     <section class="mx-auto my-20 max-w-[1180px] rounded-xl newsletter-sec">
-        <div class="/grid /grid-cols-2 py-16 px-10 /gap-x-4">
+        <div class="py-16 px-10">
             <div class="text-center">
                 <div class="flex flex-col">
-                    <!-- <div
-                        class="py-1 px-3 text-xs rounded-full news-letter-sub /bg-slate-400 w-fit mb-2"
-                    >
-                        News-letter
-                    </div> -->
                     <h3 class="text-5xl font-inter font-black mb-3">
                         Join The Future Now
                     </h3>
@@ -592,35 +587,11 @@ export default {
                     our experts. Sign up for our newsletter today and stay ahead
                     of the curve.
                 </p>
-                <form
-                    action="post"
-                    class="flex items-center gap-x-3 mt-6 w-[50%] mx-auto"
+                <div
+                    class="flex items-center justify-center gap-x-3 mt-6 w-[50%] mx-auto"
                 >
-                    <div class="grow">
-                        <TextInput
-                            id="email"
-                            type="email"
-                            class="mt-1 block w-full"
-                            v-model="form.email"
-                            required
-                            autocomplete="username"
-                            placeholder="Email Adress"
-                        />
-                        <InputError class="mt-2" :message="form.errors.email" />
-                    </div>
-                    <PrimaryButton
-                        class="w-fit justify-center px-6"
-                        :class="{ 'opacity-25': form.processing }"
-                        :disabled="form.processing"
-                    >
-                        Subscribe
-                    </PrimaryButton>
-                </form>
-            </div>
-            <div class="overflow-hidden">
-                <!-- <div style="background:url('../../../storage/app/public/assets/eth.jpg')" class="h-[300px]">
-                </div> -->
-                <!-- <img src="storage/assets/nft.svg" alt="" class="scale-150"> -->
+                    <Link :href="route('login')" class="px-12 py-3 rounded-full bg-white text-black cursor-pointer font-semibold hover:bg-white/90">Creat Your Account Now</Link>
+                </div>
             </div>
         </div>
     </section>
