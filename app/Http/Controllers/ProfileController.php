@@ -41,6 +41,9 @@ class ProfileController extends Controller
         }
         if ($request->hasFile('image')) {
             $id = Auth::id();
+            $request->validate([
+                'image' => 'image|mimes:jpg,png,jpeg,gif,webp|max:2048',
+            ]);
             $has_image = User::where('id', $id)->where('image_url', '!=', null)->limit(1)->count();
             if($has_image === 1){
                 // Delete Old Image from storage
