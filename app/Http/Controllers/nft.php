@@ -25,7 +25,11 @@ class nft extends Controller
     {
         $id = $request->get('id');
         $nft = Nfts::where('id', $id)->limit(1)->get();
-        return Inertia::render('Nft', ['nft' => $nft[0]]);
+        $nfts = Nfts::where('id', '!=', $id)
+        ->limit(6)
+        ->select('id', 'imgurl', 'name', 'price', 'is_featured', 'created_at', 'blockchain' )
+        ->get();
+        return Inertia::render('Nft', ['nft' => $nft[0], 'nfts' => $nfts]);
     }
 
     public function store(Request $request)

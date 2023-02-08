@@ -82,7 +82,7 @@ export default {
                                 <div class="bg-myPurple-400 mb-1 rounded-full px-5 py-1 w-fit font-semibold">{{ post.category }}</div>
 
                                 <div class="flex items-center">
-                                    <img alt="testimonial" src="https://dummyimage.com/106x106"
+                                    <img alt="testimonial" :src="$page.props.auth.user.image_url"
                                         class="w-10 h-10 rounded-full flex-shrink-0 object-cover object-center" />
                                     <span class="/flex-grow flex flex-col pl-3">
                                         <span class="title-font font-medium">{{ post.name }}</span>

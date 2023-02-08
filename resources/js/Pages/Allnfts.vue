@@ -99,7 +99,6 @@ export default {
 
             <div class="grid grid-cols-4 gap-12">
                 <div v-for="item in filteredNfts" :key="item.id" class="w-fit">
-                    <!-- <NftCard :item="item" /> -->
                     <div class="bg-[#0D0D0D] rounded-2xl relative overflow-hidden">
                         <div class="w-[255px] h-[255px]">
                             <img :src="item.imgurl" @error="(event) => handleError(event)" alt=""

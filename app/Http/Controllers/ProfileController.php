@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Http\Requests\ProfileUpdateRequest;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\Request;
@@ -38,9 +39,25 @@ class ProfileController extends Controller
         if ($request->user()->isDirty('email')) {
             $request->user()->email_verified_at = null;
         }
-        dump($request->get('image'));
-        die();
-        //$request->user()->save();
+        if ($request->hasFile('image')) {
+            $id = Auth::id();
+            $has_image = User::where('id', $id)->where('image_url', '!=', null)->limit(1)->count();
+            if($has_image === 1){
+                // Delete Old Image from storage
+                $imgurl = User::where('id', $id)->limit(1)->get('image_url');
+                $imagename = substr($imgurl[0]['image_url'], strpos($imgurl[0]['image_url'], 'users/') + 6);
+                @unlink('storage/users/'.$imagename);
+            }
+            //Store new image
+            $image_path = $request->file('image')->store('users', 'public');
+            $user = $request->user();
+            $user->image_url = asset('storage/'.$image_path);
+            $user->save();
+
+        } else {
+            // The request does not have a file with the name "image".
+            $request->user()->save();
+        }
 
         return Redirect::route('profile.edit');
     }

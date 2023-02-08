@@ -32,10 +32,6 @@ const form = useForm({
                         <ion-icon name="call-outline"></ion-icon>
                         <span>080089656</span>
                     </p>
-                    <p class="flex gap-x-2 items-center py-1">
-                        <ion-icon name="location-outline"></ion-icon>
-                        <span class="">5th-AV NewYourk City - USA</span>
-                    </p>
                 </div>
             </div>
             <div>
@@ -58,7 +54,7 @@ const form = useForm({
             <div class="w-full">
                 <h4 class="font-semibold mb-2 text-lg">Community</h4>
                 <p class="mb-3 font-light">
-                    Lorem ipsum dolor sit. Lorem ipsum dolor.
+                    Join our community on any social media
                 </p>
 
                 <div class="flex items-center gap-x-2 mb-6">
