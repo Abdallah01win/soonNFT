@@ -41,9 +41,9 @@ export default {
 <template>
     <div class="bg-[#0D0D0D] rounded-2xl relative overflow-hidden w-[255px]">
         <div class="w-[255px] h-[255px]">
-            <img v-if="isImage(item.image)" :src="item.image" @error="(event) => handleError(event)" alt=""
+            <img v-if="isImage(item.image)" :src="item.image" alt=""
                 class="min-w-[100%] h-full block rounded-2xl" />
-            <video v-else :src="item.image" autoplay loop height="320px" class="min-w-[100%] h-full block rounded-2xl" />
+            <video v-else :src="item.image" autoplay loop class="min-w-[100%] rounded-2xl" />
         </div>
         <div class="py-3 px-4">
             <div class="pb-1">

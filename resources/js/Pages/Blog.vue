@@ -7,7 +7,6 @@ import Footer from "@/Components/Footer.vue";
 export default {
     data() {
         return {
-            //firstPost: this.filteredPosts[0],
             hover: false,
             selectedCategory: "",
             selectedOrder: "desc",
@@ -56,79 +55,74 @@ export default {
             myDate.time = newDate.toString().substring(16, 24);
             return myDate;
         },
+        selectOption(option) {
+            this.selectedCategory = option;
+        },
+        SelectedOrder(option) {
+            this.selectedOrder = option;
+        },
     },
 };
 </script>
 <template>
+
     <Head title="Blog" />
     <Navigation />
     <!-- {{ posts }} -->
     <section class="mx-auto my-12 max-w-[1180px]">
         <div class="flex items-center justify-between mb-10">
             <div class="flex flex-col">
-                <div
-                    class="text-myPurple-400 text-base font-semibold uppercase"
-                >
+                <div class="text-myPurple-400 text-base font-semibold uppercase">
                     Blog
                 </div>
                 <h3 class="text-4xl font-bold">Latest Stories</h3>
             </div>
 
+
+
             <div class="flex items-center gap-x-5">
-                <select v-model="selectedCategory"
-                :class="{ 'custom-select': true }"
-                class="bg-myDark-300 border-white rounded-full pl-[15px] w-32">
-                    <option value="">All</option>
-                    <option v-for="category in categories" :value="category" :key="category">
-                        {{ category }}
-                    </option>
-                </select>
-                <select v-model="selectedOrder"
-                :class="{ 'custom-options': true }"
-                class="bg-myDark-300 border-white rounded-full pl-[15px] w-32">
-                    <option value="desc">Newest</option>
-                    <option value="asc">Oldest</option>
-                </select>
+                <div
+                    class="relative text-sm flex border-[3px] border-myPurple-400 bg-transparent rounded-full py-2 px-2 /font-semibold leading-relaxed">
+                    <button @click="selectOption('')" class="py-1 px-5 rounded-full transition-colors"
+                        :class="{ 'bg-myPurple-400': '' === selectedCategory}">
+                        All
+                    </button>
+                    <button v-for="(option, index) in categories" :key="index" @click="selectOption(option)"
+                        class="py-1 px-5 rounded-full transition-colors capitalize"
+                        :class="{ 'bg-myPurple-400': option === selectedCategory }">
+                        {{ option }}
+                    </button>
+                </div>
+
+                <div
+                    class="relative text-sm flex border-[3px] border-myPurple-400 bg-transparent rounded-full py-2 px-2 /font-semibold leading-relaxed">
+                    <button @click="SelectedOrder('desc')" class="py-1 px-5 rounded-full transition-colors"
+                        :class="{ 'bg-myPurple-400': 'desc' === selectedOrder }">
+                        Newest
+                    </button>
+                    <button @click="SelectedOrder('asc')" class="py-1 px-5 rounded-full transition-colors"
+                        :class="{ 'bg-myPurple-400': 'asc' === selectedOrder }">
+                        Oldest
+                    </button>
+                </div>
             </div>
         </div>
 
         <div class="grid grid-cols-[0.75fr,1fr] gap-x-10">
-            <div
-                class="relative"
-                @mouseover="hover = true"
-                @mouseleave="hover = false"
-            >
-                <img
-                    :src="filteredPosts[0].image"
-                    alt=""
-                    class="w-full h-[300px] rounded-3xl overflow-hidden"
-                />
-                <div
-                    v-if="hover"
-                    class="transition-all absolute top-0 left-0 flex items-center justify-center w-full h-full bg-myDark-100/60 rounded-3xl"
-                >
-                    <Link
-                        :href="route('post')"
-                        method="post"
-                        as="button"
-                        :data="{ id: filteredPosts[0].id }"
-                    >
-                        <div
-                            class="w-16 h-16 rounded-full bg-myPurple-400 hover:bg-myPurple-300 text-white flex items-center justify-center"
-                        >
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                class="ionicon"
-                                width="28px"
-                                fill="#fff"
-                                viewBox="0 0 512 512"
-                            >
-                                <title>Navigate</title>
-                                <path
-                                    d="M272 464a16 16 0 01-16-16.42V264.13a8 8 0 00-8-8H64.41a16.31 16.31 0 01-15.49-10.65 16 16 0 018.41-19.87l384-176.15a16 16 0 0121.22 21.19l-176 384A16 16 0 01272 464z"
-                                />
-                            </svg>
-                        </div>
+            <div class="relative" @mouseover="hover = true" @mouseleave="hover = false">
+                <img :src="filteredPosts[0].image" alt="" class="w-full h-[300px] rounded-3xl overflow-hidden" />
+                <div v-if="hover"
+                    class="transition-all absolute top-0 left-0 flex items-center justify-center w-full h-full bg-myDark-100/60 rounded-3xl">
+                    <Link :href="route('post')" method="post" as="button" :data="{ id: filteredPosts[0].id }">
+                    <div
+                        class="w-16 h-16 rounded-full bg-myPurple-400 hover:bg-myPurple-300 text-white flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" width="28px" fill="#fff"
+                            viewBox="0 0 512 512">
+                            <title>Navigate</title>
+                            <path
+                                d="M272 464a16 16 0 01-16-16.42V264.13a8 8 0 00-8-8H64.41a16.31 16.31 0 01-15.49-10.65 16 16 0 018.41-19.87l384-176.15a16 16 0 0121.22 21.19l-176 384A16 16 0 01272 464z" />
+                        </svg>
+                    </div>
                     </Link>
                 </div>
             </div>
@@ -144,11 +138,8 @@ export default {
                     {{ filteredPosts[0].description }}
                 </p>
                 <div class="flex items-center">
-                    <img
-                        alt="testimonial"
-                        :src="$page.props.auth.user.image_url"
-                        class="w-12 h-12 rounded-full flex-shrink-0 object-cover object-center"
-                    />
+                    <img alt="testimonial" :src="filteredPosts[0].image_url"
+                        class="w-12 h-12 rounded-full flex-shrink-0 object-cover object-center" />
                     <span class="flex-grow flex flex-col pl-4">
                         <span class="title-font font-medium">{{
                             filteredPosts[0].name

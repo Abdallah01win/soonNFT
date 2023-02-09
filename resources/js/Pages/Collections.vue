@@ -54,7 +54,7 @@ export default {
                 </div>
                 <h3 class="text-4xl font-bold">All Collections</h3>
             </div>
-            <input type="text" class="border-white rounded-full bg-transparent placeholder:text-myGray"
+            <input type="text" class="border-[3px] border-myPurple-400 focus:border-myPurple-400 focus:ring-0 rounded-full bg-transparent placeholder:text-myGray"
                 placeholder="Search" v-model="searchTerm" @input="searchData" />
         </div>
 

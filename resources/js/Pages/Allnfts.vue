@@ -34,6 +34,12 @@ export default {
                 return str;
             }
         },
+        SelectedOrder(option) {
+            this.selectedOrder = option;
+        },
+        SelectedBlockchain(option) {
+            this.selectedBlockchain = option;
+        },
     },
     computed: {
         filteredNfts() {
@@ -80,20 +86,39 @@ export default {
                 </div>
 
                 <div class="flex items-center gap-x-5">
-                    <select v-model="selectedBlockchain" :class="{ 'custom-select': true }"
-                        class="bg-black border-white rounded-full pl-[15px] w-48">
-                        <option value="">All Blockchains</option>
-                        <option v-for="blockchain in blockchains" :value="blockchain" :key="blockchain">
-                            {{ blockchain }}
-                        </option>
-                    </select>
-                    <select v-model="selectedOrder" :class="{ 'custom-options': true }"
-                        class="bg-black border-white rounded-full capitalize pl-[15px] w-48">
-                        <option value="desc">Newest</option>
-                        <option value="asc">Oldest</option>
-                        <option value="heighest">Heighest price</option>
-                        <option value="lowest">Lowest price</option>
-                    </select>
+
+                    <div
+                    class="relative text-sm flex border-[3px] border-myPurple-400 bg-transparent rounded-full py-2 px-2 /font-semibold leading-relaxed">
+                    <button @click="SelectedBlockchain('')" class="py-1 px-5 rounded-full transition-colors"
+                        :class="{ 'bg-myPurple-400': '' === selectedBlockchain}">
+                        All
+                    </button>
+                    <button v-for="(option, index) in blockchains" :key="index" @click="SelectedBlockchain(option)"
+                        class="py-1 px-5 rounded-full transition-colors capitalize"
+                        :class="{ 'bg-myPurple-400': option === selectedBlockchain }">
+                        {{ option }}
+                    </button>
+                </div>
+
+                    <div
+                    class="relative text-sm flex border-[3px] border-myPurple-400 bg-transparent rounded-full py-2 px-2 /font-semibold leading-relaxed">
+                    <button @click="SelectedOrder('desc')" class="py-1 px-5 rounded-full transition-colors"
+                        :class="{ 'bg-myPurple-400': 'desc' === selectedOrder }">
+                        Newest
+                    </button>
+                    <button @click="SelectedOrder('asc')" class="py-1 px-5 rounded-full transition-colors"
+                        :class="{ 'bg-myPurple-400': 'asc' === selectedOrder }">
+                        Oldest
+                    </button>
+                    <button @click="SelectedOrder('heighest')" class="py-1 px-5 rounded-full transition-colors"
+                        :class="{ 'bg-myPurple-400': 'heighest' === selectedOrder }">
+                        heighest
+                    </button>
+                    <button @click="SelectedOrder('lowest')" class="py-1 px-5 rounded-full transition-colors"
+                        :class="{ 'bg-myPurple-400': 'lowest' === selectedOrder }">
+                        lowest
+                    </button>
+                </div>
                 </div>
             </div>
 

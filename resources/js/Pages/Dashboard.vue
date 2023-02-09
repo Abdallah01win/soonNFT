@@ -42,6 +42,7 @@ export default {
             usersCount: this.getUsersCount(),
             postsCount: this.getPostsCount(),
             formMessage: false,
+            postMessage: false,
         };
     },
     components: {
@@ -101,11 +102,22 @@ export default {
             });
         },
         submitPost() {
-            postForm.post(route("posts/store")),
-            {
+            postForm.post(route("posts/store")),{
                 forceFormData: true,
                 onSuccess: () => {
-                    postForm.reset();
+                    postForm.reset(
+                        "body",
+                        "category",
+                        "description",
+                        "image",
+                        "title",
+                    );
+                    let file = document.getElementById("postImage");
+                    file.value = null;
+                    this.postMessage = true;
+                    setTimeout(() => {
+                        this.postMessage = false;
+                    }, 3000);
                 },
             };
         },
@@ -287,10 +299,10 @@ onMounted(() => {
                     <div class="text-2xl font-semibold">
                         Write New Blog Post
                     </div>
-                    <div v-if="formMessage != ''"
+                    <div v-if="postMessage != ''"
                         class="py-1 px-4 text-xs rounded-full bg-green-400 flex items-center gap-2 transition-all ease-out duration-300">
                         <ion-icon name="checkmark-outline"></ion-icon>
-                        <span>NFT Saved Successfully</span>
+                        <span>Post Saved Successfully</span>
                     </div>
                 </div>
                 <div class="flex items-center gap-x-3 my-4">
@@ -352,8 +364,7 @@ onMounted(() => {
                                 <span> Image Selected </span>
                             </span>
                             <input class="absolute top-0 left-0 w-full h-[100%] opacity-0" type="file" name="image"
-                                id="image" @input="
-                                    postForm.image = $event.target.files[0]
+                                id="postImage" @input="postForm.image = $event.target.files[0]
                                 " />
                         </lable>
                         <InputError class="mt-2" :message="postForm.errors.image" />

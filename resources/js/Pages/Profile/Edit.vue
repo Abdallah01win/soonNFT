@@ -34,26 +34,28 @@ export default{
             <h2 class="font-semibold text-xl text-myGray leading-relaxed">Profile</h2>
         </template>
 
-        <div class="py-12">
-            <div class="mx-auto max-w-[1180px] sm:px-6 lg:px-8 space-y-6">
+        
+            <div class="py-12 mx-auto max-w-[1180px] space-y-6">
+                
                 <div class="p-4 sm:p-8 bg-myDark-400 rounded-xl /grid /grid-cols-2 /gap-x-6">
                     <UpdateProfileInformationForm
                         :must-verify-email="mustVerifyEmail"
                         :status="status"
-                        class="max-w-full"
+                        class=""
                     />
                     
                 </div>
+                <div class="grid grid-cols-[1fr,.7fr] gap-6">
 
-                <div class="p-4 sm:p-8 bg-myDark-400 rounded-xl">
-                    <UpdatePasswordForm class="max-w-xl" />
-                </div>
-
-                <div class="p-4 sm:p-8 bg-myDark-400 rounded-xl">
-                    <DeleteUserForm class="max-w-xl" />
+                    <div class="p-4 sm:p-8 bg-myDark-400 rounded-xl">
+                        <UpdatePasswordForm class="/max-w-xl" />
+                    </div>
+                    
+                    <div class="p-4 sm:p-8 bg-myDark-400 rounded-xl">
+                        <DeleteUserForm class="/max-w-xl" />
+                    </div>
                 </div>
             </div>
-        </div>
         <Footer />
     </AuthenticatedLayout>
 </template>

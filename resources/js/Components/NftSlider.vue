@@ -37,6 +37,9 @@ export default {
             myDate.time = newDate.toString().substring(16, 24);
             return myDate;
         },
+        isImage(link) {
+            return !link.endsWith('mp4');
+        }
     },
 };
 </script>
@@ -71,7 +74,9 @@ export default {
         <div class="bg-[#0D0D0D] rounded-xl p-6 w-[70%] mx-auto">
             <div class="grid grid-cols-[1.5fr,2fr] gap-x-8">
                 <div class="w-[100%] rounded-xl overflow-hidden">
-                    <img :src="drop.image" alt="" />
+                    <img v-if="isImage(drop.image)" :src="drop.image" alt=""
+                class="min-w-[100%] h-full block rounded-2xl" />
+            <video v-else :src="drop.image" autoplay loop class="min-w-[100%] rounded-2xl" />
                 </div>
                 <div class="flex.flex-col">
                     <div

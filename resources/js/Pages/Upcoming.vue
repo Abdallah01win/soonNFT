@@ -77,7 +77,7 @@ export default {
             </div>
             <input
                 type="text"
-                class="border-white rounded-full bg-transparent placeholder:text-myGray"
+                class="border-[3px] border-myPurple-400 focus:border-myPurple-400 focus:ring-0 rounded-full bg-transparent placeholder:text-myGray"
                 placeholder="Search"
                 v-model="searchTerm"
                 @input="searchData"

@@ -53,7 +53,7 @@ export default {
             <div class="flex items-center">
               <img
                 alt="testimonial"
-                :src="$page.props.auth.user.image_url"
+                :src="item.image_url"
                 class="w-10 h-10 rounded-full flex-shrink-0 object-cover object-center"
               />
               <span class="flex-grow flex flex-col pl-4">

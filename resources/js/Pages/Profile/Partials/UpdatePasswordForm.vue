@@ -88,11 +88,11 @@ const updatePassword = () => {
                 <InputError :message="form.errors.password_confirmation" class="mt-2" />
             </div>
 
-            <div class="flex items-center gap-4">
-                <PrimaryButton :disabled="form.processing">Save</PrimaryButton>
+            <div class="flex items-center justify-between">
+                <PrimaryButton :disabled="form.processing" class="w-1/3 justify-center">Save</PrimaryButton>
 
                 <Transition enter-from-class="opacity-0" leave-to-class="opacity-0" class="transition ease-in-out">
-                    <p v-if="form.recentlySuccessful" class="text-sm text-myGray">Saved.</p>
+                    <p v-if="form.recentlySuccessful" class="text-sm text-white font-semibold bg-green-600 py-1 px-4 rounded-full">Profile Saved.</p>
                 </Transition>
             </div>
         </form>
