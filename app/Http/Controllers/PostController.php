@@ -8,6 +8,7 @@ use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
 {
@@ -60,7 +61,7 @@ class PostController extends Controller
         $image_path = $request->file('image')->store('posts', 'public');
         $post = Post::create([
             'title' => $request->get('title'),
-            'image' => asset('storage/'.$image_path),
+            'image' => asset('storage/' . $image_path),
             'category' => $request->get('category'),
             'body' => $request->get('body'),
             'description' => $postDesc,
@@ -135,8 +136,19 @@ class PostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Post $post)
+    public function destroy(Request $request)
     {
-        //
+        $user = Auth::user();
+        $userType = $user->type;
+        if ($userType === 1) {
+            $id = $request->get('id');
+            $imgurl = Post::where('id', $id)->limit(1)->get('image');
+            $imagename = substr($imgurl[0]['image'], strpos($imgurl[0]['image'], 'posts/') + 6);
+            @unlink('storage/posts/' . $imagename);
+            DB::table('posts')->Where('id', $id)->delete();
+            return redirect('blog')->with('success', 'Post Deleted');
+        } else{
+            return redirect('blog');
+        }
     }
 }

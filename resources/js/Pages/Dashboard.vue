@@ -371,7 +371,7 @@ onMounted(() => {
                     </div>
                 </div>
                 <div class="w-full mb-4">
-                    <TextInput id="postDescription" max="255" type="text" class="mt-1 block w-full"
+                    <TextInput id="postDescription" maxlength="254" type="text" class="mt-1 block w-full"
                         v-model="postForm.description" required autocomplete="postDescription"
                         placeholder="Description" />
                     <InputError class="mt-2" :message="postForm.errors.description" />

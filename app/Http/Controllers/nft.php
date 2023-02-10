@@ -6,6 +6,7 @@ use App\Models\Nfts;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use GuzzleHttp\Client;
 
@@ -18,7 +19,7 @@ class nft extends Controller
     }
     public function count()
     {
-        return Nfts::count();    
+        return Nfts::count();
     }
 
     public function view(Request $request)
@@ -26,9 +27,9 @@ class nft extends Controller
         $id = $request->get('id');
         $nft = Nfts::where('id', $id)->limit(1)->get();
         $nfts = Nfts::where('id', '!=', $id)
-        ->limit(6)
-        ->select('id', 'imgurl', 'name', 'price', 'is_featured', 'created_at', 'blockchain' )
-        ->get();
+            ->limit(6)
+            ->select('id', 'imgurl', 'name', 'price', 'is_featured', 'created_at', 'blockchain')
+            ->get();
         return Inertia::render('Nft', ['nft' => $nft[0], 'nfts' => $nfts]);
     }
 
@@ -47,10 +48,10 @@ class nft extends Controller
 
         $image_path = $request->file('imgurl')->store('images', 'public');
 
-        $nft = new Nfts ([
+        $nft = new Nfts([
             'name' => $request->get('name'),
             'discription' => $request->get('description'),
-            'imgurl' => asset('storage/'.$image_path),
+            'imgurl' => asset('storage/' . $image_path),
             'price' => $request->get('price'),
             'blockchain' => $request->get('blockchain'),
             'twitter' => $request->get('twitter'),
@@ -66,26 +67,17 @@ class nft extends Controller
 
     public function destroy(Request $request)
     {
-        $id = $request->get('id');
-        $imgurl = nfts::where('id', $id)->limit(1)->get('imgurl');
-        $imagename = substr($imgurl[0]['imgurl'], strpos($imgurl[0]['imgurl'], 'images/') + 7);
-        @unlink('storage/images/'.$imagename);
-        DB::table('nfts')->Where('id', $id)->delete();
-        return redirect('nfts/all')->with('success', 'NFT Deleted');
+        $user = Auth::user();
+        $userType = $user->type;
+        if ($userType === 1) {
+            $id = $request->get('id');
+            $imgurl = nfts::where('id', $id)->limit(1)->get('imgurl');
+            $imagename = substr($imgurl[0]['imgurl'], strpos($imgurl[0]['imgurl'], 'images/') + 7);
+            @unlink('storage/images/' . $imagename);
+            DB::table('nfts')->Where('id', $id)->delete();
+            return redirect('nfts/all')->with('success', 'NFT Deleted');
+        } else{
+            return redirect('nfts/all');
+        }
     }
-    /*public function collection(Request $request)
-    {
-        $id = $request->get('id');
-        $client = new Client();
-        $response = $client->get("https://api-devnet.magiceden.dev/v2/collections/{$id}/activities?offset=0&limit=100");
-        $col = json_decode($response->getBody(), true);
-
-        $response2 = $client->get("https://api-devnet.magiceden.dev/v2/collections/{$id}/stats");
-        $secondData = json_decode($response2->getBody(), true);
-        $combinedData = [];
-        $col = array_merge($col, $secondData);
-        return Inertia::render('Collection', [
-            'data' => $col,
-        ]);
-    }*/
 }

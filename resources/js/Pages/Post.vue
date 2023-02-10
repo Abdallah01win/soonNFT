@@ -42,7 +42,12 @@ export default {
             myDate.time = newDate.toString().substring(16, 24);
             return myDate;
         },
-
+        close() {
+            const confirmDelete = document.getElementById("confirmDelete");
+            const body = document.body;
+            body.classList.toggle("overflow-hidden");
+            confirmDelete.classList.toggle("hidden");
+        },
         submit() {
             form.transform((data) => ({
                 ...data,
@@ -75,11 +80,36 @@ export default {
                 <!-- Post Header -->
                 <div class="relative">
                     <img :src="post.image" alt="" class="w-full h-[440px] rounded-3xl overflow-hidden">
+
+                    <div v-if="
+                    $page.props.auth.user &&
+                    $page.props.auth.user.type === 1" @click="close"
+                        class="absolute top-0 left-0 z-10 mt-4 ml-4 rounded-full bg-slate-300 py-2 px-2 cursor-pointer">
+                        <span class="">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" fill="#000000" viewBox="0 0 256 256">
+                                <rect width="256" height="256" fill="none"></rect>
+                                <line x1="216" y1="56" x2="40" y2="56" fill="none" stroke="#000000"
+                                    stroke-linecap="round" stroke-linejoin="round" stroke-width="12"></line>
+                                <line x1="104" y1="104" x2="104" y2="168" fill="none" stroke="#000000"
+                                    stroke-linecap="round" stroke-linejoin="round" stroke-width="12"></line>
+                                <line x1="152" y1="104" x2="152" y2="168" fill="none" stroke="#000000"
+                                    stroke-linecap="round" stroke-linejoin="round" stroke-width="12"></line>
+                                <path d="M200,56V208a8,8,0,0,1-8,8H64a8,8,0,0,1-8-8V56" fill="none" stroke="#000000"
+                                    stroke-linecap="round" stroke-linejoin="round" stroke-width="12"></path>
+                                <path d="M168,56V40a16,16,0,0,0-16-16H104A16,16,0,0,0,88,40V56" fill="none"
+                                    stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="12">
+                                </path>
+                            </svg>
+                        </span>
+                    </div>
+
                     <div class="absolute top-0 left-0 w-full h-full flex items-end py-8 px-8 rounded-3xl overflow-hidden"
                         style="background: linear-gradient(180deg, rgba(30,30,30,0.25) 0%, rgba(3,3,3,.9) 100%);">
                         <div class="flex flex-col w-full">
                             <div class="flex items-center justify-between mb-2">
-                                <div class="bg-myPurple-400 mb-1 rounded-full px-5 py-1 w-fit font-semibold">{{ post.category }}</div>
+                                <div class="bg-myPurple-400 mb-1 rounded-full px-5 py-1 w-fit font-semibold">{{
+                                    post.category
+                                }}</div>
 
                                 <div class="flex items-center">
                                     <img alt="testimonial" :src="post.image_url"
@@ -182,8 +212,7 @@ export default {
                     </div>
                     <div class="flex flex-col gap-y-6">
                         <div class="relative" v-for="post in similar" :key="post.id">
-                            <img :src="post.image" alt=""
-                                class="w-full h-[250px] rounded-3xl overflow-hidden">
+                            <img :src="post.image" alt="" class="w-full h-[250px] rounded-3xl overflow-hidden">
                             <div class="absolute top-0 left-0 w-full h-full flex items-end py-6 px-6 rounded-3xl overflow-hidden"
                                 style="background: linear-gradient(180deg, rgba(30,30,30,0.25) 0%, rgba(3,3,3,.9) 100%);">
                                 <div class="flex flex-col">
@@ -210,54 +239,107 @@ export default {
         </div>
         </div> -->
     </section>
+
+    <!-- Confirm Delete -->
+    <div class="bg-myDark-300/80 fixed top-0 left-0 w-full h-screen flex items-center z-10 hidden" id="confirmDelete"
+        @click.self="close">
+        <div
+            class="bg-myDark-100 overflow-hidden shadow-sm sm:rounded-lg px-10 py-10 w-[45%] mx-auto /////////translate-y-[130%]">
+            <div class="flex justify-between items-center mb-2">
+                <h3 class="text-2xl font-semibold">Delete Post</h3>
+                <button class="p-2 bg-gray-200 rounded-full" @click="close">
+                    <span class="w-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" fill="#000000" viewBox="0 0 256 256">
+                            <rect width="256" height="256" fill="none"></rect>
+                            <line x1="200" y1="56" x2="56" y2="200" fill="none" stroke="#000000" stroke-linecap="round"
+                                stroke-linejoin="round" stroke-width="12"></line>
+                            <line x1="200" y1="200" x2="56" y2="56" fill="none" stroke="#000000" stroke-linecap="round"
+                                stroke-linejoin="round" stroke-width="12"></line>
+                        </svg>
+                    </span>
+                </button>
+            </div>
+            <p>
+                Are You sure you want to delete this post? This can't be
+                undone!
+            </p>
+            <div class="flex items-center justify-between mt-6 gap-x-5">
+                <Link :href="route('posts/destroy')" method="post" as="button" :data="{ id: post.id }" @click="close"
+                    class="w-full justify-center items-center px-4 py-3 bg-white border border-transparent rounded-full font-semibold text-black uppercase tracking-widest hover:bg-white/90 focus:bg-white/90 active:bg-white/90 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150 text-sm">
+                Delete
+                </Link>
+
+                <div type="button"
+                    class="grow flex cursor-pointer w-full justify-center px-4 py-3 rounded-full bg-transparent border border-white text-white/100"
+                    @click="close">
+                    Cancel
+                </div>
+            </div>
+        </div>
+    </div>
+
     <Footer />
 </template>
 
 <style>
-#postBody h1, h2, h3, h4, h5, h6{
+#postBody h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     color: white;
     font-size: larger;
     font-weight: 700;
     margin: 6px 0px;
 }
-#postBody h6{
+
+#postBody h6 {
     font-size: 14px;
 }
-#postBody h5{
+
+#postBody h5 {
     font-size: 16px;
 }
-#postBody h4{
+
+#postBody h4 {
     font-size: 18px;
 }
-#postBody h3{
+
+#postBody h3 {
     font-size: 20px;
 }
-#postBody h2{
+
+#postBody h2 {
     font-size: 24px;
 }
-#postBody h1{
+
+#postBody h1 {
     font-size: 30px;
 }
 
-#postBody a{
-    color:#5e45ff;
+#postBody a {
+    color: #5e45ff;
     text-underline-offset: 2px;
     text-decoration: underline;
 }
 
-#postBody a:hover{
-    color:#3930cf;
+#postBody a:hover {
+    color: #3930cf;
 }
 
-#postBody ul, ol{
+#postBody ul,
+ol {
     list-style-type: disc;
     display: block;
     padding: 12px 0px 0px 30px;
 }
-#postBody ul{
+
+#postBody ul {
     list-style-type: disc;
 }
-#postBody ol{
+
+#postBody ol {
     list-style-type: decimal;
 }
 </style>

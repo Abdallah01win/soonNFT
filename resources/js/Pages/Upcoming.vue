@@ -104,9 +104,8 @@ export default {
             <div class="grid grid-cols-[1.5fr,2fr] gap-x-8">
                 <div class="w-[100%] rounded-xl overflow-hidden">
                     <img
-                        v-if="isImage(drop.image)"
+                        v-if="drop != '' && isImage(drop.image)"
                         :src="drop.image"
-                        @error="(event) => handleError(event)"
                         alt=""
                         class="min-w-[100%] h-full block rounded-2xl"
                     />

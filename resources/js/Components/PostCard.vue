@@ -49,7 +49,7 @@ export default {
         <div class="leading-relaxed py-5 px-3">
             <div class="text-myPurple-400 text-sm font-semibold my-1">{{ item.category }}</div>
             <div class="text-xl font-semibold mb-3 capitalize">{{  item.title  }}</div>
-            <p class="text-myGray mb-3 capitalize">{{ truncateString(115, item.description) }}</p>
+            <p class="text-myGray mb-3 capitalize">{{ truncateString(100, item.description) }}</p>
             <div class="flex items-center">
               <img
                 alt="testimonial"
