@@ -73,7 +73,7 @@ export default {
 
     <Head title="Post" />
     <Navigation />
-    <section class="mx-auto my-10 max-w-[1180px]">
+    <section class="mx-auto my-12 max-w-[1180px]">
 
         <div class="grid grid-cols-[1fr,0.5fr] gap-x-10">
             <div>

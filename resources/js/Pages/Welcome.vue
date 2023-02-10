@@ -180,14 +180,14 @@ export default {
     <main class="main">
         <Navigation />
         <section
-            class="grid grid-cols-2 gap-x-10 /h-[100vh] max-h-[620px] mx-auto max-w-[1180px] py-10"
+            class="grid grid-cols-2 gap-x-10 /h-[100vh] max-h-[620px] mx-auto max-w-full sm:max-w-[580px] md:max-w-[730px] lg:max-w-[980px] xl:max-w-[1180px] my-12"
         >
             <div class="flex flex-col justify-center">
-                <h1 class="font-inter font-black text-6xl mb-3 uppercase">
+                <h1 class="font-inter font-black md:text-4xl lg:text-5xl xl:text-6xl mb-3 uppercase">
                     Unlocking a New Dimension of
                     <span class="text-myPurple-400">NFT Collection</span>
                 </h1>
-                <p class="text-myGray text-lg leading-relaxed">
+                <p class="text-myGray md:text-sm lg:text-base xl:text-lg leading-relaxed">
                     Discover the world of digital art, NFTs are more than just
                     digital collectibles, they represent
                     <span class="text-myPurple-400 font-semibold uppercase"
@@ -197,12 +197,12 @@ export default {
                 </p>
                 <div class="flex items-center gap-x-6 mt-8">
                     <Link :href="route('login')"
-                        class="text-lg rounded-full py-2 px-6 uppercase hover:bg-myPurple-300 bg-myPurple-400 transition-all"
+                        class="md:text-sm lg:text-base xl:text-lg rounded-full py-2 px-6 uppercase hover:bg-myPurple-300 bg-myPurple-400 transition-all"
                     >
                         Get Started
                 </Link>
                     <Link :href="route('nfts/all')"
-                        class="text-lg rounded-full py-2 px-6 border border-white bg-none hover:bg-white hover:text-black transition-all"
+                        class="md:text-sm lg:text-base xl:text-lg rounded-full py-2 px-6 border border-white bg-none hover:bg-white hover:text-black transition-all"
                     >
                         EXPLORE NFTs
             </Link>
@@ -215,35 +215,35 @@ export default {
     </main>
     <!-- collections -->
     <section
-        class="mx-auto my-20 max-w-[1180px] bg-myDark-400 px-10 py-12 rounded-xl"
+        class="mx-auto my-20 max-w-full sm:max-w-[580px] md:max-w-[730px] lg:max-w-[980px] xl:max-w-[1180px] bg-myDark-400 px-10 py-12 rounded-xl"
     >
         <div class="flex items-center justify-between">
             <div class="flex flex-col mb-6">
                 <div
-                    class="text-myPurple-400 text-base font-semibold uppercase"
+                    class="text-myPurple-400 sm:text-xs lg:text-sm xl:text-base font-semibold uppercase"
                 >
                     Gallery
                 </div>
-                <h3 class="text-4xl font-bold">Top Collections</h3>
+                <h3 class="sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold">Top Collections</h3>
             </div>
             <Link
                 :href="route('/collections')"
-                class="text-base rounded-full py-2 px-6 bg-myPurple-400 hover:bg-myPurple-300 transition-all"
+                class="sm:text-sm lg:text-base rounded-full py-1 px-3 sm:px-4 lg:py-2 lg:px-6 bg-myPurple-400 hover:bg-myPurple-300 transition-all"
             >
                 View All
             </Link>
         </div>
 
-        <div class="grid grid-cols-3 gap-x-4 gap-y-3">
+        <div class="grid grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-3">
             <div
-                class="flex items-center gap-x-4 /border-b /border-myPurple-400 py-2 /px-4"
+                class="flex items-center gap-x-4 py-2"
                 v-for="col in cols"
                 :key="col.symbol"
             >
-                <div class="font-inter font-bold">
+                <div class="font-inter text-xs md:text-sm font-bold">
                     {{ cols.indexOf(col) + 1 }}
                 </div>
-                <div class="rounded-full overflow-hidden w-20 h-20">
+                <div class="rounded-full overflow-hidden w-12 h-12 sm:w-14 md:w-16 md:h-16 sm:h-14 lg:w-20 lg:h-20">
                     <img
                         :src="col.image"
                         alt=""
@@ -253,7 +253,7 @@ export default {
                 <div class="flex flex-col">
                     <div
                         @click="showPopup(col)"
-                        class="cursor-pointer font-inter font-semibold text-lg hover:text-myPurple-400 flex items-center gap-x-2"
+                        class="cursor-pointer font-inter font-semibold sm:text-sm lg:text-lg hover:text-myPurple-400 flex items-center gap-x-2"
                     >
                         {{ truncateString(16, col.name) }}
                         <span v-if="col.isBadged">
@@ -274,7 +274,7 @@ export default {
                             </svg>
                         </span>
                     </div>
-                    <div class="text-myGray text-sm font-semibold">
+                    <div class="text-myGray text-xs md:text-sm font-semibold">
                         <span>{{ col.symbol }}</span>
                     </div>
                 </div>
@@ -283,20 +283,20 @@ export default {
     </section>
 
     <!-- Upcoming Section -->
-    <section class="mx-auto my-20 max-w-[1180px]" v-if="dropsCount !== 0">
+    <section class="mx-auto my-20 max-w-full sm:max-w-[580px] md:max-w-[730px] lg:max-w-[980px] xl:max-w-[1180px]" v-if="dropsCount !== 0">
         <div class="flex items-center justify-between">
             <div class="flex flex-col mb-6">
                 <div
-                    class="text-myPurple-400 text-base font-semibold uppercase"
+                    class="text-myPurple-400 xs:text-xs md:text-sm xl:text-base font-semibold uppercase"
                 >
                     Drops
                 </div>
-                <h3 class="text-4xl font-bold">Most Unticipated</h3>
+                <h3 class="sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold">Most Unticipated</h3>
             </div>
 
             <Link
                 :href="route('upcoming')"
-                class="text-base rounded-full py-2 px-6 bg-myPurple-400 hover:bg-myPurple-300 transition-all"
+                class="sm:text-sm lg:text-base rounded-full py-1 px-3 sm:px-4 lg:py-2 lg:px-6 bg-myPurple-400 hover:bg-myPurple-300 transition-all"
             >
                 View All
             </Link>
@@ -309,21 +309,21 @@ export default {
 
     <!-- Table Section -->
     <section
-        class="mx-auto my-20 max-w-[1180px] /bg-myDark-200 bg-[#0D0D0D] px-10 pt-12 pb-3 rounded-xl leading-relaxed"
+        class="mx-auto my-20 max-w-full sm:max-w-[580px] md:max-w-[730px] lg:max-w-[980px] xl:max-w-[1180px] bg-[#0D0D0D] px-10 pt-12 pb-3 rounded-xl leading-relaxed"
     >
         <div class="flex items-center justify-between">
             <div class="flex flex-col mb-6">
                 <div
-                    class="text-myPurple-400 text-base font-semibold uppercase"
+                    class="text-myPurple-400 xs:text-xs md:text-sm xl:text-base font-semibold uppercase"
                 >
                     NFTS
                 </div>
-                <h3 class="text-4xl font-bold">Featured Selection</h3>
+                <h3 class="sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold">Featured Selection</h3>
             </div>
 
             <Link
                 :href="route('nfts/all')"
-                class="text-base rounded-full py-2 px-6 bg-myPurple-400 hover:bg-myPurple-300 transition-all"
+                class="sm:text-sm lg:text-base rounded-full py-1 px-3 sm:px-4 lg:py-2 lg:px-6 bg-myPurple-400 hover:bg-myPurple-300 transition-all"
             >
                 View All
             </Link>
@@ -332,12 +332,12 @@ export default {
             <thead class="border-b border-myDark-100 font-semibold">
                 <tr class="">
                     <td class="py-3 //text-lg pl-3">#</td>
-                    <td class="py-3 //text-lg">Name</td>
-                    <td class="py-3 //text-lg">Social</td>
-                    <td class="py-3 //text-lg">Blockchain</td>
-                    <td class="py-3 //text-lg">supply</td>
-                    <td class="py-3 //text-lg">Price</td>
-                    <td class="py-3 //text-lg">Added</td>
+                    <td class="py-3 ">Name</td>
+                    <td class="py-3 ">Social</td>
+                    <td class="py-3 ">Blockchain</td>
+                    <td class="py-3 hidden md:table-cell">supply</td>
+                    <td class="py-3 ">Price</td>
+                    <td class="py-3 hidden lg:table-cell">Added</td>
                 </tr>
             </thead>
 
@@ -480,11 +480,11 @@ export default {
                         </div>
                     </td>
                     <td class="py-2 capitalize">{{ item.blockchain }}</td>
-                    <td class="py-2">{{ item.supply }}</td>
+                    <td class="py-2 hidden md:table-cell">{{ item.supply }}</td>
                     <td class="py-2 uppercase">
                         {{ item.price }} {{ item.blockchain.substr(0, 3) }}
                     </td>
-                    <td class="py-2">{{ dateConvert(item.added).date }}</td>
+                    <td class="py-2 hidden lg:table-cell">{{ dateConvert(item.added).date }}</td>
                 </tr>
             </tbody>
         </table>
@@ -496,20 +496,20 @@ export default {
 
     <!-- Blog Section -->
     <section
-        class="mx-auto my-20 max-w-[1180px] bg-myDark-400 px-10 py-10 rounded-xl"
+        class="mx-auto my-20 max-w-full sm:max-w-[580px] md:max-w-[730px] lg:max-w-[980px] xl:max-w-[1180px] bg-myDark-400 px-10 py-10 rounded-xl"
     >
         <div class="flex items-center justify-between">
             <div class="flex flex-col mb-6">
                 <div
-                    class="text-myPurple-400 text-base font-semibold uppercase"
+                    class="text-myPurple-400 xs:text-xs md:text-sm xl:text-base font-semibold uppercase"
                 >
                     Blog
                 </div>
-                <h3 class="text-4xl font-bold">Latest News</h3>
+                <h3 class="sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold">Latest News</h3>
             </div>
             <Link
                 :href="route('blog')"
-                class="text-base rounded-full py-2 px-6 bg-myPurple-400 hover:bg-myPurple-300 transition-all"
+                class="sm:text-sm lg:text-base rounded-full py-1 px-3 sm:px-4 lg:py-2 lg:px-6 bg-myPurple-400 hover:bg-myPurple-300 transition-all"
             >
                 View All
             </Link>

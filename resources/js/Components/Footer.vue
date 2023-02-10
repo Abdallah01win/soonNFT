@@ -10,7 +10,7 @@ const form = useForm({
 </script>
 <template>
     <footer
-        class="mx-auto mt-28 pt-10 max-w-[1180px] border-t border-myDark-100"
+        class="mx-auto /mt-28 pt-10 max-w-[1180px] border-t border-myDark-100"
     >
         <div class="text-5xl uppercase font-black mb-4">
             <Link :href="route('/')">Soonnft</Link>

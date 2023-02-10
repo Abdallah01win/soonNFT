@@ -58,7 +58,7 @@ Route::get('/', function () {
 
     $client = new Client();
     $response = $client->get('https://api-mainnet.magiceden.dev/v2/collections?offset=0&limit=500');
-    $firstData = array_slice(filter_badged(json_decode($response->getBody(), true), 'isBadged'), 0, 15);
+    $firstData = array_slice(filter_badged(json_decode($response->getBody(), true), 'isBadged'), 0, 12);
     /*$combinedData = [];
     foreach($firstData as $item){
         $response = $client->get("https://api-devnet.magiceden.dev/v2/collections/{$item['symbol']}/stats");

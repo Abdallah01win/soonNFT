@@ -4,11 +4,16 @@ import Dropdown from '@/Components/Dropdown.vue';
 import DropdownLink from '@/Components/DropdownLink.vue';
 </script>
 <template>
-    <nav class="flex justify-between items-center py-5 mx-auto max-w-[1180px]">
+    <div>
+    <nav class="flex justify-between items-center py-5 mx-auto border-b border-myDark-100
+                max-w-full sm:max-w-[580px] md:max-w-[730px] lg:max-w-[980px] xl:max-w-[1180px]">
         <div class="font-inter text-2xl font-extrabold">
-            <Link :href="route('/')">SOONNFT</Link>
+            <Link :href="route('/')">
+                <!-- <img src="/storage/assets/Logo-white.svg" class="w-full h-[150px]"/> -->
+                SOONNFT
+            </Link>
         </div>
-        <ul class="flex items-center gap-x-8 font-semibold leading-relaxed">
+        <ul class="hidden md:flex items-center gap-x-8 leading-relaxed ">
             <li class="hover:text-myPurple-400 cursor-pointer transition-all">
                 <Link :href="route('nfts/all')">NFTs</Link>
             </li>
@@ -57,4 +62,5 @@ import DropdownLink from '@/Components/DropdownLink.vue';
             </Dropdown>
         </div>
     </nav>
+</div>
 </template>

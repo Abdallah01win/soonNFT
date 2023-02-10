@@ -43,16 +43,15 @@ const closeModal = () => {
             <h2 class="text-lg font-medium ">Delete Account</h2>
 
             <p class="mt-1 text-sm text-myGray">
-                Once your account is deleted, all of its resources and data will be permanently deleted. Before deleting
-                your account, please download any data or information that you wish to retain.
+                Once your account is deleted, all of its resources and data will be permanently deleted.
             </p>
         </header>
 
         <DangerButton @click="confirmUserDeletion">Delete Account</DangerButton>
 
         <Modal :show="confirmingUserDeletion" @close="closeModal">
-            <div class="p-6">
-                <h2 class="text-lg font-medium text-gray-900">
+            <div class="p-6 bg-myDark-100">
+                <h2 class="text-lg font-medium text-white">
                     Are you sure you want to delete your account?
                 </h2>
 
