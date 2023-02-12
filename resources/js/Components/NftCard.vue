@@ -39,8 +39,8 @@ export default {
 };
 </script>
 <template>
-    <div class="bg-[#0D0D0D] rounded-2xl relative overflow-hidden w-[255px]">
-        <div class="w-[255px] h-[255px]">
+    <div class="bg-[#0D0D0D] rounded-2xl relative overflow-hidden min-sm:w-fit">
+        <div class="w-full /w-[180px] sm:w-[235px] md:w-[255px] h-[180px] sm:h-[235px] md:h-[255px]">
             <img v-if="isImage(item.image)" :src="item.image" alt=""
                 class="min-w-[100%] h-full block rounded-2xl" />
             <video v-else :src="item.image" autoplay loop class="min-w-[100%] rounded-2xl" />
@@ -48,9 +48,9 @@ export default {
         <div class="py-3 px-4">
             <div class="pb-1">
                 <div @click="handleClick" class="flex items-center gap-x-2 capitalize
-                    hover:text-myPurple-400 font-inter font-semibold text-base
+                    hover:text-myPurple-400 font-inter font-semibold text-xs sm:text-sm md:text-base
                     cursor-pointer">
-                    {{ truncateString(19, item.name) }}
+                    {{ truncateString(16, item.name) }}
                     <span v-if="item.featured">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" fill="#5e45ff" viewBox="0 0 256 256">
                             <rect width="256" height="256" fill="none"></rect>
@@ -62,11 +62,11 @@ export default {
                 </div>
             </div>
             <div class="flex items-center justify-between font-semibold text-myGray /border-t /border-myGray pt-1">
-                <div v-if="item.price" class="text-sm uppercase">
+                <div v-if="item.price" class="text-xs md:text-sm uppercase">
                     {{ item.price }} SOL
                 </div>
-                <div v-else class="text-sm uppercase">--</div>
-                <div class="text-sm uppercase">
+                <div v-else class="text-xs md:text-sm uppercase">--</div>
+                <div class="text-xs md:text-sm uppercase">
                     {{ dateConvert(item.launchDatetime).date }}
                 </div>
             </div>

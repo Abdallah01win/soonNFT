@@ -46,30 +46,39 @@ export default {
 
     <Head title="Home" />
     <Navigation />
-    <section class="mx-auto my-12 max-w-[1180px] bg-myDark-400 px-10 py-12 rounded-xl">
-        <div class="flex items-center justify-between">
-            <div class="flex flex-col mb-6">
-                <div class="text-myPurple-400 text-base font-semibold uppercase">
+    <section class="mx-auto my-12 sm:my-16 md:my-20 max-w-full sm:max-w-[580px] md:max-w-[730px] lg:max-w-[980px] xl:max-w-[1180px] bg-myDark-400 px-[8%] sm:px-10 py-6 md:py-10 lg:py-12 rounded-xl">
+        <div class="flex max-md:flex-col items-start md:items-center justify-between mb-6">
+            <div class="flex flex-col max-md:mb-3">
+                <div class="text-myPurple-400 text-sm md:text-base font-semibold uppercase">
                     Gallery
                 </div>
-                <h3 class="text-4xl font-bold">All Collections</h3>
+                <h3 class="text-2xl md:text-3xl xl:text-4xl font-bold">All Collections</h3>
             </div>
-            <input type="text" class="border-[3px] border-myPurple-400 focus:border-myPurple-400 focus:ring-0 rounded-full bg-transparent placeholder:text-myGray"
+            <input type="text" class="max-md:w-full border-[2px] md:border-[3px] border-myPurple-400 focus:border-myPurple-400 focus:ring-0 rounded-full bg-transparent placeholder:text-myGray"
                 placeholder="Search" v-model="searchTerm" @input="searchData" />
         </div>
 
-        <div class="grid grid-cols-3 gap-x-4 gap-y-3">
+        <div class="grid grid-cols-2 lg:grid-cols-3 gap-x-2 md:gap-x-4 gap-y-3">
             <p v-if="!filteredData.length" class="text-lg text-myGray">No Collections</p>
             <div v-else class="flex items-center gap-x-4 /border-b /border-myPurple-400 py-2 /px-4"
                 v-for="col in filteredData" :key="col.symbol">
-                <div class="rounded-full overflow-hidden w-20 h-20">
-                    <img :src="col.image" alt="" class="min-w-full min-h-full" />
+                <div class="relative w-10 h-10 sm:w-12 md:w-16 md:h-16 sm:h-12 lg:w-20 lg:h-20">
+                    <img :src="col.image" alt="" class="min-w-full min-h-full rounded-full overflow-hidden" />
+                    <span v-if="col.isBadged"
+                        class="sm:hidden block absolute bottom-0 right-0 z-10 bg-myDark-400 w-fit rounded-full">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" fill="#5e45ff" viewBox="0 0 256 256">
+                            <rect width="256" height="256" fill="none"></rect>
+                            <path
+                                d="M128,24A104,104,0,1,0,232,128,104.2,104.2,0,0,0,128,24Zm49.5,85.8-58.6,56a8.1,8.1,0,0,1-5.6,2.2,7.7,7.7,0,0,1-5.5-2.2l-29.3-28a8,8,0,1,1,11-11.6l23.8,22.7,53.2-50.7a8,8,0,0,1,11,11.6Z">
+                            </path>
+                        </svg>
+                    </span>
                 </div>
                 <div class="flex flex-col">
                     <div @click="showPopup(col)"
-                        class="cursor-pointer font-inter font-semibold text-lg hover:text-myPurple-400 flex items-center gap-x-2">
+                        class="cursor-pointer font-inter font-semibold text-xs sm:text-sm lg:text-lg hover:text-myPurple-400 flex items-center gap-x-2">
                         {{ truncateString(16, col.name) }}
-                        <span v-if="col.isBadged">
+                        <span v-if="col.isBadged" class="max-sm:hidden">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" fill="#5e45ff" viewBox="0 0 256 256">
                                 <rect width="256" height="256" fill="none"></rect>
                                 <path
@@ -78,8 +87,10 @@ export default {
                             </svg>
                         </span>
                     </div>
-                    <div class="text-myGray text-sm font-semibold">
-                        <span>{{ col.symbol }}</span>
+                    <div class="text-myGray text-xs md:text-sm font-semibold">
+                        <span>
+                            {{ truncateString(10, col.symbol) }}
+                            </span>
                     </div>
                 </div>
             </div>
@@ -90,13 +101,25 @@ export default {
     <div id="popup" ref="popup"
         class="bg-myDark-100/70 fixed top-0 left-0 w-full h-screen flex items-center justify-center z-10 hidden"
         @click.self="showPopup('')">
-        <div class="bg-[#0D0D0D] rounded-xl p-6 w-[70%] mx-auto">
-            <div class="grid grid-cols-[1.5fr,2fr] gap-x-8">
-                <div class="w-[100%] rounded-xl overflow-hidden">
+        <div class="bg-[#0D0D0D] rounded-xl p-6 w-full sm:w-[80%] md:w-[70%] mx-auto">
+            <div class="grid grid-cols-1 sm:grid-cols-[1.5fr,2fr] gap-y-2 gap-x-4 md:gap-x-8">
+                <div class="relative w-[100%] rounded-xl overflow-hidden">
                     <img :src="col.image" alt="" />
+                    <button class="absolute top-0 right-0 mt-3 mr-3 p-2 bg-gray-200 rounded-full"
+                        @click="showPopup('')">
+                        <span class="w-6">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" fill="#000000" viewBox="0 0 256 256">
+                                <rect width="256" height="256" fill="none"></rect>
+                                <line x1="200" y1="56" x2="56" y2="200" fill="none" stroke="#000000"
+                                    stroke-linecap="round" stroke-linejoin="round" stroke-width="12"></line>
+                                <line x1="200" y1="200" x2="56" y2="56" fill="none" stroke="#000000"
+                                    stroke-linecap="round" stroke-linejoin="round" stroke-width="12"></line>
+                            </svg>
+                        </span>
+                    </button>
                 </div>
                 <div class="flex.flex-col">
-                    <div class="flex items-center gap-2 text-3xl font-bold my-3">
+                    <div class="flex items-center gap-2 text-2xl sm:text-3xl font-bold my-3">
                         {{ col.name }}
                         <span v-if="col.isBadged">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" fill="#5e45ff" viewBox="0 0 256 256">

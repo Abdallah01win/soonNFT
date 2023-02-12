@@ -76,63 +76,63 @@ export default {
         <template v-slot:nav>
             <Navigation class="" />
         </template>
-        <section class="mx-auto my-12 max-w-[1180px]">
-            <div class="flex items-center justify-between mb-10">
-                <div class="flex flex-col">
-                    <div class="text-myPurple-400 text-base font-semibold uppercase">
+        <section class="mx-auto max-sm:mx-[8%] my-6 sm:my-8 md:my-12 max-w-full sm:max-w-[580px] md:max-w-[730px] lg:max-w-[980px] xl:max-w-[1180px]">
+            <div class="flex max-lg:flex-col items-start lg:items-center justify-between mb-10">
+                <div class="flex flex-col max-lg:mb-3">
+                    <div class="text-myPurple-400 text-xs sm:text-sm md:text-base font-semibold uppercase">
                         Brows
                     </div>
-                    <h3 class="text-4xl font-bold">All Nfts</h3>
+                    <h3 class="text-2xl sm:text-3xl lg:text-4xl font-bold">All Nfts</h3>
                 </div>
 
-                <div class="flex items-center gap-x-5">
+                <div class="flex max-md:flex-col items-start md:items-center max-md:gap-y-3 gap-x-5">
 
                     <div
-                    class="relative text-sm flex border-[3px] border-myPurple-400 bg-transparent rounded-full py-2 px-2 /font-semibold leading-relaxed">
-                    <button @click="SelectedBlockchain('')" class="py-1 px-5 rounded-full transition-colors"
+                    class="relative text-xs md:text-sm flex border-[2px] md:border-[3px] border-myPurple-400 bg-transparent rounded-full py-2 px-2 leading-relaxed">
+                    <button @click="SelectedBlockchain('')" class="py-1 px-3 sm:px-4 md:px-5 rounded-full transition-colors"
                         :class="{ 'bg-myPurple-400': '' === selectedBlockchain}">
                         All
                     </button>
                     <button v-for="(option, index) in blockchains" :key="index" @click="SelectedBlockchain(option)"
-                        class="py-1 px-5 rounded-full transition-colors capitalize"
+                        class="py-1 px-3 sm:px-4 md:px-5 rounded-full transition-colors capitalize"
                         :class="{ 'bg-myPurple-400': option === selectedBlockchain }">
                         {{ option }}
                     </button>
                 </div>
 
                     <div
-                    class="relative text-sm flex border-[3px] border-myPurple-400 bg-transparent rounded-full py-2 px-2 /font-semibold leading-relaxed">
-                    <button @click="SelectedOrder('desc')" class="py-1 px-5 rounded-full transition-colors"
+                    class="relative text-xs md:text-sm flex border-[2px] md:border-[3px] border-myPurple-400 bg-transparent rounded-full py-2 px-2 leading-relaxed">
+                    <button @click="SelectedOrder('desc')" class="py-1 px-3 sm:px-4 md:px-5 rounded-full transition-colors"
                         :class="{ 'bg-myPurple-400': 'desc' === selectedOrder }">
                         Newest
                     </button>
-                    <button @click="SelectedOrder('asc')" class="py-1 px-5 rounded-full transition-colors"
+                    <button @click="SelectedOrder('asc')" class="py-1 px-3 sm:px-4 md:px-5 rounded-full transition-colors"
                         :class="{ 'bg-myPurple-400': 'asc' === selectedOrder }">
                         Oldest
                     </button>
-                    <button @click="SelectedOrder('heighest')" class="py-1 px-5 rounded-full transition-colors"
+                    <button @click="SelectedOrder('heighest')" class="py-1 px-3 sm:px-4 md:px-5 rounded-full transition-colors"
                         :class="{ 'bg-myPurple-400': 'heighest' === selectedOrder }">
-                        heighest
+                        H.Price
                     </button>
-                    <button @click="SelectedOrder('lowest')" class="py-1 px-5 rounded-full transition-colors"
+                    <button @click="SelectedOrder('lowest')" class="py-1 px-3 sm:px-4 md:px-5 rounded-full transition-colors"
                         :class="{ 'bg-myPurple-400': 'lowest' === selectedOrder }">
-                        lowest
+                        L.Price
                     </button>
                 </div>
                 </div>
             </div>
 
-            <div class="grid grid-cols-4 gap-12">
-                <div v-for="item in filteredNfts" :key="item.id" class="w-fit">
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 sm:gap-8 lg:gap-12">
+                <div v-for="item in filteredNfts" :key="item.id" class="min-md:w-fit">
                     <div class="bg-[#0D0D0D] rounded-2xl relative overflow-hidden">
-                        <div class="w-[255px] h-[255px]">
+                        <div class="w-full h-[160px] sm:h-[180px] md:h-[200px] lg:w-[220px] lg:h-[220px] xl:w-[255px] xl:h-[255px]">
                             <img :src="item.imgurl" @error="(event) => handleError(event)" alt=""
                                 class="min-w-[100%] h-full block rounded-2xl" />
                         </div>
-                        <div class="py-3 px-4">
+                        <div class="py-2 md:py-3 px-2 md:px-4">
                             <div class="pb-1">
                                 <Link :href="route('nfts/nft')" method="post" as="button" :data="{ id: item.id }"
-                                    class="flex items-center gap-x-2 capitalize hover:text-myPurple-400 font-inter font-semibold text-base cursor-pointer">
+                                    class="flex items-center gap-x-2 capitalize hover:text-myPurple-400 font-inter font-semibold text-sm sm:text-base cursor-pointer">
                                 {{ truncateString(19, item.name) }}
                                 <span v-if="item.is_featured">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" fill="#5e45ff"
@@ -147,11 +147,11 @@ export default {
                             </div>
                             <div
                                 class="flex items-center justify-between font-semibold text-myGray /border-t /border-myGray pt-1">
-                                <div v-if="item.price" class="text-sm uppercase">{{ item.price }} {{
+                                <div v-if="item.price" class="text-xs sm:text-sm uppercase">{{ item.price }} {{
                                     item.blockchain.substring(0, 3)
                                 }}</div>
-                                <div v-else class="text-sm uppercase">--</div>
-                                <div class="text-sm uppercase">{{ dateConvert(item.created_at).date }}</div>
+                                <div v-else class="text-xs sm:text-sm uppercase">--</div>
+                                <div class="text-xs sm:text-sm uppercase">{{ dateConvert(item.created_at).date }}</div>
                             </div>
                         </div>
                     </div>

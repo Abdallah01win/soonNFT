@@ -73,13 +73,13 @@ export default {
 
     <Head title="Post" />
     <Navigation />
-    <section class="mx-auto my-12 max-w-[1180px]">
+    <section class="mx-auto max-sm:mx-[8%] my-6 sm:my-8 md:my-12 max-w-full sm:max-w-[580px] md:max-w-[730px] lg:max-w-[980px] xl:max-w-[1180px]">
 
-        <div class="grid grid-cols-[1fr,0.5fr] gap-x-10">
+        <div class="grid grid-cols-1 md:grid-cols-[1fr,0.5fr] md:gap-x-6 lg:gap-x-10">
             <div>
                 <!-- Post Header -->
                 <div class="relative">
-                    <img :src="post.image" alt="" class="w-full h-[440px] rounded-3xl overflow-hidden">
+                    <img :src="post.image" alt="" class="w-full h-[310px] sm:h-[350px] lg:h-[440px] rounded-3xl overflow-hidden">
 
                     <div v-if="
                     $page.props.auth.user &&
@@ -103,21 +103,21 @@ export default {
                         </span>
                     </div>
 
-                    <div class="absolute top-0 left-0 w-full h-full flex items-end py-8 px-8 rounded-3xl overflow-hidden"
+                    <div class="absolute top-0 left-0 w-full h-full flex items-end py-4 md:py-6 lg:py-8 px-4 md:px-6 lg:px-8 rounded-3xl overflow-hidden"
                         style="background: linear-gradient(180deg, rgba(30,30,30,0.25) 0%, rgba(3,3,3,.9) 100%);">
                         <div class="flex flex-col w-full">
                             <div class="flex items-center justify-between mb-2">
-                                <div class="bg-myPurple-400 mb-1 rounded-full px-5 py-1 w-fit font-semibold">{{
+                                <div class="bg-myPurple-400 mb-1 rounded-full px-4 md:px-5 sm:py-1 w-fit font-semibold">{{
                                     post.category
                                 }}</div>
 
-                                <div class="flex items-center">
+                                <div class="flex items-center ">
                                     <img alt="testimonial" :src="post.image_url"
                                         class="w-10 h-10 rounded-full flex-shrink-0 object-cover object-center" />
-                                    <span class="/flex-grow flex flex-col pl-3">
-                                        <span class="title-font font-medium">{{ post.name }}</span>
+                                    <span class="flex flex-col pl-3">
+                                        <span class="font-medium max-sm:text-sm">{{ post.name }}</span>
                                     </span>
-                                    <span class="flex items-center gap-x-2 pl-4">
+                                    <span class="flex items-center gap-x-2 pl-4 max-sm:hidden">
                                         <span>
                                             <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" width="26px"
                                                 height="26px" viewBox="0 0 512 512">
@@ -136,7 +136,7 @@ export default {
                                     </span>
                                 </div>
                             </div>
-                            <div class="text-3xl font-semibold">{{ post.title }}</div>
+                            <div class="text-xl md:text-2xl lg:text-3xl font-semibold">{{ post.title }}</div>
 
                         </div>
                     </div>
@@ -144,7 +144,7 @@ export default {
                 <!-- End Post Header -->
 
                 <!-- Post Body -->
-                <div v-html="post.body" class="leading-relaxed my-10 text-myGray" id="postBody">
+                <div v-html="post.body" class="leading-relaxed my-6 sm:my-8 md:my-10 xl:my-12 text-myGray" id="postBody">
                 </div>
                 <!-- End Body -->
 
@@ -205,14 +205,14 @@ export default {
             <div class="leading-relaxed flex flex-col">
                 <div>
                     <div class="mt-3 mb-6">
-                        <div class="text-myPurple-400 text-base font-semibold uppercase">
+                        <div class="text-myPurple-400 text-sm lg:text-base font-semibold uppercase">
                             Posts
                         </div>
-                        <h3 class="mt-[-3px] text-2xl font-bold">Suggested Stories</h3>
+                        <h3 class="mt-[-3px] text-xl lg:text-2xl font-bold">Suggested Stories</h3>
                     </div>
-                    <div class="flex flex-col gap-y-6">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:flex md:flex-col sm:gap-x-6 gap-y-6">
                         <div class="relative" v-for="post in similar" :key="post.id">
-                            <img :src="post.image" alt="" class="w-full h-[250px] rounded-3xl overflow-hidden">
+                            <img :src="post.image" alt="" class="w-full h-[225px] sm:h-[200px] md:h-[225px] lg:h-[250px] rounded-3xl overflow-hidden">
                             <div class="absolute top-0 left-0 w-full h-full flex items-end py-6 px-6 rounded-3xl overflow-hidden"
                                 style="background: linear-gradient(180deg, rgba(30,30,30,0.25) 0%, rgba(3,3,3,.9) 100%);">
                                 <div class="flex flex-col">
@@ -221,7 +221,7 @@ export default {
                                             post.category
                                         }}</div>
                                     </div>
-                                    <Link class="text-xl font-semibold hover:text-myPurple-400 cursor-pointer text-left"
+                                    <Link class="text-base lg:text-xl font-semibold hover:text-myPurple-400 cursor-pointer text-left"
                                         :href="route('post')" method="POST" as="button" :data="{ id: post.id }">
                                     {{ post.title }}
                                     </Link>
