@@ -13,6 +13,7 @@ export default {
     props: {
         nft: Object,
         nfts: Array,
+        screen: window.screen.width,
     },
     components: {
         Splide,
@@ -24,6 +25,11 @@ export default {
         Footer,
         Link,
     },
+    computed: {
+        width() {
+            return this.screen >= 768 ? 2 : 1;
+        },
+    },
     methods: {
         dateConvert(date) {
             let newDate = new Date(date);
@@ -31,7 +37,7 @@ export default {
             myDate.date = newDate.toString().substring(0, 10);
             myDate.time = newDate.toString().substring(16, 24);
             return myDate;
-        },  
+        },
         close() {
             const confirmDelete = document.getElementById("confirmDelete");
             const body = document.body;
@@ -55,8 +61,8 @@ export default {
         <template v-slot:nav>
             <Navigation class="" />
         </template>
-        <section class="mx-auto my-12 max-w-[1180px]">
-            <div class="grid grid-cols-[.45fr,1fr] gap-x-12">
+        <section class="mx-auto my-6 sm:my-10 md:my-12 max-w-full sm:max-w-[580px] md:max-w-[730px] lg:max-w-[980px] xl:max-w-[1180px] max-sm:px-[8%] py-6 md:py-10 lg:py-12 ">
+            <div class="grid grid-cols-1 lg:grid-cols-[.45fr,1fr] gap-y-6 md:gap-y-8 lg:gap-x-10 xl:gap-x-12">
                 <div
                     class="rounded-xl overflow-hidden w-[100%] h-[350px] relative"
                 >
@@ -64,25 +70,85 @@ export default {
                     <div
                         v-if="
                             $page.props.auth.user &&
-                            $page.props.auth.user.type === 1"
+                            $page.props.auth.user.type === 1
+                        "
                         @click="close"
-                        class="absolute top-0 left-0 mt-4 ml-4 rounded-full bg-slate-300 py-2 px-2 cursor-pointer">
+                        class="absolute top-0 left-0 mt-4 ml-4 rounded-full bg-slate-300 py-2 px-2 cursor-pointer"
+                    >
                         <span class="">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" fill="#000000" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><line x1="216" y1="56" x2="40" y2="56" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="12"></line><line x1="104" y1="104" x2="104" y2="168" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="12"></line><line x1="152" y1="104" x2="152" y2="168" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="12"></line><path d="M200,56V208a8,8,0,0,1-8,8H64a8,8,0,0,1-8-8V56" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="12"></path><path d="M168,56V40a16,16,0,0,0-16-16H104A16,16,0,0,0,88,40V56" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="12"></path></svg>
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="20"
+                                fill="#000000"
+                                viewBox="0 0 256 256"
+                            >
+                                <rect
+                                    width="256"
+                                    height="256"
+                                    fill="none"
+                                ></rect>
+                                <line
+                                    x1="216"
+                                    y1="56"
+                                    x2="40"
+                                    y2="56"
+                                    fill="none"
+                                    stroke="#000000"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="12"
+                                ></line>
+                                <line
+                                    x1="104"
+                                    y1="104"
+                                    x2="104"
+                                    y2="168"
+                                    fill="none"
+                                    stroke="#000000"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="12"
+                                ></line>
+                                <line
+                                    x1="152"
+                                    y1="104"
+                                    x2="152"
+                                    y2="168"
+                                    fill="none"
+                                    stroke="#000000"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="12"
+                                ></line>
+                                <path
+                                    d="M200,56V208a8,8,0,0,1-8,8H64a8,8,0,0,1-8-8V56"
+                                    fill="none"
+                                    stroke="#000000"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="12"
+                                ></path>
+                                <path
+                                    d="M168,56V40a16,16,0,0,0-16-16H104A16,16,0,0,0,88,40V56"
+                                    fill="none"
+                                    stroke="#000000"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="12"
+                                ></path>
+                            </svg>
                         </span>
                     </div>
                 </div>
                 <div class="flex flex-col">
-                    <div
-                        class="font-bold mb-3 flex flex-col"
-                    >
+                    <div class="font-bold mb-3 flex flex-col">
                         <div
-                            class="text-xs uppercase px-4 py-1 mb-2 rounded-full bg-myPurple-400 w-fit"
+                            class="text-xs uppercase px-3 md:px-4 py-1 mb-2 rounded-full bg-myPurple-400 w-fit"
                         >
                             {{ nft.blockchain }}
                         </div>
                         <div
-                            class="text-6xl font-inter capitalize flex gap-x-2"
+                            class="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-inter capitalize flex gap-x-2"
                         >
                             <span>
                                 {{ nft.name }}
@@ -110,14 +176,14 @@ export default {
                     <p class="mb-6 text-myGray">
                         {{ nft.discription }}
                     </p>
-                    <div class="flex items-center justify-between">
+                    <div class="flex items-end justify-between">
                         <div
-                            class="flex flex-col gap-y-1 /border-r /border-myGray"
+                            class="flex flex-col gap-y-1"
                         >
-                            <div class="text-base font-semibold uppercase">
+                            <div class="text-xs md:text-base font-semibold uppercase">
                                 Price
                             </div>
-                            <div class="font-bold text-4xl uppercase">
+                            <div class="font-bold text-2xl md:text-3xl lg:text-4xl uppercase">
                                 {{ nft.price }}
                                 {{ nft.blockchain.substring(0, 3) }}
                             </div>
@@ -215,20 +281,25 @@ export default {
             </div>
         </section>
         <!-- Suggested Section -->
-        <section class="mx-auto my-20 max-w-[1180px]">
-            <div class="flex items-center justify-between">
-                <div class="flex flex-col mb-6">
+        <section
+            class="mx-auto my-10 sm:my-14 md:my-18 max-w-full sm:max-w-[580px] md:max-w-[730px] lg:max-w-[980px] xl:max-w-[1180px]"
+        >
+            <div class="flex items-end justify-between mb-6 max-sm:px-[8%]">
+                <div class="flex flex-col">
                     <div
-                        class="text-myPurple-400 text-base font-semibold uppercase"
+                        class="text-myPurple-400 text-sm xl:text-base font-semibold uppercase"
                     >
                         NFTS
                     </div>
-                    <h3 class="text-4xl font-bold">Suggested NFTs</h3>
+                    <h3
+                        class="text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold"
+                    >
+                        Suggested NFTs
+                    </h3>
                 </div>
-
                 <Link
                     :href="route('nfts/all')"
-                    class="text-base rounded-full py-2 px-6 bg-myPurple-400 hover:bg-myPurple-300 transition-all"
+                    class="text-xs sm:text-sm lg:text-base rounded-full py-1 px-3 sm:px-4 lg:py-2 lg:px-6 bg-myPurple-400 hover:bg-myPurple-300 transition-all"
                 >
                     View All
                 </Link>
@@ -240,7 +311,7 @@ export default {
                     autoWidth: true,
                     focus: 'center',
                     perPage: 4,
-                    perMove: 2,
+                    perMove: width,
                     gap: '2em',
                     padding: '4rem',
                 }"
@@ -250,41 +321,66 @@ export default {
                 aria-label="Viral Nfts"
             >
                 <SplideSlide v-for="item in nfts" :key="item.id">
-                    <div class="bg-[#0D0D0D] rounded-2xl relative overflow-hidden">
+                    <div
+                        class="bg-[#0D0D0D] rounded-2xl relative overflow-hidden"
+                    >
                         <div class="w-[255px] h-[255px]">
-                            <img :src="item.imgurl" alt=""
-                                class="min-w-[100%] h-full block rounded-2xl" />
+                            <img
+                                :src="item.imgurl"
+                                alt=""
+                                class="min-w-[100%] h-full block rounded-2xl"
+                            />
                         </div>
                         <div class="py-3 px-4">
                             <div class="pb-1">
-                                <Link :href="route('nfts/nft')" method="post" as="button" :data="{ id: item.id }"
-                                    class="flex items-center gap-x-2 capitalize hover:text-myPurple-400 font-inter font-semibold text-base cursor-pointer">
-                                {{ truncateString(19, item.name) }}
-                                <span v-if="item.is_featured">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" fill="#5e45ff"
-                                        viewBox="0 0 256 256">
-                                        <rect width="256" height="256" fill="none"></rect>
-                                        <path
-                                            d="M128,24A104,104,0,1,0,232,128,104.2,104.2,0,0,0,128,24Zm49.5,85.8-58.6,56a8.1,8.1,0,0,1-5.6,2.2,7.7,7.7,0,0,1-5.5-2.2l-29.3-28a8,8,0,1,1,11-11.6l23.8,22.7,53.2-50.7a8,8,0,0,1,11,11.6Z">
-                                        </path>
-                                    </svg>
-                                </span>
+                                <Link
+                                    :href="route('nfts/nft')"
+                                    method="post"
+                                    as="button"
+                                    :data="{ id: item.id }"
+                                    class="flex items-center gap-x-2 capitalize hover:text-myPurple-400 font-inter font-semibold text-base cursor-pointer"
+                                >
+                                    {{ truncateString(19, item.name) }}
+                                    <span v-if="item.is_featured">
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="16px"
+                                            height="16px"
+                                            fill="#5e45ff"
+                                            viewBox="0 0 256 256"
+                                        >
+                                            <rect
+                                                width="256"
+                                                height="256"
+                                                fill="none"
+                                            ></rect>
+                                            <path
+                                                d="M128,24A104,104,0,1,0,232,128,104.2,104.2,0,0,0,128,24Zm49.5,85.8-58.6,56a8.1,8.1,0,0,1-5.6,2.2,7.7,7.7,0,0,1-5.5-2.2l-29.3-28a8,8,0,1,1,11-11.6l23.8,22.7,53.2-50.7a8,8,0,0,1,11,11.6Z"
+                                            ></path>
+                                        </svg>
+                                    </span>
                                 </Link>
                             </div>
                             <div
-                                class="flex items-center justify-between font-semibold text-myGray /border-t /border-myGray pt-1">
-                                <div v-if="item.price" class="text-sm uppercase">{{ item.price }} {{
-                                    item.blockchain.substring(0, 3)
-                                }}</div>
+                                class="flex items-center justify-between font-semibold text-myGray /border-t /border-myGray pt-1"
+                            >
+                                <div
+                                    v-if="item.price"
+                                    class="text-sm uppercase"
+                                >
+                                    {{ item.price }}
+                                    {{ item.blockchain.substring(0, 3) }}
+                                </div>
                                 <div v-else class="text-sm uppercase">--</div>
-                                <div class="text-sm uppercase">{{ dateConvert(item.created_at).date }}</div>
+                                <div class="text-sm uppercase">
+                                    {{ dateConvert(item.created_at).date }}
+                                </div>
                             </div>
                         </div>
                     </div>
                 </SplideSlide>
             </Splide>
         </section>
-
 
         <!-- Confirm Delete -->
         <div

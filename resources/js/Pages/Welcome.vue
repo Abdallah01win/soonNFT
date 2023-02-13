@@ -184,7 +184,7 @@ export default {
     <main class="main">
         <Navigation />
         <section
-            class="grid grid-cols-1 md:grid-cols-2 gap-y-8 gap-x-6 md:gap-x-10 md:max-h-[620px] mx-auto max-w-full sm:max-w-[580px] md:max-w-[730px] lg:max-w-[980px] xl:max-w-[1180px] my-8 md:my-12 max-sm:mx-[8%]">
+            class="grid grid-cols-1 md:grid-cols-2 gap-y-8 gap-x-6 md:gap-x-10 mx-auto max-w-full sm:max-w-[580px] md:max-w-[730px] lg:max-w-[980px] xl:max-w-[1180px] my-8 md:my-12 max-sm:mx-[8%]">
             <div class="flex flex-col justify-center">
                 <h1 class="font-inter font-black text-3xl md:text-4xl lg:text-5xl xl:text-6xl mb-3 uppercase">
                     Unlocking a New Dimension of
@@ -209,7 +209,7 @@ export default {
                 </div>
             </div>
             <div class="rounded-xl overflow-hidden">
-                <img src="/storage/assets/hero2.png" alt="" class="w-full" />
+                <img src="/storage/assets/hero2.png" alt="" class="w-full min-md:max-h-[450px]" />
             </div>
         </section>
     </main>

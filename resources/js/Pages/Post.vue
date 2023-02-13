@@ -79,7 +79,7 @@ export default {
             <div>
                 <!-- Post Header -->
                 <div class="relative">
-                    <img :src="post.image" alt="" class="w-full h-[310px] sm:h-[350px] lg:h-[440px] rounded-3xl overflow-hidden">
+                    <img :src="post.image" alt="" class="w-full h-[290px] sm:h-[350px] lg:h-[440px] rounded-3xl overflow-hidden">
 
                     <div v-if="
                     $page.props.auth.user &&

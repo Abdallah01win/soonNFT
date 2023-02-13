@@ -82,7 +82,7 @@ const form = useForm({
             </div>
         </div>
         <div
-            class="border-t border-myDark-100 text-myGray py-3 mt-10 flex flex-col sm:flex-row items-center justify-between"
+            class="border-t border-myDark-100 text-myGray py-3 mt-4 lg:mt-10 flex flex-col sm:flex-row items-center justify-between"
         >
             <div>&copy; - 2022 SoonNFT, Inc</div>
             <div class="flex gap-3">

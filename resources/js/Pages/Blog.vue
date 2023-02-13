@@ -69,20 +69,20 @@ export default {
     <Head title="Blog" />
     <Navigation />
     <!-- {{ posts }} -->
-    <section class="mx-auto my-12 max-w-[1180px]">
-        <div class="flex items-center justify-between mb-10">
-            <div class="flex flex-col">
-                <div class="text-myPurple-400 text-base font-semibold uppercase">
+    <section class="mx-auto max-sm:mx-[8%] my-6 sm:my-8 md:my-12 max-w-full sm:max-w-[580px] md:max-w-[730px] lg:max-w-[980px] xl:max-w-[1180px]">
+        <div class="flex max-lg:flex-col items-start lg:items-center justify-between mb-10">
+            <div class="flex flex-col max-lg:mb-3">
+                <div class="text-myPurple-400 text-xs sm:text-sm md:text-base font-semibold uppercase">
                     Blog
                 </div>
-                <h3 class="text-4xl font-bold">Latest Stories</h3>
+                <h3 class="text-2xl sm:text-3xl lg:text-4xl font-bold">Latest Stories</h3>
             </div>
 
 
 
-            <div class="flex items-center gap-x-5">
+            <div class="flex max-md:flex-col items-start md:items-center max-md:gap-y-3 gap-x-5">
                 <div
-                    class="relative text-sm flex border-[3px] border-myPurple-400 bg-transparent rounded-full py-2 px-2 /font-semibold leading-relaxed">
+                    class="relative text-xs md:text-sm flex border-[2px] md:border-[3px] border-myPurple-400 bg-transparent rounded-full py-2 px-2 leading-relaxed">
                     <button @click="selectOption('')" class="py-1 px-5 rounded-full transition-colors"
                         :class="{ 'bg-myPurple-400': '' === selectedCategory}">
                         All
@@ -95,7 +95,7 @@ export default {
                 </div>
 
                 <div
-                    class="relative text-sm flex border-[3px] border-myPurple-400 bg-transparent rounded-full py-2 px-2 /font-semibold leading-relaxed">
+                    class="relative text-xs md:text-sm flex border-[2px] md:border-[3px] border-myPurple-400 bg-transparent rounded-full py-2 px-2 leading-relaxed">
                     <button @click="SelectedOrder('desc')" class="py-1 px-5 rounded-full transition-colors"
                         :class="{ 'bg-myPurple-400': 'desc' === selectedOrder }">
                         Newest
@@ -108,9 +108,9 @@ export default {
             </div>
         </div>
 
-        <div class="grid grid-cols-[0.75fr,1fr] gap-x-10">
+        <div class="grid grid-cols-1 md:grid-cols-[0.75fr,1fr] gap-y-3 gap-x-6 md:gap-x-8 lg:gap-x-10">
             <div class="relative" @mouseover="hover = true" @mouseleave="hover = false">
-                <img :src="filteredPosts[0].image" alt="" class="w-full h-[300px] rounded-3xl overflow-hidden" />
+                <img :src="filteredPosts[0].image" alt="" class="w-full h-[210px] lg:h-[250px] xl:h-[300px] rounded-3xl overflow-hidden" />
                 <div v-if="hover"
                     class="transition-all absolute top-0 left-0 flex items-center justify-center w-full h-full bg-myDark-100/60 rounded-3xl">
                     <Link :href="route('post')" method="post" as="button" :data="{ id: filteredPosts[0].id }">
@@ -128,18 +128,18 @@ export default {
             </div>
 
             <div class="leading-relaxed flex flex-col justify-center">
-                <div class="bg-myPurple-400 text-base text-white w-fit rounded-full px-4 py-2-1 font-semibold my-1">
+                <div class="background-transparent md:bg-myPurple-400 text-sm lg:text-base text-myPurple-400 md:text-white w-fit rounded-full px-0 md:px-4 py-0 md:py-1 font-semibold my-1">
                     {{ filteredPosts[0].category }}
                 </div>
-                <div class="text-4xl font-semibold mb-4">
+                <div class="text-lg md:text-2xl lg:text-3xl xl:text-4xl font-semibold mb-2 md:mb-4">
                     {{ filteredPosts[0].title }}
                 </div>
-                <p class="text-myGray w-[90%] mb-4">
+                <p class="text-myGray w-full text-sm md:text-base lg:w-[90%] mb-4">
                     {{ filteredPosts[0].description }}
                 </p>
                 <div class="flex items-center">
                     <img alt="testimonial" :src="filteredPosts[0].image_url"
-                        class="w-12 h-12 rounded-full flex-shrink-0 object-cover object-center" />
+                        class="w-10 lg:w-12 h-10 lg:h-12 rounded-full flex-shrink-0 object-cover object-center" />
                     <span class="flex-grow flex flex-col pl-4">
                         <span class="title-font font-medium">{{
                             filteredPosts[0].name
@@ -152,7 +152,7 @@ export default {
             </div>
         </div>
 
-        <div class="grid grid-cols-3 gap-14 mt-14">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10 lg:gap-12 xl:gap-14 mt-14">
             <div v-for="item in filteredPosts.slice(1)" :key="item.id">
                 <PostCard :item="item" />
             </div>

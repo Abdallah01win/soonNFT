@@ -137,15 +137,15 @@ onMounted(() => {
             <Navigation class="" />
         </template>
         <!-- Add Nft Form -->
-        <section class="mx-auto my-8 max-w-[1180px]">
+        <section class="mx-auto pt-10 px-[8%] sm:px-0 max-w-full sm:max-w-[580px] md:max-w-[730px] lg:max-w-[980px] xl:max-w-[1180px] border-t border-myDark-100 text-sm sm:text-base">
             <div class="flex flex-col mb-6">
                 <div class="text-myPurple-400 text-base font-semibold uppercase">
                     Wellcom back
                 </div>
                 <h3 class="text-4xl font-bold">Dashboard</h3>
             </div>
-            <div class="grid grid-cols-[2fr,0.7fr] gap-x-4">
-                <form @submit.prevent="this.submit" class="bg-myDark-200 px-8 py-10 rounded-xl">
+            <div class="grid grid-cols-1 md:grid-cols-[2fr,0.7fr] gap-4">
+                <form @submit.prevent="this.submit" class="bg-myDark-200 px-5 md:px-8 py-8 md:py-10 rounded-xl">
                     <div class="flex items-center justify-between mb-4">
                         <div class="text-2xl font-semibold">
                             Add New NFT
@@ -156,7 +156,7 @@ onMounted(() => {
                             <span>NFT Saved Successfully</span>
                         </div>
                     </div>
-                    <div class="flex items-center gap-x-3 mt-4">
+                    <div class="flex max-md:flex-wrap max-md:gap-y-3 items-center gap-x-3 mt-4">
                         <div class="w-full">
                             <TextInput id="NFTname" type="text" class="mt-1 block w-full" v-model="form.name" required
                                 autocomplete="name" placeholder="NFT name" />
@@ -214,7 +214,7 @@ onMounted(() => {
                             required autocomplete="name" placeholder="Description" />
                         <InputError class="mt-2" :message="form.errors.description" />
                     </div>
-                    <div class="flex items-center gap-x-3 mt-4">
+                    <div class="flex max-md:flex-wrap max-md:gap-y-3 items-center gap-x-3 mt-4">
                         <div class="w-full">
                             <TextInput id="twitter" type="text" class="mt-1 block w-full" v-model="form.twitter"
                                 autocomplete="twitter" placeholder="Twitter Link" />
@@ -231,7 +231,7 @@ onMounted(() => {
                             <InputError class="mt-2" :message="form.errors.website" />
                         </div>
                     </div>
-                    <div class="flex items-center gap-x-3 mt-4">
+                    <div class="flex max-md:flex-wrap max-md:gap-y-3 items-center gap-x-3 mt-4">
                         <div class="w-full">
                             <TextInput id="price" type="number" step="0.001" min="0" class="mt-1 block w-full"
                                 v-model="form.price" required autocomplete="price" placeholder="Price" />
@@ -274,16 +274,16 @@ onMounted(() => {
                     </PrimaryButton>
                 </form>
 
-                <div class="flex flex-col gap-y-4">
-                    <div class="flex flex-col gap-y-2 bg-myDark-200 px-8 py-6 rounded-xl">
+                <div class="flex flex-wrap flex-row md:flex-col max-md:grow gap-4">
+                    <div class="max-md:grow flex flex-col gap-y-2 bg-myDark-200 px-8 py-6 rounded-xl">
                         <span class="text-myGray text-sm">Total Users</span>
                         <span class="font-bold text-3xl">{{ usersCount }}</span>
                     </div>
-                    <div class="flex flex-col gap-y-2 bg-myDark-200 px-8 py-6 rounded-xl">
+                    <div class="max-md:grow flex flex-col gap-y-2 bg-myDark-200 px-8 py-6 rounded-xl">
                         <span class="text-myGray text-sm">Total NFTs</span>
                         <span class="font-bold text-3xl">{{ nftCount }}</span>
                     </div>
-                    <div class="flex flex-col gap-y-2 bg-myDark-200 px-8 py-6 rounded-xl">
+                    <div class="max-md:grow flex flex-col gap-y-2 bg-myDark-200 px-8 py-6 rounded-xl">
                         <span class="text-myGray text-sm">Blog Posts</span>
                         <span class="font-bold text-3xl">{{ postsCount }}</span>
                     </div>
@@ -293,9 +293,9 @@ onMounted(() => {
         <!-- End Add Nft Form -->
 
         <!-- Add Blogpost Form -->
-        <section class="mx-auto my-8 max-w-[1180px]">
-            <form @submit.prevent="this.submitPost" class="bg-myDark-200 px-8 py-10 rounded-xl">
-                <div class="flex items-center justify-between mb-4">
+        <section class="mx-auto pt-10 px-[8%] sm:px-0 max-w-full sm:max-w-[580px] md:max-w-[730px] lg:max-w-[980px] xl:max-w-[1180px] border-t border-myDark-100 text-sm sm:text-base">
+            <form @submit.prevent="this.submitPost" class="bg-myDark-200 px-5 md:px-8 py-8 md:py-10 rounded-xl">
+                <div class="flex max-md:flex-wrap max-md:gap-y-3 items-center justify-between mb-4">
                     <div class="text-2xl font-semibold">
                         Write New Blog Post
                     </div>
@@ -305,7 +305,7 @@ onMounted(() => {
                         <span>Post Saved Successfully</span>
                     </div>
                 </div>
-                <div class="flex items-center gap-x-3 my-4">
+                <div class="flex max-md:flex-wrap max-md:gap-y-3 items-center gap-x-3 my-4">
                     <div class="w-full">
                         <TextInput id="postTitle" type="text" class="mt-1 block w-full" v-model="postForm.title"
                             required autocomplete="postTitle" placeholder="Title" />
