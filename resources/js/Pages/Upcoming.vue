@@ -65,7 +65,7 @@ export default {
     <Head title="Upcoming" />
     <Navigation />
 
-    <section class="max-sm:mx-[8%] mx-auto my-12 sm:my-16 md:my-20 max-w-full sm:max-w-[580px] md:max-w-[730px] lg:max-w-[980px] xl:max-w-[1180px] ">
+    <section class="max-sm:mx-[8%] mx-auto my-6 sm:my-8 md:my-12 max-w-full sm:max-w-[580px] md:max-w-[730px] lg:max-w-[980px] xl:max-w-[1180px] ">
         <div class="flex max-md:flex-col items-start md:items-center justify-between mb-6">
             <div class="flex flex-col max-md:mb-3">
                 <div class="text-myPurple-400 text-sm md:text-base font-semibold uppercase">

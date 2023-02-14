@@ -8,9 +8,8 @@ import DropdownLink from '@/Components/DropdownLink.vue';
         <nav class="flex justify-between items-center py-3 md:py-4 mx-auto border-b border-myDark-100
                 max-w-full sm:max-w-[580px] md:max-w-[730px] lg:max-w-[980px] xl:max-w-[1180px] max-sm:mx-[8%]">
             <div class="font-inter text-xl lg:text-2xl font-extrabold">
-                <Link :href="route('/')">
-                <!-- <img src="/storage/assets/Logo-white.svg" class="w-full h-[150px]"/> -->
-                SOONNFT
+                <Link :href="route('/')" class="w-fit">
+                <img src="/storage/assets/Logo.svg" class="w-[115px] sm:w-[130px] md:w-[150px]"/>
                 </Link>
             </div>
             <ul class="hidden md:flex items-center gap-x-8 leading-relaxed ">
