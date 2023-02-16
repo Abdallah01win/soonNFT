@@ -12,7 +12,7 @@ const form = useForm({
     <footer
         class="mx-auto pt-10 px-[8%] sm:px-0 max-w-full sm:max-w-[580px] md:max-w-[730px] lg:max-w-[980px] xl:max-w-[1180px] border-t border-myDark-100 text-sm sm:text-base"
     >
-        <div class="text-5xl uppercase font-black mb-4">
+        <div class="mb-4 w-fit">
             <Link :href="route('/')" class="w-fit">
                 <img src="/storage/assets/Logo.svg" class="w-[220px] sm:w-[260px] md:w-[380px]"/>
             </Link>
