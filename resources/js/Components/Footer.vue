@@ -10,11 +10,11 @@ const form = useForm({
 </script>
 <template>
     <footer
-        class="mx-auto pt-10 px-[8%] sm:px-0 max-w-full sm:max-w-[580px] md:max-w-[730px] lg:max-w-[980px] xl:max-w-[1180px] border-t border-myDark-100 text-sm sm:text-base"
+        class="mx-auto pt-10 px-[8%] sm:px-0 max-w-full sm:max-w-[580px] md:max-w-[730px] lg:max-w-[980px] xl:max-w-[1180px] border-t border-myDark-100 text-sm"
     >
         <div class="mb-4 w-fit">
             <Link :href="route('/')" class="w-fit">
-                <img src="/storage/assets/Logo.svg" class="w-[220px] sm:w-[260px] md:w-[380px]"/>
+                <img src="/storage/assets/Logo.svg" class="w-[200px] sm:w-[260px] md:w-[300px]"/>
             </Link>
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-[1.5fr,0.5fr] lg:grid-cols-[2.5fr,0.7fr,1.8fr] gap-x-4 gap-y-6 lg:gap-x-6">

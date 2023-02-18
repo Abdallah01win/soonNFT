@@ -25,19 +25,20 @@ use GuzzleHttp\Client;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 function filter_badged($array, $isBadged)
-    {
-        return array_filter($array, function ($element) use ($isBadged) {
-            return $element[$isBadged] === true;
-        });
-    }
+{
+    return array_filter($array, function ($element) use ($isBadged) {
+        return $element[$isBadged] === true;
+    });
+}
 function filter_past_dates($array, $date_field)
-    {
-        return array_filter($array, function ($element) use ($date_field) {
-            $date = new DateTime($element[$date_field]);
-            return $date > new DateTime();
-        });
-    }
+{
+    return array_filter($array, function ($element) use ($date_field) {
+        $date = new DateTime($element[$date_field]);
+        return $date > new DateTime();
+    });
+}
 
 Route::get('/', function () {
     $items = Nfts::paginate(10)->through(function ($item) {
@@ -100,10 +101,13 @@ Route::get('/upcoming', function () {
     ]);
 })->name('upcoming');
 Route::get('/dashboard', function () {
-    $comments = Comment::where('status', 2)
-        ->select('id', 'comment',)
-        ->get();
-    return Inertia::render('Dashboard', ['comments' => $comments]);
+    $user = Auth::user();
+    $userType = $user->type;
+    if ($userType === 1) {
+        return Inertia::render('Dashboard');
+    } else {
+        return Inertia::render('Welcome');
+    }
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/contact', function () {

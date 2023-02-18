@@ -29,12 +29,12 @@ export default {
 </script>
 
 <template>
-    <section class="">
+    <section class="py-3">
 
         <div class="">
-            <form @submit.prevent="form.post(route('profile.update'))" class="/mt-6  grid grid-cols-[1fr,.7fr] gap-x-8">
-                <div class="space-y-6 sm:pr-6 lg:pr-8">
-                    <header>
+            <form @submit.prevent="form.post(route('profile.update'))" class="grid grid-cols-1  md:grid-cols-[1fr,.7fr] gap-x-8">
+                <div class="space-y-6 sm:pr-6 lg:pr-8 max-md:order-2">
+                    <header class="max-md:hidden">
                         <h2 class="text-lg font-medium">Profile Information</h2>
 
                         <p class="mt-1 text-sm text-myGray">
@@ -77,8 +77,8 @@ export default {
                         </div>
                     </div>
 
-                    <div class="flex items-center justify-between gap-4">
-                        <PrimaryButton :disabled="form.processing" class="w-1/3 justify-center">Save</PrimaryButton>
+                    <div class="flex max-md:flex-col items-center justify-between gap-4">
+                        <PrimaryButton :disabled="form.processing" class="w-full md:w-1/3 justify-center">Save</PrimaryButton>
 
                         <Transition enter-from-class="opacity-0" leave-to-class="opacity-0"
                             class="transition ease-in-out">
@@ -89,7 +89,7 @@ export default {
                         </Transition>
                     </div>
                 </div>
-                <div class="flex items-center justify-center">
+                <div class="flex items-center justify-center max-md:order-1">
                     <div class="relative">
                         <div class="overflow-hidden rounded-full">
                             <img v-if="!user.image_url" src="https://dummyimage.com/106x106" alt=""

@@ -40,10 +40,10 @@ export default {
 </script>
 <template>
     <div class="bg-[#0D0D0D] rounded-2xl relative overflow-hidden min-sm:w-fit">
-        <div class="w-full /w-[180px] sm:w-[235px] md:w-[255px] h-[180px] sm:h-[235px] md:h-[255px]">
+        <div class="w-full sm:w-[235px] md:w-[255px] h-[180px] sm:h-[235px] md:h-[255px]">
             <img v-if="isImage(item.image)" :src="item.image" alt=""
                 class="min-w-[100%] h-full block rounded-2xl" />
-            <video v-else :src="item.image" autoplay loop class="min-w-[100%] rounded-2xl" />
+            <video v-else :src="item.image" autoplay loop class="min-w-[100%] h-full block rounded-2xl" />
         </div>
         <div class="py-3 px-4">
             <div class="pb-1">
@@ -63,7 +63,7 @@ export default {
             </div>
             <div class="flex items-center justify-between font-semibold text-myGray /border-t /border-myGray pt-1">
                 <div v-if="item.price" class="text-xs md:text-sm uppercase">
-                    {{ item.price }} SOL
+                    {{ item.price }}
                 </div>
                 <div v-else class="text-xs md:text-sm uppercase">--</div>
                 <div class="text-xs md:text-sm uppercase">

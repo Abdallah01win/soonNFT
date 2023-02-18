@@ -35,9 +35,9 @@ export default{
         </template>
 
         
-            <div class="py-12 mx-auto max-w-[1180px] space-y-6">
+            <div class="py-8 md:py-12 mx-auto px-[8%] sm:px-0 max-w-full sm:max-w-[580px] md:max-w-[730px] lg:max-w-[980px] xl:max-w-[1180px] space-y-6">
                 
-                <div class="p-4 sm:p-8 bg-myDark-400 rounded-xl /grid /grid-cols-2 /gap-x-6">
+                <div class="p-4 sm:p-8 bg-myDark-400 rounded-xl">
                     <UpdateProfileInformationForm
                         :must-verify-email="mustVerifyEmail"
                         :status="status"
@@ -45,14 +45,14 @@ export default{
                     />
                     
                 </div>
-                <div class="grid grid-cols-[1fr,.7fr] gap-6">
+                <div class="grid grid-cols-1 md:grid-cols-[1fr,.7fr] gap-6">
 
                     <div class="p-4 sm:p-8 bg-myDark-400 rounded-xl">
-                        <UpdatePasswordForm class="/max-w-xl" />
+                        <UpdatePasswordForm />
                     </div>
                     
                     <div class="p-4 sm:p-8 bg-myDark-400 rounded-xl">
-                        <DeleteUserForm class="/max-w-xl" />
+                        <DeleteUserForm />
                     </div>
                 </div>
             </div>

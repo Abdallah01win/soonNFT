@@ -28,9 +28,10 @@ const submit = () => {
         <Head title="Register" />
 
         <div class="mb-6">
-            <Link :href="route('/')" class="block w-fit cursor-pointer font-inter text-4xl font-extrabold uppercase mb-4">
-            Soonnft</Link>
-            <div class="text-lg font-semibold">Welcome!</div>
+            <Link :href="route('/')" class="w-fit">
+                <img src="/storage/assets/Logo.svg" class="w-[215px]"/>
+                </Link>
+            <div class="text-lg font-semibold mt-4">Welcome!</div>
             <p class="text-white/50">Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
         </div>
 

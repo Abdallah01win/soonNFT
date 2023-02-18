@@ -260,7 +260,7 @@ export default {
                         </span>
                     </div>
                     <div class="text-myGray text-xs md:text-sm font-semibold">
-                        <span>{{ col.symbol }}</span>
+                        <span>{{ truncateString(14, col.symbol) }}</span>
                     </div>
                 </div>
             </div>

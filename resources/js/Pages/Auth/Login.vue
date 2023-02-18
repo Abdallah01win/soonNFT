@@ -30,8 +30,10 @@ const submit = () => {
         <Head title="Log in" />
         <div class="">
             <div class="mb-6">
-                <Link :href="route('/')" class="block w-fit cursor-pointer font-inter text-4xl font-extrabold uppercase mb-4">Soonnft</Link>
-                <div class="text-lg font-semibold">Welcome Back!</div>
+                <Link :href="route('/')" class="w-fit">
+                <img src="/storage/assets/Logo.svg" class="w-[215px]"/>
+                </Link>
+                <div class="text-lg font-semibold mt-4">Welcome Back!</div>
                 <p class="text-white/50">Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
             </div>
             <form @submit.prevent="submit" class="">
@@ -65,7 +67,7 @@ const submit = () => {
                     Log in
                 </PrimaryButton>
 
-                <div class="flex items-center justify-between mt-4">
+                <div class="flex max-sm:flex-col gap-y-2 sm:items-center justify-between mt-4">
                     <Link v-if="canResetPassword" :href="route('register')"
                         class="underline text-sm text-white/50 hover:hover:text-white rounded-md focus:outline-none underline-offset-4">
                     Don't have an account?

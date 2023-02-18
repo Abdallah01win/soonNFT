@@ -293,7 +293,7 @@ onMounted(() => {
         <!-- End Add Nft Form -->
 
         <!-- Add Blogpost Form -->
-        <section class="mx-auto pt-10 px-[8%] sm:px-0 max-w-full sm:max-w-[580px] md:max-w-[730px] lg:max-w-[980px] xl:max-w-[1180px] border-t border-myDark-100 text-sm sm:text-base">
+        <section class="mx-auto pt-10 px-[8%] sm:px-0 max-w-full sm:max-w-[580px] md:max-w-[730px] lg:max-w-[980px] xl:max-w-[1180px] text-sm sm:text-base">
             <form @submit.prevent="this.submitPost" class="bg-myDark-200 px-5 md:px-8 py-8 md:py-10 rounded-xl">
                 <div class="flex max-md:flex-wrap max-md:gap-y-3 items-center justify-between mb-4">
                     <div class="text-2xl font-semibold">
