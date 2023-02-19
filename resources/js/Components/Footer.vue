@@ -1,12 +1,7 @@
 <script setup>
-import InputError from "@/Components/InputError.vue";
-import TextInput from "@/Components/TextInput.vue";
-import { useForm, Link } from "@inertiajs/inertia-vue3";
+import { Link } from "@inertiajs/inertia-vue3";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 
-const form = useForm({
-    email: "",
-});
 </script>
 <template>
     <footer

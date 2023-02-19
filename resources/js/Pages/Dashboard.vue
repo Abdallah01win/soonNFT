@@ -327,6 +327,9 @@ onMounted(() => {
                             <option class="bg-black" value="NFTs">
                                 NFTs
                             </option>
+                            <option class="bg-black" value="Crypto">
+                                Crypto
+                            </option>
                         </select>
                         <InputError class="mt-2" :message="postForm.errors.category" />
                     </div>

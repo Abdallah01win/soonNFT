@@ -82,6 +82,7 @@ const submit = () => {
                             </span>
                         </span>
                     </label>
+                    <InputError class="mt-2" :message="form.errors.terms" />
                 </div>
             </div>
 

@@ -71,7 +71,7 @@ export default {
 </script>
 <template>
 
-    <Head title="All NFTs" />
+    <Head title="NFTs" />
     <AuthenticatedLayout class="bg-myDark-300">
         <template v-slot:nav>
             <Navigation class="" />
@@ -123,9 +123,9 @@ export default {
             </div>
 
             <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 sm:gap-8 lg:gap-12">
-                <div v-for="item in filteredNfts" :key="item.id" class="min-md:w-fit">
+                <div v-for="item in filteredNfts" :key="item.id" class="w-fit">
                     <div class="bg-[#0D0D0D] rounded-2xl relative overflow-hidden">
-                        <div class="w-full h-[160px] sm:h-[180px] md:h-[200px] lg:w-[220px] lg:h-[220px] xl:w-[255px] xl:h-[255px]">
+                        <div class="w-full h-[160px] sm:h-[180px] md:h-[200px] lg:w-[220px] lg:h-[220px] xl:w-[250px] xl:h-[250px]">
                             <img :src="item.imgurl" @error="(event) => handleError(event)" alt=""
                                 class="min-w-[100%] h-full block rounded-2xl" />
                         </div>

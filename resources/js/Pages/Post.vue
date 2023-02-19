@@ -296,26 +296,32 @@ h6 {
 
 #postBody h6 {
     font-size: 14px;
+    font-weight:500;
 }
 
 #postBody h5 {
-    font-size: 16px;
+    font-size: 18px;
+    font-weight:600;
 }
 
 #postBody h4 {
-    font-size: 18px;
+    font-size: 22px;
+    font-weight:600;
 }
 
 #postBody h3 {
-    font-size: 20px;
+    font-size: 28px;
+    font-weight:700;
 }
 
 #postBody h2 {
-    font-size: 24px;
+    font-size: 32px;
+    font-weight:700;
 }
 
 #postBody h1 {
-    font-size: 30px;
+    font-size: 40px;
+    font-weight:800;
 }
 
 #postBody a {
@@ -341,5 +347,8 @@ ol {
 
 #postBody ol {
     list-style-type: decimal;
+}
+#postBody p {
+    margin-bottom: 22px;
 }
 </style>

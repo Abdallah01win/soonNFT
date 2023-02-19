@@ -38,7 +38,7 @@ export default {
     <div class="w-full">
         <div class="relative" @mouseover="hover = true" @mouseleave="hover = false">
             <img :src="item.image" alt=""
-                class="w-full h-[170px] lg:h-[200px] xl:h-[240px] rounded-3xl overflow-hidden">
+                class="w-full h-[170px] lg:h-[200px] xl:h-[220px] rounded-3xl overflow-hidden">
             <div v-if="hover"
                 class="transition-all absolute top-0 left-0 flex items-center justify-center w-full h-full bg-myDark-100/60 rounded-3xl">
                 <Link :href="route('post')" method="post" as="button" :data="{ id: item.id }">
@@ -54,8 +54,8 @@ export default {
                 </Link>
             </div>
         </div>
-        <div class="leading-relaxed py-3 md:py-5 px-0 sm:px-3">
-            <div class="text-myPurple-400 text-xs sm:text-sm lg:text-base font-semibold my-1">{{ item.category }}</div>
+        <div class="leading-relaxed py-3 md:py-5 px-0 sm:px-2">
+            <div class="text-myPurple-400 text-xs sm:text-sm lg:text-base font-semibold">{{ item.category }}</div>
             <div class="sm:text-sm md:text-base lg:text-lg xl:text-xl font-semibold mb-2 md:mb-3 capitalize">{{
                 item.title }}</div>
             <p class="text-sm lg:text:base text-myGray mb-2 md:mb-3 capitalize">

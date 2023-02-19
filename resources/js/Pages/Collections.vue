@@ -44,7 +44,7 @@ export default {
 </script>
 <template>
 
-    <Head title="Home" />
+    <Head title="Collections" />
     <Navigation />
     <section class="mx-auto my-6 sm:my-8 md:my-12 max-w-full sm:max-w-[580px] md:max-w-[730px] lg:max-w-[980px] xl:max-w-[1180px] bg-myDark-400 px-[8%] sm:px-10 py-6 md:py-10 lg:py-12 rounded-xl">
         <div class="flex max-md:flex-col items-start md:items-center justify-between mb-6">

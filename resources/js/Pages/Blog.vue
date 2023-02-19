@@ -128,7 +128,7 @@ export default {
             </div>
 
             <div class="leading-relaxed flex flex-col justify-center">
-                <div class="background-transparent md:bg-myPurple-400 text-sm lg:text-base text-myPurple-400 md:text-white w-fit rounded-full px-0 md:px-4 py-0 md:py-1 font-semibold my-1">
+                <div class="background-transparent md:bg-myPurple-400 text-xs lg:text-sm text-myPurple-400 md:text-white w-fit rounded-full px-0 md:px-4 py-0 md:py-1 font-semibold my-1 mb-1">
                     {{ filteredPosts[0].category }}
                 </div>
                 <div class="text-lg md:text-2xl lg:text-3xl xl:text-4xl font-semibold mb-2 md:mb-4">
